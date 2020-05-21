@@ -1,0 +1,13 @@
+# API Specification for Vehicle location backend
+
+## GET `/location/`
+Get list of all rented vehicles
+
+## GET `/location/vehicle/{id}`
+Get location of vehicle by id
+
+## GET `/location/agent/{id}`
+Get list of all rented vehicles location for cpecifoc agent
+
+## POST `/location/vehicle/{id}`
+Set new vehicle location
