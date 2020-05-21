@@ -1,5 +1,5 @@
 
-# API Specification for Backend Master
+# API Specification for User-side backend
 
 ## GET `/users/`
 
