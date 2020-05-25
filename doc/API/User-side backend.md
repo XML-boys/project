@@ -1,5 +1,5 @@
 
-# API Specification for Backend Master
+# API Specification for User-side backend
 
 ## GET `/users/`
 
@@ -63,8 +63,6 @@ Add vehicle into cart
 
 Create order from cart. 
 
-
 ## GET `/orders/`
 
 Get orders for logged in user
-

@@ -1,0 +1,34 @@
+# API Specification for database handling backend
+# Spring Boot microservice using MySQL database
+
+## User saveUser(User user);
+Save user in db
+
+## User getUser(Long id);
+Get user by id
+
+## User getUser(String username);
+Get user by username
+
+## List<User> getAllUsers();
+Get all users 
+
+## List<User> getAllUsersByRole(ROLE ROLE.'role');
+Get all users by specific role
+
+## void deleteUser(User user);
+Delete user
+
+## Vehicle saveVehicle(Vehicle vehicle);
+Save vehicle in db
+
+## Vehicle getVehicle(Long id);
+Get vehicle by id
+
+## List<Vehicle> getAllVehicles();
+Get all vehicles
+
+## void deleteVehicle(Vehicle vehicle);
+Delete vehicle
+
+

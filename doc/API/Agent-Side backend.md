@@ -59,4 +59,26 @@ Get info about user
 
 Modify user 
 
+## GET `/rentVehicles`
 
+Get list of vehicles that user wants to rent
+
+## GET `/nonRentedVehicles`
+
+Get list of vehicles that are not rented yet
+
+## POST `/approveRentVehicles/{id}`
+
+Approve request for renting vehicles
+
+## POST `/rentForFirmsUse/{id}`
+
+Rent a vehicle for firms use
+
+## POST `/priceList/`
+
+Create new priceList
+
+## POST `/discount/`
+
+Create new discount
