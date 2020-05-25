@@ -1,0 +1,34 @@
+version: "3.5"
+services:
+        user_frontend: # stefan
+                image: nginx
+                volumes:
+                        - "./user_frontend/dist:/usr/share/nginx/html/frontend/dist"
+                        - "./user_frontend/index.html:/usr/share/nginx/html/frontend/index.html"
+                        - "./user_frontend/nginx:/etc/nginx"
+                ports:
+                        - "666:80"
+        vehicle_location: # stefan
+                image: python
+                volumes:
+                        - "./vehicle:/code"
+                command: "python /code/main.py"
+        agent_backend: # stefan
+                build: "./agent_backend/"
+        agent_database:
+                image: postgres
+        message_queue: # stefan
+                image: rmohr/activemq
+                ports:
+                        - "665:8161"
+        email_service: # stefan
+                image: maven
+                command: "cd /usr/src/mymaven && mvn spring-boot:run"
+                volumes:
+                        - "./email_service/:/usr/src/mymaven/"
+
+        message_service: # stefan
+                image: maven
+                command: "cd /usr/src/mymaven && mvn spring-boot:run"
+                volumes:
+                        - "./message_service/:/usr/src/mymaven/"

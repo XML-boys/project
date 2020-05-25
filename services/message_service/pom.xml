@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.2.0.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>org.psw_isa</groupId>
+	<artifactId>psw_isa_backend</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>backend</name>
+	<description>PSW ISA Project</description>
+  	<packaging>war</packaging>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<start-class>org.psw_isa.psw_isa_backend.BackendApplication</start-class>
+	</properties>
+
+
+	<dependencies>
+		<dependency>
+    			<groupId>org.springframework.boot</groupId>
+    			<artifactId>spring-boot-starter-web</artifactId>
+    		</dependency>
+    		
+    	<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+    		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jersey</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+		</dependency>
+		<dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+		<dependency>
+		  <groupId>junit</groupId>
+		  <artifactId>junit</artifactId>
+		  <scope>compile</scope>
+		</dependency>
+		<dependency>
+		    <groupId>com.h2database</groupId>
+		    <artifactId>h2</artifactId>
+		    <scope>test</scope>
+		    <version>1.4.194</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.junit.jupiter</groupId>
+		    <artifactId>junit-jupiter-api</artifactId>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-test</artifactId>
+		  <scope>test</scope>
+		
+		  <exclusions>
+		    <exclusion>
+		      <groupId>junit</groupId>
+		      <artifactId>junit</artifactId>
+		    </exclusion>
+		  </exclusions>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+        		<plugin>
+         			 <artifactId>maven-clean-plugin</artifactId>
+          
+        		</plugin>
+        		<!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
+        		<plugin>
+          			<artifactId>maven-resources-plugin</artifactId>
+          
+        		</plugin>
+        		<plugin>
+          			<artifactId>maven-compiler-plugin</artifactId>
+        		</plugin>
+        		<plugin>
+          			<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.0</version>
+
+        		</plugin>
+        		<plugin>
+          			<artifactId>maven-war-plugin</artifactId>
+        		</plugin>
+        		<plugin>
+          			<artifactId>maven-install-plugin</artifactId>
+        		</plugin>
+        		<plugin>
+          			<artifactId>maven-deploy-plugin</artifactId>
+        		</plugin>
+        		<plugin>
+                		<groupId>org.apache.maven.plugins</groupId>
+                		<artifactId>maven-site-plugin</artifactId>
+                		<version>3.7.1</version>
+            		</plugin>
+		</plugins>
+	</build>
+
+</project>
