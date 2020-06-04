@@ -23,12 +23,17 @@ services:
                         - "665:8161"
         email_service: # stefan
                 image: maven
-                command: "cd /usr/src/mymaven && mvn spring-boot:run"
+                command: cd /usr/src/mymaven && mvn spring-boot:run
                 volumes:
                         - "./email_service/:/usr/src/mymaven/"
 
         message_service: # stefan
                 image: maven
-                command: "cd /usr/src/mymaven && mvn spring-boot:run"
+                command: /usr/src/mymaven/run.sh
                 volumes:
                         - "./message_service/:/usr/src/mymaven/"
+        user_service:
+                image: maven
+                command: /usr/src/mymaven/run.sh
+                volumes:
+                        - "./user_service/:/usr/src/mymaven/"
