@@ -10,9 +10,9 @@ public class Admin {
     @Column
     private Long userId;
     @Column
-    private String ime;
+    private String firstName;
     @Column
-    private String prezime;
+    private String lastName;
 
     public Admin() {
     }
@@ -21,11 +21,11 @@ public class Admin {
         this.userId = userId;
     }
 
-    public Admin(Long id, Long userId, String ime, String prezime) {
+    public Admin(Long id, Long userId, String firstName, String lastName) {
         this.id = id;
         this.userId = userId;
-        this.ime = ime;
-        this.prezime = prezime;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public Long getId() {
@@ -45,18 +45,18 @@ public class Admin {
     }
 
     public String getIme() {
-        return ime;
+        return firstName;
     }
 
     public void setIme(String ime) {
-        this.ime = ime;
+        this.firstName = firstName;
     }
 
     public String getPrezime() {
-        return prezime;
+        return lastName;
     }
 
-    public void setPrezime(String prezime) {
-        this.prezime = prezime;
+    public void setPrezime(String lastName) {
+        this.lastName = lastName;
     }
 }

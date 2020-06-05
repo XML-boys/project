@@ -10,25 +10,28 @@ public class Client {
     @Column
     private Long userId;
     @Column
-    private String ime;
+    private String firstName;
     @Column
-    private String prezime;
+    private String lastName;
     @Column
-    private String adresa;
+    private String adress;
+    @Column
+    private Boolean blocked;
 
     public Client() {
     }
 
     public Client(Long userId) {
         this.userId = userId;
+        this.blocked = false;
     }
 
-    public Client(Long id, Long userId, String ime, String prezime, String adresa) {
+    public Client(Long id, String firstName, String lastName, String adress, Boolean blocked) {
         this.id = id;
-        this.userId = userId;
-        this.ime = ime;
-        this.prezime = prezime;
-        this.adresa = adresa;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.adress = adress;
+        this.blocked = blocked;
     }
 
     public Long getId() {
@@ -47,27 +50,35 @@ public class Client {
         this.userId = userId;
     }
 
-    public String getIme() {
-        return ime;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setIme(String ime) {
-        this.ime = ime;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getPrezime() {
-        return prezime;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setPrezime(String prezime) {
-        this.prezime = prezime;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getAdresa() {
-        return adresa;
+    public String getAdress() {
+        return adress;
     }
 
-    public void setAdresa(String adresa) {
-        this.adresa = adresa;
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    public Boolean getBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(Boolean blocked) {
+        this.blocked = blocked;
     }
 }

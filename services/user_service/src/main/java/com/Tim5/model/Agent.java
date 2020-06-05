@@ -10,7 +10,11 @@ public class Agent {
     @Column
     private Long userId;
     @Column
-    private String ime;
+    private String name;
+    @Column
+    private Long companyIdentifier;
+    @Column
+    private String adress;
 
     public Agent() {
     }
@@ -19,10 +23,11 @@ public class Agent {
         this.userId = userId;
     }
 
-    public Agent(Long id, Long userId, String ime) {
+    public Agent(Long id, String name, Long companyIdentifier, String adress) {
         this.id = id;
-        this.userId = userId;
-        this.ime = ime;
+        this.name = name;
+        this.companyIdentifier = companyIdentifier;
+        this.adress = adress;
     }
 
     public Long getId() {
@@ -42,10 +47,34 @@ public class Agent {
     }
 
     public String getIme() {
-        return ime;
+        return name;
     }
 
-    public void setIme(String ime) {
-        this.ime = ime;
+    public void setIme(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getCompanyIdentifier() {
+        return companyIdentifier;
+    }
+
+    public void setCompanyIdentifier(Long companyIdentifier) {
+        this.companyIdentifier = companyIdentifier;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
     }
 }
