@@ -8,7 +8,6 @@ com/model/AdDTO.class
 com/repository/AdRepository.class
 com/model/AdLocationDTO.class
 com/OrderMain.class
-com/model/Vehicle.class
 com/controller/AdController.class
 com/model/ReservationDTO.class
 com/service/AdService.class

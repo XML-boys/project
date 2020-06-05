@@ -4,7 +4,6 @@ import com.model.ADLSDDTO;
 import com.model.Ad;
 import com.model.AdDTO;
 import com.model.AdLocationDTO;
-import com.repository.AdRepository;
 import com.service.AdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
