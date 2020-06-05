@@ -57,3 +57,8 @@ services:
                 image: postgres
                 links:
                         - database
+        vehicle_service: # stefan
+                image: maven
+                command: /usr/src/mymaven/run.sh
+                volumes:
+                        - "./vehicle_service/:/usr/src/mymaven/"
