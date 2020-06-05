@@ -15,7 +15,7 @@ services:
                 command: "python /code/main.py"
         agent_backend: # stefan
                 build: "./agent_backend/"
-        agent_database:
+        agent_database: # stefan
                 image: postgres
         message_queue: # stefan
                 image: rmohr/activemq
@@ -32,7 +32,7 @@ services:
                 command: /usr/src/mymaven/run.sh
                 volumes:
                         - "./message_service/:/usr/src/mymaven/"
-        order_service: 
+        order_service: # borislav
                 image: maven
                 command: /usr/src/mymaven/run.sh
                 volumes:
@@ -42,11 +42,11 @@ services:
                 command: /usr/src/mymaven/run.sh
                 volumes:
                         - "./user_service/:/usr/src/mymaven/"
-        database:
+        database: # stefan
                 environment:
                         - POSTGRES_PASSWORD=admin
                 image: postgres
-        db_setup:
+        db_setup: # stefan
                 volumes:
                         - "./setup/:/opt/code"
                 command: /opt/code/setup.sh
