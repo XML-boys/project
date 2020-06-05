@@ -6,6 +6,7 @@ import java.util.Objects;
 import com.Tim5.dto.ResponseDTO;
 import com.Tim5.dto.UserDTO;
 import com.Tim5.dto.UserLoginDTO;
+import com.Tim5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import com.Tim5.service.JwtUserDetailsService;
 
 
 import com.Tim5.config.JwtTokenUtil;
@@ -35,7 +35,7 @@ public class AuthenticationController {
     private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    private JwtUserDetailsService userDetailsService;
+    private UserService userDetailsService;
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody UserLoginDTO authenticationRequest) throws Exception {

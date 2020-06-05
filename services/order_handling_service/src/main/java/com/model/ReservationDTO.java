@@ -4,23 +4,24 @@ import java.time.LocalDate;
 
 public class ReservationDTO {
     private Long userId;
-    //private Ad ad;
     private LocalDate startTime;
     private LocalDate endTime;
+    private String state;
+    private Ad reklama;
 
 
     public ReservationDTO(Long userId, LocalDate startTime, LocalDate endTime) {
         this.userId = userId;
-        //this.ad = ad;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
     public ReservationDTO(Reservation reservation) {
         this.userId = reservation.getUserId();
-      //  this.ad = reservation.getReklama();
         this.startTime = reservation.getStartTime();
         this.endTime = reservation.getEndTime();
+        this.state = reservation.getState();
+        this.reklama = reservation.getReklama();
     }
 
     public Long getUserId() {
@@ -30,14 +31,6 @@ public class ReservationDTO {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
-
-    /*public Ad getAd() {
-        return ad;
-    }
-
-    public void setAd(Ad ad) {
-        this.ad = ad;
-    }*/
 
     public LocalDate getStartTime() {
         return startTime;
@@ -53,5 +46,21 @@ public class ReservationDTO {
 
     public void setEndTime(LocalDate endTime) {
         this.endTime = endTime;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public Ad getReklama() {
+        return reklama;
+    }
+
+    public void setReklama(Ad reklama) {
+        this.reklama = reklama;
     }
 }
