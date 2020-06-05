@@ -26,6 +26,7 @@ import com.Tim5.config.JwtTokenUtil;
 
 @RestController
 @CrossOrigin
+@RequestMapping(value = "/auth")
 public class AuthenticationController {
 
     @Autowired

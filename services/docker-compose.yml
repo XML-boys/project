@@ -41,7 +41,7 @@ services:
                 command: /usr/src/mymaven/run.sh
                 volumes:
                         - "./order_handling_service/:/usr/src/mymaven/"
-        user_service: # uros
+        user-service: # uros
                 image: maven
                 command: /usr/src/mymaven/run.sh
                 volumes:
@@ -57,3 +57,8 @@ services:
                 image: postgres
                 links:
                         - database
+        admin_service: # uros
+                image: maven
+                command: /usr/src/mymaven/run.sh
+                volumes:
+                        - "./admin_service/:/usr/src/mymaven/"
