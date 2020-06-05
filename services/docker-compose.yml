@@ -37,7 +37,7 @@ services:
                 command: /usr/src/mymaven/run.sh
                 volumes:
                         - "./order_handling_service/:/usr/src/mymaven/"
-        user_service:
+        user_service: # uros
                 image: maven
                 command: /usr/src/mymaven/run.sh
                 volumes:

@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.Tim5.dao.AgentRepository;
+import com.Tim5.dao.ClientRepository;
 import com.Tim5.dao.UserDao;
 import com.Tim5.dto.UserDTO;
+import com.Tim5.model.Agent;
+import com.Tim5.model.Client;
+import com.Tim5.model.ROLE;
+import com.Tim5.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,7 +22,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.Tim5.dao.UserDao;
-import com.Tim5.model.DAOUser;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
@@ -26,11 +30,17 @@ public class JwtUserDetailsService implements UserDetailsService {
     private UserDao userDao;
 
     @Autowired
+    private AgentRepository agentRepository;
+
+    @Autowired
+    private ClientRepository clientRepository;
+
+    @Autowired
     private PasswordEncoder bcryptEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        DAOUser user = userDao.findByUsername(username);
+        User user = userDao.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
@@ -41,11 +51,22 @@ public class JwtUserDetailsService implements UserDetailsService {
                 grantedAuthorities);
     }
 
-    public DAOUser save(UserDTO user) {
-        DAOUser newUser = new DAOUser();
+    public User save(UserDTO user) {
+        User newUser = new User();
         newUser.setUsername(user.getUsername());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         newUser.setRole(user.getRole());
-        return userDao.save(newUser);
+
+        User savedUser = userDao.save(newUser);
+        if(newUser.getRole() == ROLE.Agent){
+            Agent agent = new Agent(savedUser.getId());
+            agentRepository.save(agent);
+        }else if(newUser.getRole() == ROLE.Client)
+        {
+            Client client = new Client(savedUser.getId());
+            clientRepository.save(client);
+        }
+
+        return savedUser;
     }
 }
