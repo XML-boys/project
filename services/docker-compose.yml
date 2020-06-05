@@ -6,37 +6,37 @@ services:
                         - "./gateway/nginx:/etc/nginx"
                 ports:
                         - "6969:80"
-        user_frontend: # stefan
+        user-frontend: # stefan
                 image: nginx
                 volumes:
                         - "./user_frontend/dist:/usr/share/nginx/html/frontend/dist"
                         - "./user_frontend/index.html:/usr/share/nginx/html/frontend/index.html"
                         - "./user_frontend/nginx:/etc/nginx"
-        vehicle_location: # stefan
+        vehicle-location: # stefan
                 image: python
                 volumes:
                         - "./vehicle:/code"
                 command: "python /code/main.py"
-        agent_backend: # stefan
+        agent-backend: # stefan
                 build: "./agent_backend/"
-        agent_database: # stefan
+        agent-database: # stefan
                 image: postgres
-        message_queue: # stefan
+        message-queue: # stefan
                 image: rmohr/activemq
                 ports:
                         - "665:8161"
-        email_service: # stefan
+        email-service: # stefan
                 image: maven
                 command: cd /usr/src/mymaven && mvn spring-boot:run
                 volumes:
                         - "./email_service/:/usr/src/mymaven/"
 
-        message_service: # stefan
+        message-service: # stefan
                 image: maven
                 command: /usr/src/mymaven/run.sh
                 volumes:
                         - "./message_service/:/usr/src/mymaven/"
-        order_service: # borislav
+        order-service: # borislav
                 image: maven
                 command: /usr/src/mymaven/run.sh
                 volumes:
@@ -57,8 +57,13 @@ services:
                 image: postgres
                 links:
                         - database
-        admin_service: # uros
+        admin-service: # uros
                 image: maven
                 command: /usr/src/mymaven/run.sh
                 volumes:
                         - "./admin_service/:/usr/src/mymaven/"
+        vehicle-service: # stefan
+                image: maven
+                command: /usr/src/mymaven/run.sh
+                volumes:
+                        - "./vehicle_service/:/usr/src/mymaven/"
