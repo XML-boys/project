@@ -8,16 +8,16 @@
 		<version>2.2.0.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>org.psw_isa</groupId>
-	<artifactId>psw_isa_backend</artifactId>
+	<groupId>xmlproject</groupId>
+	<artifactId>message_service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>backend</name>
-	<description>PSW ISA Project</description>
+	<description>XWS Project</description>
   	<packaging>war</packaging>
 
 	<properties>
 		<java.version>1.8</java.version>
-		<start-class>org.psw_isa.psw_isa_backend.BackendApplication</start-class>
+		<start-class>com.xmlboyz.service.BackendApplication</start-class>
 	</properties>
 
 
