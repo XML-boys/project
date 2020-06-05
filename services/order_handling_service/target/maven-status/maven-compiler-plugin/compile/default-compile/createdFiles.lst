@@ -1,5 +1,9 @@
 com/model/Reservation.class
 com/service/ReservationService.class
+<<<<<<< HEAD
+=======
+com/model/ADLSDDTO.class
+>>>>>>> a7e20aa0391073fc8e63b3109fe1c7c4262c9e55
 com/model/AdDTO.class
 com/repository/AdRepository.class
 com/model/AdLocationDTO.class

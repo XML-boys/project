@@ -10,7 +10,11 @@ public class AdDTO {
     private String location;
     private Long vehicleId;
     private ArrayList<String> pictures;
+    private String cena;
+    private boolean damage;
 
+    public AdDTO() {
+    }
 
     public AdDTO(Long idAgenta, LocalDate startTime, LocalDate endTime, String location, Long vehicleId, ArrayList<String> pictures) {
         this.idAgenta = idAgenta;
@@ -28,6 +32,8 @@ public class AdDTO {
         this.idAgenta = ad.getIdAgenta();
         this.vehicleId = ad.getVehicleId();
         this.pictures = ad.getPictures();
+        this.cena = ad.getCena();
+        this.damage = ad.isDamage();
     }
 
     public Long getIdAgenta() {
@@ -76,5 +82,21 @@ public class AdDTO {
 
     public void setPictures(ArrayList<String> pictures) {
         this.pictures = pictures;
+    }
+
+    public String getCena() {
+        return cena;
+    }
+
+    public void setCena(String cena) {
+        this.cena = cena;
+    }
+
+    public boolean isDamage() {
+        return damage;
+    }
+
+    public void setDamage(boolean damage) {
+        this.damage = damage;
     }
 }

@@ -24,6 +24,10 @@ public class Ad {
     private Long vehicleId;
     @Column
     private String location;
+    @Column
+    private String cena;
+    @Column
+    private boolean damage;
 
     @OneToMany(mappedBy = "reklama", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
@@ -32,13 +36,16 @@ public class Ad {
     public Ad() {
     }
 
-    public Ad(Long idAgenta, LocalDate startTime, LocalDate endDate, ArrayList<String> pictures, Long vehicleId, String location) {
+    public Ad(Long idAgenta, LocalDate startTime, LocalDate endDate, ArrayList<String> pictures, Long vehicleId, String location, String cena, boolean damage, Set<Reservation> ads) {
         this.idAgenta = idAgenta;
         this.startTime = startTime;
         this.endDate = endDate;
         this.pictures = pictures;
         this.vehicleId = vehicleId;
         this.location = location;
+        this.cena = cena;
+        this.damage = damage;
+        this.ads = ads;
     }
 
     public Long getId() {
@@ -95,5 +102,21 @@ public class Ad {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getCena() {
+        return cena;
+    }
+
+    public void setCena(String cena) {
+        this.cena = cena;
+    }
+
+    public boolean isDamage() {
+        return damage;
+    }
+
+    public void setDamage(boolean damage) {
+        this.damage = damage;
     }
 }
