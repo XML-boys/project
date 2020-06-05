@@ -1,7 +1,0 @@
-com/xmlboyz/service/BackendApplication.class
-com/xmlboyz/service/models/Conversation.class
-com/xmlboyz/service/models/Message.class
-com/xmlboyz/service/repository/ConversationRepository.class
-com/xmlboyz/service/service/ConversationService.class
-com/xmlboyz/service/repository/MessageRepository.class
-com/xmlboyz/service/service/MessageService.class
