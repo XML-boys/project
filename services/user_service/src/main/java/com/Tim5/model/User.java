@@ -1,18 +1,26 @@
 package com.Tim5.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "user")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column
     private String username;
+    @Column
+    @JsonIgnore
     private String password;
+    @Column
     private ROLE role;
 
-    public User() {
-    }
-
-    public User(String username, String password, ROLE role) {
-        this.username = username;
-        this.password = password;
-        this.role = role;
+    public long getId() {
+        return id;
     }
 
     public String getUsername() {
@@ -37,5 +45,9 @@ public class User {
 
     public void setRole(ROLE role) {
         this.role = role;
+    }
+
+    public void setRole(String role) {
+        this.role = ROLE.valueOf(role);
     }
 }
