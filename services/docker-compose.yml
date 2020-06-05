@@ -37,3 +37,14 @@ services:
                 command: /usr/src/mymaven/run.sh
                 volumes:
                         - "./user_service/:/usr/src/mymaven/"
+        database:
+                environment:
+                        - POSTGRES_PASSWORD=admin
+                image: postgres
+        db_setup:
+                volumes:
+                        - "./setup/:/opt/code"
+                command: /opt/code/setup.sh
+                image: postgres
+                links:
+                        - database
