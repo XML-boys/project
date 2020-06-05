@@ -5,6 +5,7 @@ import com.model.ReservationDTO;
 import com.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +23,10 @@ public class ReservationController {
     public ResponseEntity<Void> saveReservation(@RequestBody ReservationDTO reservationDTO)  {
         Reservation reservation = new Reservation();
         reservation.setUserId(reservationDTO.getUserId());
-        //reservation.setReklama(reservationDTO.getAd());
+        reservation.setReklama(reservationDTO.getReklama());
         reservation.setStartTime(reservationDTO.getStartTime());
         reservation.setEndTime(reservationDTO.getEndTime());
+        reservation.setState(reservationDTO.getState());
 
         reservationService.save(reservation);
 
@@ -45,9 +47,41 @@ public class ReservationController {
         return new ResponseEntity<>(reservationDTOS, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/deleteReservation/{id}")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteReservation(@PathVariable Long id) {
         reservationService.remove(id);
         return new ResponseEntity<>((HttpStatus.OK));
     }
+
+    @PostMapping(path = "/pendingVehicle", consumes = "application/json")
+    public ResponseEntity<String> postPending(@RequestBody String status,Long userId) {
+        List<Reservation> reservations = reservationService.pronadjiPoUserId(userId);
+        if(reservations != null)
+        {
+            for(Reservation r : reservations)
+            {
+                r.setState(status);
+                return new ResponseEntity<>(r.getState(), HttpStatus.OK);
+            }
+        }
+
+
+        return new ResponseEntity<>("Nema ni jedne rezervacije za dato vozilo", HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/vehicleStatus/", consumes = "application/json")
+    public ResponseEntity<String> getResStatus(@RequestBody Long userId){
+        List<Reservation> reservations = reservationService.pronadjiPoUserId(userId);
+        if(reservations != null)
+        {
+            for(Reservation r : reservations)
+            {
+                return new ResponseEntity<>(r.getState(), HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>("Nema ni jedne rezervacije za dato vozilo", HttpStatus.OK);
+    }
+
+
+
 }
