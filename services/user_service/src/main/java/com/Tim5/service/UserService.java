@@ -51,6 +51,11 @@ public class UserService implements UserDetailsService {
                 grantedAuthorities);
     }
 
+    public User findUserByUsername(String username) {
+        User user = userDao.findByUsername(username);
+        return user;
+    }
+
     public User save(UserDTO user) {
         User newUser = new User();
         newUser.setUsername(user.getUsername());
