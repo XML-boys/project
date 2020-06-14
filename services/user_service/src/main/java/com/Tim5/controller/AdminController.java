@@ -32,12 +32,12 @@ public class AdminController {
         adminService.unblockUser(id);
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteUser(@PathParam("id") Long id){
         userService.deleteUser(id);
     }
 
-    @RequestMapping(value = "/getAllClients", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public List<Client> getAllClients(){
         return adminService.getAll();
     }

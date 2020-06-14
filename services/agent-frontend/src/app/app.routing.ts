@@ -6,10 +6,10 @@ import {BrowserModule} from '@angular/platform-browser';
 const routes: Routes = [
 
   {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  }
+    path: 'agent',
+    loadChildren: () => import('./pages/pages.module')
+      .then(m => m.PagesModule),
+  },
 /*  , {
     path: 'signup',
     component: ,
