@@ -19,7 +19,7 @@ public class ReservationController {
     @Autowired
     private ReservationService reservationService;
 
-    @PostMapping(path = "/saveReservation", consumes = "application/json")
+    @PostMapping(consumes = "application/json")
     public ResponseEntity<Void> saveReservation(@RequestBody ReservationDTO reservationDTO)  {
         Reservation reservation = new Reservation();
         reservation.setUserId(reservationDTO.getUserId());
@@ -33,9 +33,9 @@ public class ReservationController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PostMapping(path = "/getReservation", consumes = "application/json")
-    public ResponseEntity<List<ReservationDTO>> getReservation(@RequestBody Long userId) {
-        List<Reservation> reservations = reservationService.pronadjiPoUserId(userId);
+    @GetMapping(consumes = "application/json")
+    public ResponseEntity<List<ReservationDTO>> getReservations() {
+        List<Reservation> reservations = reservationService.findAll();
         List<ReservationDTO> reservationDTOS= new ArrayList<>();
         if(reservations != null)
         {
@@ -53,25 +53,64 @@ public class ReservationController {
         return new ResponseEntity<>((HttpStatus.OK));
     }
 
-    @PostMapping(path = "/pendingVehicle", consumes = "application/json")
-    public ResponseEntity<String> postPending(@RequestBody String status,Long userId) {
-        List<Reservation> reservations = reservationService.pronadjiPoUserId(userId);
-        if(reservations != null)
-        {
-            for(Reservation r : reservations)
+    @PutMapping(value = "/{id}", consumes = "application/json")
+    public ResponseEntity<Void> putReservation(@RequestBody ReservationDTO reservationDTO, @PathVariable Long id)  {
+        List<Reservation> reservations = reservationService.findAll();
+        if(reservations != null){
+            for(Reservation reservation : reservations)
             {
-                r.setState(status);
-                return new ResponseEntity<>(r.getState(), HttpStatus.OK);
+                if(reservation.getId() == id)
+                {
+                    reservation.setUserId(reservationDTO.getUserId());
+                    reservation.setReklama(reservationDTO.getReklama());
+                    reservation.setStartTime(reservationDTO.getStartTime());
+                    reservation.setEndTime(reservationDTO.getEndTime());
+                    reservation.setState(reservationDTO.getState());
+
+                    reservationService.save(reservation);
+                }
             }
         }
 
 
-        return new ResponseEntity<>("Nema ni jedne rezervacije za dato vozilo", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping(path = "/vehicleStatus/", consumes = "application/json")
-    public ResponseEntity<String> getResStatus(@RequestBody Long userId){
-        List<Reservation> reservations = reservationService.pronadjiPoUserId(userId);
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Reservation> getReservation(@PathVariable Long id) {
+        List<Reservation> reservations = reservationService.findAll();
+        if(reservations != null)
+        {
+            for(Reservation reservation : reservations)
+            {
+                if(reservation.getId() == id){
+                    return new ResponseEntity<>(reservation, HttpStatus.OK);
+                }
+            }
+        }
+        return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping(value = "/{id}/state", consumes = "application/json")
+    public ResponseEntity<Void> putVehicleStatus(@RequestBody String state, @PathVariable Long id) {
+        List<Reservation> reservations = reservationService.findAll();
+        if(reservations != null)
+        {
+            for(Reservation r : reservations)
+            {
+                if(r.getId() == id){
+                    r.setState(state);
+                    reservationService.save(r);
+                    return new ResponseEntity<>(HttpStatus.OK);
+                }
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping(value = "/{id}/state")
+    public ResponseEntity<String> getVehicleStatus(@PathVariable Long id){
+        List<Reservation> reservations = reservationService.findAll();
         if(reservations != null)
         {
             for(Reservation r : reservations)
@@ -79,7 +118,7 @@ public class ReservationController {
                 return new ResponseEntity<>(r.getState(), HttpStatus.OK);
             }
         }
-        return new ResponseEntity<>("Nema ni jedne rezervacije za dato vozilo", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 

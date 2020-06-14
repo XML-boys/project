@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class AdDTO {
+    private Long id;
     private Long idAgenta;
     private LocalDate startTime;
     private LocalDate endTime;
@@ -26,6 +27,7 @@ public class AdDTO {
     }
 
     public AdDTO(Ad ad) {
+        this.id = ad.getId();
         this.startTime = ad.getStartTime();
         this.endTime = ad.getEndDate();
         this.location = ad.getLocation();
@@ -98,5 +100,13 @@ public class AdDTO {
 
     public void setDamage(boolean damage) {
         this.damage = damage;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
