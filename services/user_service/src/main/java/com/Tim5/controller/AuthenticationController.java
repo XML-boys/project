@@ -53,10 +53,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(new ResponseDTO(token));
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
-        return ResponseEntity.ok(userDetailsService.save(user));
-    }
+
 
     @GetMapping()
     public ResponseEntity<UserValidateDTO> validate(HttpServletRequest request){

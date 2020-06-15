@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SmartTableData} from '../../@core/data/smart-table';
 import {LocalDataSource} from 'ng2-smart-table';
+import {MyAdsService} from '../../@core/services/my-ads.service';
 
 @Component({
   selector: 'app-my-ads',
@@ -53,9 +54,17 @@ export class MyAdsComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: SmartTableData) {
-    const data = this.service.getData();
-    this.source.load(data);
+  constructor(private service: MyAdsService) {
+    this.service.getAll().subscribe((data: {}) => {
+      this.loadAds(data);
+      }
+    );
+  }
+
+  loadAds(data){
+    for (const item of data) {
+      this.source.add(item);
+    }
   }
 
   onDeleteConfirm(event): void {

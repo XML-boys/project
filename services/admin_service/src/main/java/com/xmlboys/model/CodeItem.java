@@ -3,7 +3,7 @@ package com.xmlboys.model;
 import javax.persistence.*;
 
 @Entity
-public class Code {
+public class CodeItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,10 +16,10 @@ public class Code {
     @Column
     private String gear;
 
-    public Code() {
+    public CodeItem() {
     }
 
-    public Code(Long agentId) {
+    public CodeItem(Long agentId) {
         this.agentId = agentId;
     }
 

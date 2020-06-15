@@ -1,6 +1,7 @@
 package com.Tim5.service;
 
 import com.Tim5.dao.ClientRepository;
+import com.Tim5.dto.LongBoolDTO;
 import com.Tim5.model.Client;
 import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,8 @@ public class AdminService {
     private ClientRepository clientRepository;
 
     
-    public void blockUser(Long userID) {
-        clientRepository.blockUser(userID);
-    }
-    public void unblockUser(Long userID) {
-        clientRepository.unblockUser(userID);
+    public void blockUser(LongBoolDTO longBoolDTO) {
+        clientRepository.blockUpdate(longBoolDTO.getId(), longBoolDTO.getBlocked());
     }
 
     public List<Client> getAll() {return  Lists.newArrayList(clientRepository.findAll());}

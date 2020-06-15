@@ -3,7 +3,6 @@ com/service/ReservationService.class
 com/model/ADLSDDTO.class
 com/model/AdDTO.class
 com/repository/AdRepository.class
-com/model/AdLocationDTO.class
 com/OrderMain.class
 com/controller/AdController.class
 com/model/ReservationDTO.class

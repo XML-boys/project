@@ -12,8 +12,10 @@ public class ClientController {
 
     @GetMapping
     public void getUsers(HttpServletResponse httpServletResponse){
-        httpServletResponse.setHeader("Location", "gateway/adminUser/getAllClients");
+        httpServletResponse.setHeader("Location", "http://localhost:6969/adminUser");
         httpServletResponse.setStatus(302);
     }
+
+
 
 }
