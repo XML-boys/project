@@ -45,9 +45,10 @@ public class AdController {
             for(Ad a : ads)
             {
                 adDTOS.add(new AdDTO(a));
+                return new ResponseEntity<>(adDTOS, HttpStatus.OK);
             }
         }
-        return new ResponseEntity<>(adDTOS, HttpStatus.OK);
+        return new ResponseEntity<>(adDTOS, HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping(value = "/{id}")
