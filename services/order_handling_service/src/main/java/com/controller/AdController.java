@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/ad")
 public class AdController {
 
@@ -36,7 +37,7 @@ public class AdController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = "application/json")
     public ResponseEntity<List<AdDTO>> getAds() {
         List<Ad> ads = adService.findAllAds();
         List<AdDTO> adDTOS= new ArrayList<>();

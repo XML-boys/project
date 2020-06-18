@@ -1,9 +1,9 @@
 package com.xmlboys.repository;
 
-import com.xmlboys.model.Code;
+import com.xmlboys.model.CodeItem;
 import org.springframework.data.repository.CrudRepository;
 
-public interface CodeBook extends CrudRepository<Code, Long> {
+public interface CodeBook extends CrudRepository<CodeItem, Long> {
 
 
 }

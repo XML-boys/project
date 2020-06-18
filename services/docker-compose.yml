@@ -67,3 +67,12 @@ services:
                 command: /usr/src/mymaven/run.sh
                 volumes:
                         - "./vehicle_service/:/usr/src/mymaven/"
+        pgadmin: #uros
+                restart: always
+                image: dpage/pgadmin4
+                ports:
+                    - "8000:80"
+                environment:
+                    PGADMIN_DEFAULT_EMAIL: admin@admin.com
+                    PGADMIN_DEFAULT_PASSWORD: admin
+

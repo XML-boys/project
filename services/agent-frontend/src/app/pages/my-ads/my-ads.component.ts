@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SmartTableData} from '../../@core/data/smart-table';
 import {LocalDataSource} from 'ng2-smart-table';
+import {MyAdsService} from '../../@core/services/my-ads.service';
 
 @Component({
   selector: 'app-my-ads',
@@ -23,6 +24,7 @@ export class MyAdsComponent implements OnInit {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
     },
+    update: true,
     columns: {
       id: {
         title: 'Ad ID',
@@ -53,9 +55,24 @@ export class MyAdsComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: SmartTableData) {
-    const data = this.service.getData();
-    this.source.load(data);
+  constructor(private service: MyAdsService) {
+
+  }
+
+  loadAds(data){
+    for (const item of data) {
+      const tmp = {
+        id: item.id,
+        vehicleId: item.vehicleId,
+        startTime: item.startTime,
+        endTime: item.endTime,
+        location: item.location,
+        cena: item.cena,
+      };
+      this.source.add(tmp);
+
+    }
+    console.log(this.source);
   }
 
   onDeleteConfirm(event): void {
@@ -67,6 +84,12 @@ export class MyAdsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.service.getAll().subscribe((data: {}) => {
+        this.loadAds(data);
+        console.log(data);
+        this.source.refresh();
+      }
+    );
   }
 
 }
