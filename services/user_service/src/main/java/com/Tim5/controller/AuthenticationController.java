@@ -40,7 +40,7 @@ public class AuthenticationController {
     @Autowired
     private UserService userDetailsService;
 
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody UserLoginDTO authenticationRequest) throws Exception {
         System.out.println(authenticationRequest.getUsername() + ":" + authenticationRequest.getPassword());
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());

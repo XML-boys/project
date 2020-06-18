@@ -3,6 +3,8 @@ package com.Tim5.dto;
 import com.Tim5.model.ROLE;
 
 public class UserDTO {
+    private String email;
+    private Boolean approved;
     private String username;
     private String password;
     private ROLE role;
@@ -29,5 +31,21 @@ public class UserDTO {
 
     public void setRole(String role) {
         this.role = ROLE.valueOf(role);
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Boolean getApproved() {
+        return approved;
+    }
+
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
     }
 }

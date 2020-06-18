@@ -4,9 +4,6 @@ import com.Tim5.dto.UserDTO;
 import com.Tim5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,6 +17,7 @@ public class RegisterController {
 
     @RequestMapping( method = RequestMethod.POST)
     public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
+        user.setApproved(false);
         return ResponseEntity.ok(userDetailsService.save(user));
     }
 }

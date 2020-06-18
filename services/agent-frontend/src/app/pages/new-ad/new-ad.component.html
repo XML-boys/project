@@ -1,1 +1,54 @@
-<p>new-ad works!</p>
+<nb-card>
+  <nb-card-header>Create new ad</nb-card-header>
+  <nb-card-body>
+    <form>
+      <div class="form-group">
+      <label class="label" for="vehicle">Vehicle: </label>
+        <nb-select id="vehicle" placeholder="Choose vehicle">
+        </nb-select>
+      </div>
+      <br>
+      <div class="full-name-inputs">
+        <div class="form-group">
+
+        <label class="label col-sm-3 col-form-label" for="sDate">Start date: </label>
+          <input nbInput id="sDate"
+                 placeholder="Form Picker"
+                 [nbDatepicker]="formpicker">
+          <nb-datepicker #formpicker></nb-datepicker>
+        </div>
+        <div class="form-group">
+        <label class="label col-sm-3 col-form-label" for="eDate">End date: </label>
+          <input nbInput id="eDate"
+                 placeholder="Form Picker"
+                 [nbDatepicker]="formpicker">
+          <nb-datepicker #formpicker></nb-datepicker>
+        </div>
+      </div>
+      <br>
+      <div class="full-name-inputs">
+        <label for="oType">Oil Type: </label>
+        <nb-select id="oType" placeholder="Oil Type" >
+          <nb-option value="Diesel">Diesel</nb-option>
+          <nb-option value="Gas">Gas</nb-option>
+          <nb-option value="LPG">LPG</nb-option>
+        </nb-select>
+        <label for="gearType">Gear type </label>
+        <nb-select id="gearType" placeholder="Gearbox Type" >
+          <nb-option value="Manual">Manual</nb-option>
+          <nb-option value="Automat">Automat</nb-option>
+        </nb-select>
+      </div>
+      <br>
+      <div class="full-name-inputs">
+        <label for="distance">Distance in KM:  </label>
+        <input type="number" id="distance" nbInput  placeholder="Distnance">
+        <label for="seats">Number of kids seats:  </label>
+        <input type="number" id="seats" nbInput  placeholder="Kids seats">
+      </div>
+      <br>
+      <button type="submit" nbButton status="primary">Save</button>
+    </form>
+  </nb-card-body>
+</nb-card>
+

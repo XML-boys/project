@@ -52,8 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/auth/authenticate");
-        web.ignoring().antMatchers("/auth/register");
+        web.ignoring().antMatchers("/auth");
+        web.ignoring().antMatchers("/reg");
 
     }
 
@@ -63,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // We don't need CSRF for this example
         httpSecurity.csrf().disable()
                 // dont authenticate this particular request
-                .authorizeRequests().antMatchers("/auth/authenticate", "/auth/register").permitAll().
+                .authorizeRequests().antMatchers("/auth", "/reg").permitAll().
                 antMatchers("/test").hasAuthority(ROLE.ADMIN.name()).
                 // all other requests need to be authenticated
                         anyRequest().authenticated().and().

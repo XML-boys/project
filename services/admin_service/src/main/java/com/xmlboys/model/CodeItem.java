@@ -1,6 +1,7 @@
 package com.xmlboys.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class CodeItem {
@@ -8,20 +9,9 @@ public class CodeItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
-    private Long agentId;
-    @Column
-    private String model;
-    @Column
     private String vendor;
-    @Column
-    private String gear;
-
-    public CodeItem() {
-    }
-
-    public CodeItem(Long agentId) {
-        this.agentId = agentId;
-    }
+    @OneToMany(mappedBy = "vendor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<VehicleModel> models;
 
     public Long getId() {
         return id;
@@ -29,22 +19,6 @@ public class CodeItem {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getAgentId() {
-        return agentId;
-    }
-
-    public void setAgentId(Long agentId) {
-        this.agentId = agentId;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
     }
 
     public String getVendor() {
@@ -55,11 +29,11 @@ public class CodeItem {
         this.vendor = vendor;
     }
 
-    public String getGear() {
-        return gear;
+    public List<VehicleModel> getModels() {
+        return models;
     }
 
-    public void setGear(String gear) {
-        this.gear = gear;
+    public void setModels(List<VehicleModel> models) {
+        this.models = models;
     }
 }

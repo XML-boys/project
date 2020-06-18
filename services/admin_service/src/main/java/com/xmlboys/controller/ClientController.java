@@ -10,12 +10,13 @@ import javax.websocket.server.PathParam;
 @RequestMapping(value = "/adminClient")
 public class ClientController {
 
-    @GetMapping
-    public void getUsers(HttpServletResponse httpServletResponse){
+
+
+    @PutMapping
+    public void updateUser(HttpServletResponse httpServletResponse){
         httpServletResponse.setHeader("Location", "http://localhost:6969/adminUser");
         httpServletResponse.setStatus(302);
     }
-
 
 
 }
