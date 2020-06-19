@@ -2,7 +2,9 @@ package com.controller;
 
 import com.model.Ad;
 import com.model.AdDTO;
+import com.model.UserDTO;
 import com.service.AdService;
+import com.service.RestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,11 +21,13 @@ public class AdController {
     @Autowired
     private AdService adService;
 
+
+
     @PostMapping(consumes = "application/json")
     public ResponseEntity<Void> saveAd(@RequestBody AdDTO adDTO)  {
         Ad ad = new Ad();
         ad.setStartTime(adDTO.getStartTime());
-        ad.setEndDate(adDTO.getEndTime());
+        ad.setEndDate(adDTO.getEndDate());
         ad.setIdAgenta(adDTO.getIdAgenta());
         ad.setLocation(adDTO.getLocation());
         ad.setVehicleId(adDTO.getVehicleId());
@@ -67,7 +71,7 @@ public class AdController {
                 if(ad.getId() == id)
                 {
                     ad.setStartTime(adDTO.getStartTime());
-                    ad.setEndDate(adDTO.getEndTime());
+                    ad.setEndDate(adDTO.getEndDate());
                     ad.setIdAgenta(adDTO.getIdAgenta());
                     ad.setLocation(adDTO.getLocation());
                     ad.setVehicleId(adDTO.getVehicleId());
@@ -132,6 +136,7 @@ public class AdController {
 
     }
 
+
     /*@PostMapping(path = "/allReqAds", consumes = "application/json")
     public ResponseEntity<List<AdDTO>> getAdz(@RequestBody ADLSDDTO adlsddto) {
         List<Ad> ads = adService.findAllAds();
@@ -156,6 +161,8 @@ public class AdController {
         }
         return new ResponseEntity<>(adDTO, HttpStatus.OK);
     }*/
+
+
 
 
 

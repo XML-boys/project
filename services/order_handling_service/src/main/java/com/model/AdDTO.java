@@ -7,12 +7,12 @@ public class AdDTO {
     private Long id;
     private Long idAgenta;
     private LocalDate startTime;
-    private LocalDate endTime;
+    private LocalDate endDate;
     private String location;
     private Long vehicleId;
     private ArrayList<String> pictures;
     private String cena;
-    private boolean damage;
+    private Boolean damage;
 
     public AdDTO() {
     }
@@ -20,7 +20,7 @@ public class AdDTO {
     public AdDTO(Long idAgenta, LocalDate startTime, LocalDate endTime, String location, Long vehicleId, ArrayList<String> pictures) {
         this.idAgenta = idAgenta;
         this.startTime = startTime;
-        this.endTime = endTime;
+        this.endDate = endTime;
         this.location = location;
         this.vehicleId = vehicleId;
         this.pictures = pictures;
@@ -29,7 +29,7 @@ public class AdDTO {
     public AdDTO(Ad ad) {
         this.id = ad.getId();
         this.startTime = ad.getStartTime();
-        this.endTime = ad.getEndDate();
+        this.endDate = ad.getEndDate();
         this.location = ad.getLocation();
         this.idAgenta = ad.getIdAgenta();
         this.vehicleId = ad.getVehicleId();
@@ -54,12 +54,12 @@ public class AdDTO {
         this.startTime = startTime;
     }
 
-    public LocalDate getEndTime() {
-        return endTime;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public void setEndTime(LocalDate endTime) {
-        this.endTime = endTime;
+    public void setEndDate(LocalDate endTime) {
+        this.endDate = endTime;
     }
 
     public String getLocation() {

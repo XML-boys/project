@@ -13,23 +13,29 @@ import {AdminCompModule} from './admin-comp/admin-comp.module';
 import {AdminLayoutModule} from './admin-layout/admin-layout.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AdminUpravaComponent } from './admin-uprava/admin-uprava.component';
+import { AdminSifrarnikComponent } from './admin-sifrarnik/admin-sifrarnik.component';
+import {DropdownListModule} from 'ngx-dropdown-list';
+import { AdminRegisterAgentComponent } from './admin-register-agent/admin-register-agent.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdminUpravaComponent
+    AdminUpravaComponent,
+    AdminSifrarnikComponent,
+    AdminRegisterAgentComponent
   ],
-  imports: [
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    RouterModule,
-    AppRoutingModule,
-    NgbModule,
-    ReactiveFormsModule,
-    AdminLayoutModule,
-    FontAwesomeModule
-  ],
+    imports: [
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientModule,
+        RouterModule,
+        AppRoutingModule,
+        NgbModule,
+        ReactiveFormsModule,
+        AdminLayoutModule,
+        FontAwesomeModule,
+        DropdownListModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -2,6 +2,7 @@ package com.controller;
 
 import com.model.Reservation;
 import com.model.ReservationDTO;
+import com.model.State;
 import com.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -109,7 +110,7 @@ public class ReservationController {
     }
 
     @GetMapping(value = "/{id}/state")
-    public ResponseEntity<String> getVehicleStatus(@PathVariable Long id){
+    public ResponseEntity<State> getVehicleStatus(@PathVariable Long id){
         List<Reservation> reservations = reservationService.findAll();
         if(reservations != null)
         {

@@ -5,8 +5,12 @@ com/model/AdDTO.class
 com/repository/AdRepository.class
 com/OrderMain.class
 com/controller/AdController.class
+com/model/State.class
+com/model/UserDTO.class
 com/model/ReservationDTO.class
 com/service/AdService.class
+com/controller/RSTInterface.class
 com/controller/ReservationController.class
 com/repository/ReservationRepository.class
+com/service/RestService.class
 com/model/Ad.class

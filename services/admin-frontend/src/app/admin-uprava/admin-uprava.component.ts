@@ -116,4 +116,8 @@ export class AdminUpravaComponent implements OnInit {
     client.blocked = false;
     this.adminUpravaService.putClient(client, client.id);
   }
+
+  open12(client) {
+    this.adminUpravaService.deleteClient(client.id);
+  }
 }

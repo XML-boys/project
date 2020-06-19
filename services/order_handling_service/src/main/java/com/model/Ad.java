@@ -27,7 +27,7 @@ public class Ad {
     @Column
     private String cena;
     @Column
-    private boolean damage;
+    private Boolean damage;
 
     @OneToMany(mappedBy = "reklama", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore

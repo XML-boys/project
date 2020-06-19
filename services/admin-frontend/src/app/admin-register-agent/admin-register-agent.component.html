@@ -1,0 +1,60 @@
+<div class="panel-header panel-header-sm">
+</div>
+
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Register admin</h4>
+        </div>
+
+
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-md-4 pr-1">
+              <div class="form-group" >
+                <input type="text" [(ngModel)]="agent.name"
+                       class="form-control"
+                       id="nazivAgenta"
+                       name="nazivAgenta"
+                       value="{{agent.name}}"
+                       required #name="ngModel">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 pr-1">
+              <div class="form-group" >
+                <input type="text" [(ngModel)]="agent.companyIdentifier"
+                       class="form-control"
+                       id="companyIdentifier"
+                       name="companyIdentifier"
+                       value="{{agent.companyIdentifier}}"
+                       required #name="ngModel">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 pr-1">
+              <div class="form-group" >
+                <input type="text" [(ngModel)]="agent.adress"
+                       class="form-control"
+                       id="adress"
+                       name="adress"
+                       value="{{agent.adress}}"
+                       required #name="ngModel">
+              </div>
+            </div>
+          </div>
+
+          <button  class="btn btn-primary btn-block" (click)="open(agent.name, agent.companyIdentifier, agent.adress)">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

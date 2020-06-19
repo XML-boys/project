@@ -11,6 +11,10 @@ export class ConfigService {
     return this.apiUri + '/agent';
   }
 
+  get allItems(): string {
+    return this.apiUri + '/codeBook';
+  }
+
   get allClients(): string {
     return this.apiUri + '/client';
   }
@@ -31,8 +35,16 @@ export class ConfigService {
     return this.apiUri + '/client';
   }
 
+  get deleteModel(): string {
+    return this.apiUri + '/codeBook/{idVehicle}/model/{idModel}';
+  }
+
   get deleteUser(): string {
     return this.apiUri + '/user';
+  }
+
+  get deleteVendor(): string {
+    return this.apiUri + '/codeBook';
   }
 
   get deleteComment(): string {
@@ -43,8 +55,12 @@ export class ConfigService {
     return this.apiUri + '/client';
   }
 
-  get putAgent(): string {
-    return this.apiUri + '/agent';
+  get putCodeItem(): string {
+    return this.apiUri + '/codeItem';
+  }
+
+  get putModel(): string {
+    return this.apiUri + '/vehicleModel';
   }
 
   get putUser(): string {
@@ -53,5 +69,16 @@ export class ConfigService {
 
   get putComment(): string {
     return this.apiUri + '/comment';
+  }
+
+  get postCodeItem(): string {
+    return this.apiUri + '/codeItem';
+  }
+  get postModel(): string {
+    return this.apiUri + '/vehicleModel';
+  }
+
+  get postAgents(): string {
+    return this.apiUri + '/agents';
   }
 }
