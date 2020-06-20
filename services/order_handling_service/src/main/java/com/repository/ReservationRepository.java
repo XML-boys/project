@@ -15,6 +15,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     Reservation save(Reservation order);
     void removeById(Long id);
-	
+
     List<Reservation> findAll();
 }

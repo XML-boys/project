@@ -17,7 +17,7 @@ public class Reservation {
     @Column
     private LocalDate endTime;
     @Column
-    private String state;
+    private State state;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     //@JoinColumn(name = "reklama")
@@ -26,7 +26,7 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(Long userId, LocalDate startTime, LocalDate endTime, String state, Ad reklama) {
+    public Reservation(Long userId, LocalDate startTime, LocalDate endTime, State state, Ad reklama) {
         this.userId = userId;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -74,11 +74,11 @@ public class Reservation {
         this.endTime = endTime;
     }
 
-    public String getState() {
+    public State getState() {
         return state;
     }
 
     public void setState(String state) {
-        this.state = state;
+        this.state.valueOf(state);
     }
 }
