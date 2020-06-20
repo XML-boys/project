@@ -38,7 +38,7 @@ export default {
 <div>
 
 <p class="p">
-<WidgetUserSingle :user="this.user" />
+<WidgetUserSingle />
 </p>
 </div>
 </template>

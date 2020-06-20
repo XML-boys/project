@@ -12,7 +12,8 @@ export default {
             return {
 		data: {},
 		role: localStorage.getItem("role"),
-		user: localStorage.getItem("user_id")
+		client: localStorage.getItem("clientId"),
+		user: localStorage.getItem("userId")
 	    };
 	},
     mounted: function () 
@@ -34,7 +35,7 @@ export default {
 <template>
 <div class="profile-update">
 <p>Update for user: {{ user.id }}</p>
-<WidgetUpdateUser v-if="this.role != 'PATIENT' && this.role != 'NOT_LOGGED'" :user="this.user"/>
+<WidgetUpdateUser v-if="this.role != 'PATIENT' && this.role != 'NOT_LOGGED'" :user="this.client"/>
 <WidgetUpdatePassword v-if="this.role != 'PATIENT'" :user="this.user" />
 </div>
 </template>

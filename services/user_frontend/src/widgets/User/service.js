@@ -10,30 +10,36 @@ export default class UserService
 
     static list() 
     {
+		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
         return axios.get(API_URL + "/users/");
     }
 
     static get() 
     {
-        return axios.get(API_URL + "/client/me/user/1/");
+		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
+        return axios.get(API_URL + "/me");
     }
 
     static create(x)
     {
+		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
         return axios.post(API_URL + "/users/", x);
     }
 
     static update(data) 
     {
-        return axios.put(API_URL + "/client//" + localStorage.getItem("clientId"), data);
+		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
+        return axios.put(API_URL + "/client/" + localStorage.getItem("clientId"), data);
     }
 
     static delete(id) 
     {
+		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
         return axios.delete(API_URL + "/users/" + id);
     }
 
     static logOut(){
+		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
         return axios.post(API_URL + "/users/logOut");
     }
 }

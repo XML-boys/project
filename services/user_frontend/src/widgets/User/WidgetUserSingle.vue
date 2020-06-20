@@ -10,6 +10,10 @@ export default {
     },
     mounted: function()
     {
+        UserService.get().then(response => {
+            console.log(response);
+            this.data = response.data;
+        });
     }
 }
 </script>
@@ -20,7 +24,7 @@ export default {
 
 <div  >
   <div >
-    <h5 >{{ data.firstName }} {{ data.lastName }}</h5>
+    <h5 >User: {{ data.firstName }} {{ data.lastName }}</h5>
     <p >Address: {{ data.adress}}</p>
   </div>
 </div>

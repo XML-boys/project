@@ -11,10 +11,12 @@ export default class LoginService
 
     static login(x)
     {
+		axios.defaults.headers.common['Authorization'] = "";
         return axios.post(API_URL + "/auth", x);
     }
 
     static getProfile() {
+		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
         return axios.get(API_URL + "/me");
     }
 
