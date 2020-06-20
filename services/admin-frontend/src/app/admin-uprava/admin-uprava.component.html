@@ -1,0 +1,238 @@
+<div class="panel-header panel-header-sm">
+</div>
+
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Uprava korisnicima</h4>
+        </div>
+
+
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead class=" text-primary">
+              <th>
+                Id
+              </th>
+              <th>
+                Username
+              </th>
+              <th>
+                Role
+              </th>
+              <th>
+                Approved
+              </th>
+              <th>
+                Blocked
+              </th>
+              </thead>
+              <tbody>
+              <ng-container *ngFor="let user of users">
+                <tr>
+                  <td>{{user.id}}</td>
+                  <td>{{user.username}}</td>
+                  <td>{{user.role}}</td>
+                  <td>{{user.approved}}</td>
+                  <td>{{user.blocked}}</td>
+
+                  <td>
+                    <div ngbDropdown class="d-inline-block">
+                      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Registracija</button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem (click)="open(user)">Obriši</button>
+                        <button ngbDropdownItem (click)="open1(user)">Dodaj</button>
+                      </div>
+                    </div>
+                  </td>
+
+
+
+                  <td>
+                    <div ngbDropdown class="d-inline-block">
+                      <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>Blokiraj</button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem (click)="open4(user)">Block</button>
+                        <button ngbDropdownItem (click)="open5(user)">Unblock</button>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div ngbDropdown class="d-inline-block">
+                      <button class="btn btn-outline-primary" id="dropdownBasic3" ngbDropdownToggle>Role</button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem (click)="open3(user)">Client</button>
+                        <button ngbDropdownItem (click)="open6(user)">Agent</button>
+                        <button ngbDropdownItem (click)="open7(user)">Admin</button>
+                      </div>
+                    </div>
+                  </td>
+
+                </tr>
+              </ng-container>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Uprava komentarima</h4>
+        </div>
+
+
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead class=" text-primary">
+              <th>
+                Id
+              </th>
+              <th>
+                Approved
+              </th>
+              </thead>
+              <tbody>
+              <ng-container *ngFor="let coment of coments">
+                <tr>
+                  <td>{{coment.id}}</td>
+                  <td>{{coment.approved}}</td>
+
+                  <td>
+                    <div ngbDropdown class="d-inline-block">
+                      <button class="btn btn-outline-primary" id="dropdownBasic4" ngbDropdownToggle>Approval</button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem (click)="open8(coment)">Approve</button>
+                        <button ngbDropdownItem (click)="open9(coment)">Delete</button>
+                      </div>
+                    </div>
+                  </td>
+
+                </tr>
+              </ng-container>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Uprava ocenama</h4>
+        </div>
+
+
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead class=" text-primary">
+              <th>
+                Id
+              </th>
+              <th>
+                Approved
+              </th>
+              </thead>
+              <tbody>
+              <ng-container *ngFor="let vote of votes">
+                <tr>
+                  <td>{{vote.id}}</td>
+                  <td>{{vote.aprroved}}</td>
+
+                  <td>
+                    <div ngbDropdown class="d-inline-block">
+                      <button class="btn btn-outline-primary" id="dropdownBasic5" ngbDropdownToggle>Approval</button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem (click)="open8(vote)">Approve</button>
+                        <button ngbDropdownItem (click)="open9(vote)">Delete</button>
+                      </div>
+                    </div>
+                  </td>
+
+                </tr>
+              </ng-container>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Uprava klientima</h4>
+        </div>
+
+
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead class=" text-primary">
+              <th>
+                Id
+              </th>
+              <th>
+                Username
+              </th>
+              <th>
+                Blocked
+              </th>
+              </thead>
+              <tbody>
+              <ng-container *ngFor="let client of clients">
+                <tr>
+                  <td>{{client.id}}</td>
+                  <td>{{client.username}}</td>
+                  <td>{{client.blocked}}</td>
+
+                  <td>
+                    <div ngbDropdown class="d-inline-block">
+                      <button class="btn btn-outline-primary" id="dropdownBasic6" ngbDropdownToggle>Approval</button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem (click)="open10(client)">Block</button>
+                        <button ngbDropdownItem (click)="open11(client)">Unblock</button>
+                        <button ngbDropdownItem (click)="open12(client)">Delete</button>
+                      </div>
+                    </div>
+                  </td>
+
+                </tr>
+              </ng-container>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

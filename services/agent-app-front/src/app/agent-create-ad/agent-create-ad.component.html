@@ -1,0 +1,111 @@
+<div class="panel-header panel-header-sm">
+</div>
+
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Create ad</h4>
+        </div>
+        <div> {{ ad }}</div>
+
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-md-4 pr-1">
+              <div class="form-group" >
+                <ngx-dropdown-list [items]="locations"
+                                   [disabled]="dropDisabled"
+                                   [multiSelection]="false"
+                                   [placeHolder]="'Lokacija'"
+                                   [(selectedValue)]="selected"
+                                   [suffixText]="''"
+                                   [filterBox]="false"
+                                   [formatNumber]="true"
+                                   [disabled]="false"
+                                   id="adLocations">
+                </ngx-dropdown-list>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 pr-1">
+              <div class="form-group" >
+                <label>Cena</label>
+                <input type="numbers" [(ngModel)]="ad.cena"
+                       class="form-control"
+                       id="adCena"
+                       name="adCena"
+                       value="{{ad.cena}}"
+                       required #name="ngModel">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 pr-1">
+            <div class="form-group">
+              <label>Pocetak</label>
+              <div class="input-group">
+                <input type="datetime-local" [(ngModel)]="ad.startTime"
+                       class="form-control"
+                       id="myDate1"
+                       name="myDate1"
+                       value="yyyy-mm-dd"
+                       required #name="ngModel">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 pr-1">
+            <div class="form-group">
+              <label>Kraj</label>
+              <div class="input-group">
+                <input type="datetime-local" [(ngModel)]="ad.endDate"
+                       class="form-control"
+                       id="myDate2"
+                       name="myDate2"
+                       value="yyyy-mm-dd"
+                       required #name="ngModel">
+              </div>
+            </div>
+          </div>
+
+          <form>
+            <div class="col-md-16 pr-7">
+              <label>Zakazi</label>
+              <div class="form-group">
+                <div>
+                  <input id="dmg" [(ngModel)]="dmg"
+                         (change)="onItemChange($event)"
+                         style="transform: scale(1.3)"
+                         type="radio"
+                         value="dmg"
+                         name="requestFor">
+                  <label for="dmg" class="ml-2">Damaged </label>
+                </div>
+                <div>
+                  <input id="notdmg" [(ngModel)]="notdmg"
+                         (change)="onItemChange($event)"
+                         style="transform: scale(1.3)"
+                         type="radio"
+                         value="notdmg"
+                         name="requestFor">
+                  <label for="notdmg" class="ml-2">Not damaged </label>
+                </div>
+              </div>
+            </div>
+          </form>
+
+
+
+
+        </div>
+
+          <button  class="btn btn-primary btn-block" (click)="open()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+

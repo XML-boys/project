@@ -20,7 +20,7 @@ public class ReservationDTO {
         this.userId = reservation.getUserId();
         this.startTime = reservation.getStartTime();
         this.endTime = reservation.getEndTime();
-        this.state = reservation.getState();
+        this.state.valueOf(reservation.getState());
         this.reklama = reservation.getReklama();
     }
 
@@ -53,7 +53,7 @@ public class ReservationDTO {
     }
 
     public void setState(String state) {
-        this.state = state;
+        this.state.valueOf(state);
     }
 
     public Ad getReklama() {
