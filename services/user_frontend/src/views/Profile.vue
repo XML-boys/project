@@ -11,8 +11,6 @@ export default {
 		data: {
             id: null
         },
-		role: localStorage.getItem("role"),
-		user: localStorage.getItem("user_id")
 	    };
 	},
     mounted: function () 

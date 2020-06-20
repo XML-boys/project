@@ -23,11 +23,17 @@ export default {
 		LoginService.login(this.data).then(response => {
 			console.log(response)
 			axios.defaults.headers.common['Authorization'] = response.data.jwttoken;
-			localStorage.setItem("username", this.data.username);;
-			localStorage.setItem("user", this.data.username);;
-			localStorage.setItem("email", this.data.username);;
-			localStorage.setItem("role", "LOGGED");;
-			window.location.href = "/frontend/";
+			LoginService.getProfile().then(response => {
+				console.log(response);
+				localStorage.setItem("username", this.data.username);;
+				localStorage.setItem("user", this.data.username);;
+				localStorage.setItem("email", this.data.email);;
+				localStorage.setItem("clientId", this.data.id);;
+				localStorage.setItem("userId", this.data.userId);;
+				localStorage.setItem("role", "LOGGED");;
+				window.location.href = "/frontend/";
+			})
+			
 
 			
 		}

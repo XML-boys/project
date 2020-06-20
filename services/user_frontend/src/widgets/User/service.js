@@ -13,9 +13,9 @@ export default class UserService
         return axios.get(API_URL + "/users/");
     }
 
-    static get(id) 
+    static get() 
     {
-        return axios.get(API_URL + "/users/" + id);
+        return axios.get(API_URL + "/client/me/user/1/");
     }
 
     static create(x)
@@ -25,7 +25,7 @@ export default class UserService
 
     static update(data) 
     {
-        return axios.post(API_URL + "/updateProfile/", data);
+        return axios.put(API_URL + "/client//" + localStorage.getItem("clientId"), data);
     }
 
     static delete(id) 
