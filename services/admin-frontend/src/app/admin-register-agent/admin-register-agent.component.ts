@@ -17,7 +17,16 @@ export class AdminRegisterAgentComponent implements OnInit {
               private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.agents = this.adminRegisterAgentService.getAgents();
+    this.getAgents();
+  }
+
+  getAgents(){
+    this.adminRegisterAgentService.getAgents()
+      .subscribe((data: {}) => {
+          this.agents = data;
+          console.log(data);
+        }
+      );
   }
 
   open(name: any, companyIdentifier: any, adress: any) {
