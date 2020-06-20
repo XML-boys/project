@@ -12,12 +12,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column
+    private String email;
+    @Column
+    private Boolean approved;
+    @Column
     private String username;
     @Column
     @JsonIgnore
     private String password;
     @Column
     private ROLE role;
+
+
 
     public long getId() {
         return id;
@@ -49,5 +55,21 @@ public class User {
 
     public void setRole(String role) {
         this.role = ROLE.valueOf(role);
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Boolean getApproved() {
+        return approved;
+    }
+
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
     }
 }

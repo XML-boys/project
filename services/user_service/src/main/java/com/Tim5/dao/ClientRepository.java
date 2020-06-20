@@ -6,11 +6,9 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ClientRepository extends CrudRepository<Client, Long> {
 
-    @Query("UPDATE Client set blocked = 1 WHERE id = ?1")
-    void blockUser(Long id);
+    @Query("UPDATE Client set blocked = ?2 WHERE id = ?1")
+    void blockUpdate(Long id, Boolean blocked);
 
-    @Query("UPDATE Client set blocked = 0 WHERE id = ?1")
-    void unblockUser(Long id);
 
 
 }

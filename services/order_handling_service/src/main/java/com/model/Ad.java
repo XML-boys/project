@@ -27,7 +27,7 @@ public class Ad {
     @Column
     private String cena;
     @Column
-    private boolean damage;
+    private Boolean damage;
 
     @OneToMany(mappedBy = "reklama", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
@@ -112,11 +112,11 @@ public class Ad {
         this.cena = cena;
     }
 
-    public boolean isDamage() {
+    public Boolean isDamage() {
         return damage;
     }
 
-    public void setDamage(boolean damage) {
+    public void setDamage(Boolean damage) {
         this.damage = damage;
     }
 }

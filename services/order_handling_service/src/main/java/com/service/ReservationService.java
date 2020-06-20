@@ -17,6 +17,10 @@ public class ReservationService {
         return reservationRepository.findByUserId(userId);
     }
 
+    public List<Reservation> findAll(){
+        return reservationRepository.findAll();
+    }
+
     public Reservation save(Reservation order){
         return reservationRepository.save(order);
     }
