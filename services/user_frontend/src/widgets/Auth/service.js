@@ -15,7 +15,7 @@ export default class LoginService
     }
 
     static getProfile() {
-        return axios.get(API_URL + "/client/me/user/1");
+        return axios.get(API_URL + "/me");
     }
 
 }

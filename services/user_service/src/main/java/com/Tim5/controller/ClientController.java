@@ -66,39 +66,4 @@ public class ClientController {
             return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
-    @RequestMapping(value = "/user/me", method = RequestMethod.GET)
-    public ResponseEntity<ClienDataDTO> myInfo (HttpServletRequest request){
-        String requestTokenHeader = request.getHeader("Authorization");
-        String username = null;
-        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
-            String jwtToken = requestTokenHeader.substring(7);
-            try {
-                username = jwtTokenUtil.getUsernameFromToken(jwtToken);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Unable to get JWT Token");
-            } catch (ExpiredJwtException e) {
-                System.out.println("JWT Token has expired");
-            }
-        } else {
-            System.out.println("JWT Token does not begin with Bearer String");
-        }
-        if(username != null) {
-            User user = userService.findUserByUsername(username);
-            if(user != null ) {
-                Client client = clientService.findByUserId(user.getId());
-                if(client != null) {
-                    ClienDataDTO dto = new ClienDataDTO();
-                    dto.setId(client.getId());
-                    dto.setUserId(user.getId());
-                    dto.setFirstName(client.getFirstName());
-                    dto.setLastName(client.getLastName());
-                    dto.setAdress(client.getAdress());
-                    dto.setEmail(user.getEmail());
-                    return new ResponseEntity<>(dto, HttpStatus.OK);
-                }
-            }
-        }
-
-        return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
-    }
 }
