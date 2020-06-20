@@ -11,7 +11,7 @@ export default class LoginService
 
     static login(x)
     {
-        return axios.post(API_URL + "/login", x);
+        return axios.post(API_URL + "/auth", x);
     }
 
 }

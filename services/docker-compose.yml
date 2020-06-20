@@ -4,14 +4,10 @@ services:
                 image: nginx
                 volumes:
                         - "./gateway/nginx:/etc/nginx"
-                ports:
-                        - "6969:80"
-        user-frontend: # stefan
-                image: nginx
-                volumes:
                         - "./user_frontend/dist:/usr/share/nginx/html/frontend/dist"
                         - "./user_frontend/index.html:/usr/share/nginx/html/frontend/index.html"
-                        - "./user_frontend/nginx:/etc/nginx"
+                ports:
+                        - "6969:80"
         vehicle-location: # stefan
                 image: python
                 volumes:
