@@ -66,7 +66,7 @@ public class ClientController {
             return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
-    @RequestMapping(value = "/me/user/1", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/me", method = RequestMethod.GET)
     public ResponseEntity<ClienDataDTO> myInfo (HttpServletRequest request){
         String requestTokenHeader = request.getHeader("Authorization");
         String username = null;
@@ -94,7 +94,7 @@ public class ClientController {
                     dto.setLastName(client.getLastName());
                     dto.setAdress(client.getAdress());
                     dto.setEmail(user.getEmail());
-                    return new ResponseEntity<ClienDataDTO>(dto, HttpStatus.OK);
+                    return new ResponseEntity<>(dto, HttpStatus.OK);
                 }
             }
         }
