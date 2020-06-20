@@ -1,5 +1,6 @@
 <script>
 import AdService from "./service";
+import Vehicle from "../Vehicle/Vehicle.vue";
 
 export default {
     name: "Ad",
@@ -20,6 +21,9 @@ export default {
 		AdService.delete(this.Ad).then(response => this.data = {});
 	}
 	// add additional methods here
+    },
+    components: {
+        Vehicle
     }
 }
 </script>
@@ -40,12 +44,13 @@ export default {
         <li class="list-group-item"></li>
      </ul>
 
-
     <div class="card-body">
       <button class="btn btn-danger" @click="deleteItem" v-if="true">Delete</button>
       <button class="btn btn-primary" @click="orderItem" v-if="true">Button</button>
     </div>
     </div>
+
+    <Vehicle :Vehicle="this.data.vehicleId" />
     </div>
 
 </template>
