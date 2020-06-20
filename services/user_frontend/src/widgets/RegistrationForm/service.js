@@ -11,6 +11,6 @@ export default class RegistrationFormService
 
     static submit(x)
     {
-        return axios.post(API_URL + "/registrationRequests", x);
+        return axios.post(API_URL + "/reg", x);
     }
 }
