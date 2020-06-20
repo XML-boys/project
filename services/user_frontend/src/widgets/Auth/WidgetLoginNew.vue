@@ -1,6 +1,8 @@
 <script>
 import LoginService from "./service";
 import CheckRoleService from "../CheckRole/service";
+import axios from "axios"
+
 //import router from '../../../router';
 
 export default {
@@ -8,8 +10,9 @@ export default {
     data: function () {
         return {
             data: {
-	    	email: null,
-		password: null,
+	    	username: null,
+			password: null,
+			role: "Client"
 	    },
 
         };
@@ -19,36 +22,18 @@ export default {
 	{
 		LoginService.login(this.data).then(response => {
 			console.log(response)
-			if (response.status == 200) {
-				CheckRoleService.get().then(response => {
-					this.data.success = true;
-					localStorage.setItem("user", this.data.email);
-					localStorage.setItem("role", response.data);
-					this.$store.commit("login", {user: this.data.email, role: response.data});
-					CheckRoleService.info().then(x => {
-						console.log("User info")
-						console.log(x.data);
-						localStorage.setItem("user_id", x.data.id);
-						if (x.data.numberOfLogins <= 1 && response.data != "PATIENT") 
-						{
-							this.$router.push("/updateUser");
-						}
-						else this.$router.push("/");
-					});
+			axios.defaults.headers.common['Authorization'] = response.data.jwttoken;
+			localStorage.setItem("username", this.data.username);;
+			localStorage.setItem("user", this.data.username);;
+			localStorage.setItem("email", this.data.username);;
+			localStorage.setItem("role", "LOGGED");;
+			window.location.href = "/frontend/";
 
-
-				});
-
-			}
-			else {
-				this.data.success = false;
-				localStorage.setItem("user", null);
-				alert("Error while logging in. Access forbidden or wrong credentials");
-			}
-
-
-		}).catch(error => {
-				alert("Error while logging in. Access forbidden or wrong credentials");
+			
+		}
+		)
+		.catch(error => {
+				alert("ERROR while logging in. Access forbidden or wrong credentials");
 		});
 	}
     }
@@ -61,7 +46,7 @@ export default {
 
 		<h2> Login</h2>
 		<p>
-		<input type="email" class="form-control" placeholder="Username" v-model="data.email" />
+		<input type="text" class="form-control" placeholder="Username" v-model="data.username" />
 		</p>
 		
 		<p>
