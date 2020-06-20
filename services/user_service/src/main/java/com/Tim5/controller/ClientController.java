@@ -94,6 +94,7 @@ public class ClientController {
                     dto.setLastName(client.getLastName());
                     dto.setAdress(client.getAdress());
                     dto.setEmail(user.getEmail());
+                    dto.setUsername(user.getUsername());
                     return new ResponseEntity<>(dto, HttpStatus.OK);
                 }
             }
