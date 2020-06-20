@@ -1,6 +1,0 @@
-com/xmlboyz/service/BackendApplication.class
-com/xmlboyz/service/repository/VehicleRepository.class
-com/xmlboyz/service/dtos/VehicleDTO.class
-com/xmlboyz/service/controller/VehicleController.class
-com/xmlboyz/service/models/Vehicle.class
-com/xmlboyz/service/service/VehicleService.class

@@ -1,0 +1,119 @@
+
+* External dependencies 
+
++ Linux operating system
++ network
++ bash
+
+
+* Configuring containers
+
++ Kubernetes
++ docker 
+
+
+* Logging 
+
++ log4j for master backend can be used to log all services instantiated and their parameters and their responses
++ frontend - standard console log is used  for all callbacks
+
+* Demonstration
+
++ building simple frontend for login and registration as fast as possible
++ frontend is being built
++ deployment to racrepublic server 
+
+
+* Deployment 
+
++ using kubernetes
++ saving kubernetes configuration
++ setup scripts
++ scripts for running contaners manually
++ nginx web server with redirection to other containers and to frontend 
+
+
+* Backend applications 
+
+have three layers:
+
++ endpoint layer
++ business logic layer
++ data layer which communicates to database and communicates to other services 
+
+
+* Message brokers 
+
++ ActiveMQ will be used
+
+
+* Database 
+
++ postgresql will be used
+
+
+* Build system
+
+since all backends are Java Spring applications, Maven will be used 
+
+
+* Continious integration
+
++ Jenkins 
+
+
+
+* User frontend 
+
+since vuejs is used, code can be reused from project for PSW ISA 
+
+Selection: https://github.com/monterail/vue-multiselect
+
+drag and drop https://github.com/SortableJS/Vue.Draggable 
+
+autocomplete https://github.com/santiblanko/vue-instant 
+
+image upload https://github.com/waynecz/vue-img-inputer
+
+editor https://github.com/chmln/vue-wysiwyg
+
+context menu https://github.com/vmaimone/vue-context-menu
+
+Wizzard https://github.com/PygmySlowLoris/vue-stepper
+
+WebSockets https://github.com/MetinSeylan/Vue-Socket.io
+
+* Vehicle location script
+
+Python will be used 
+
+* Agent app backend 
+
+Python Django with dedicated DB
+
++ SOAP: python zeep
++ REST: Django
++ Database: PostgreSQL
++ consuming REST API: requests
+
+* Email service 
+
+consumes messages from ActiveMQ and sends email 
+
++ reuse from psw-isa project is possible
++ have dedicated email server
++ github deployment setup for email 
+
+
+
+* Message backend
+
++ OrderService sends information when order is made
++ this service creates Conversation in database which is inactive
+  + adds agent id and user id
+  + if agent is actually user, sets proper type
++ when order is in RESERVED state, OrderService sends message to this service
++ frontend can access this service to send messages to specified conversation
+
+
+
