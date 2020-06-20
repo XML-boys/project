@@ -3,6 +3,8 @@
 
 // import widgets for this view here
 
+import Ads from "../widgets/Ad/multi-Ad.vue";
+
 export default {
     name: "Login",
     data: function () {
@@ -20,17 +22,17 @@ export default {
         }
     },
     components: {
-        
+        Ads
     }
 }
 </script>
 
 <template>
+<div>
+<p>Ads</p>
 
-<p>Home</p>
-
-
-
+<Ads></Ads>
+</div>
 </template>
 
 <style scoped> 
