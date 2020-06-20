@@ -6,7 +6,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app.routing';
 import {HttpClientModule} from '@angular/common/http';
 import {
-  NbChatModule,
+  NbCardModule,
+  NbChatModule, NbCheckboxModule,
   NbDatepickerModule,
   NbDialogModule,
   NbMenuModule,
@@ -17,10 +18,13 @@ import {
 import {ThemeModule} from './@theme/theme.module';
 import {CoreModule} from './@core/core.module';
 import {RouterModule} from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +40,9 @@ import {RouterModule} from '@angular/router';
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
     RouterModule,
+    NbCheckboxModule,
+    NbCardModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
