@@ -1,7 +1,7 @@
 import { API_URL } from "./../../config";
 import axios from "axios"
 
-export default class VehicleService 
+export default class AdService 
 {
     constructor(self) 
     {
@@ -11,24 +11,14 @@ export default class VehicleService
     static list() 
     {
 		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
-
-        return axios.get(API_URL + "/vehicles/");
+        return axios.get(API_URL + "/ad/");
     }
 
     static get(id) 
     {
 		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
 
-        return axios.get(API_URL + "/vehicles/" + id);
-    }
-    
-    
-    
-    static order(id, data) 
-    {
-		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
-
-        return axios.post(API_URL + "/vehicles/" + id + "/order", data);
+        return axios.get(API_URL + "/ad/" + id);
     }
     
     
@@ -37,20 +27,20 @@ export default class VehicleService
     {
 		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
 
-        return axios.post(API_URL + "/vehicles/", x);
+        return axios.post(API_URL + "/ad/", x);
     }
 
     static update(id, data) 
     {
 		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
 
-        return axios.post(API_URL + "/vehicles/" + id, data);
+        return axios.post(API_URL + "/ad/" + id, data);
     }
 
     static delete(id) 
     {
 		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
 
-        return axios.delete(API_URL + "/vehicles/" + id);
+        return axios.delete(API_URL + "/ad/" + id);
     }
 }

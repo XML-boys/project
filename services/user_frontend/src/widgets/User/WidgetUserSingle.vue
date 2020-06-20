@@ -3,7 +3,6 @@ import UserService from "./service";
 
 export default {
     name: "WidgetUserSingle",
-    props: ["user"],
     data: function () {
         return {
             data: {}
@@ -11,7 +10,10 @@ export default {
     },
     mounted: function()
     {
-        UserService.get(this.user).then(response => this.data = response.data);
+        UserService.get().then(response => {
+            console.log(response);
+            this.data = response.data;
+        });
     }
 }
 </script>
@@ -22,10 +24,8 @@ export default {
 
 <div  >
   <div >
-    <h5 >{{ data.firstname }} {{ data.lastname }}</h5>
-    <p >{{ data.email}}</p>
-    <p >{{ data.address}}</p>
-    <p >{{ data.mobile_phone}}</p>
+    <h5 >User: {{ data.firstName }} {{ data.lastName }}</h5>
+    <p >Address: {{ data.adress}}</p>
   </div>
 </div>
 

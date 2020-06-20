@@ -11,8 +11,6 @@ export default {
 		data: {
             id: null
         },
-		role: localStorage.getItem("role"),
-		user: localStorage.getItem("user_id")
 	    };
 	},
     mounted: function () 
@@ -40,7 +38,7 @@ export default {
 <div>
 
 <p class="p">
-<WidgetUserSingle :user="this.user" />
+<WidgetUserSingle />
 </p>
 </div>
 </template>
