@@ -12,6 +12,7 @@ import {AgentLayoutModule} from './agent-layout/agent-layout.module';
 import {DropdownListModule} from 'ngx-dropdown-list';
 import {HttpClientModule} from '@angular/common/http';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {FlatpickrModule} from 'angularx-flatpickr';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     ReactiveFormsModule,
     AgentLayoutModule,
     FontAwesomeModule,
+    FlatpickrModule.forRoot(),
     DropdownListModule
   ],
   providers: [],

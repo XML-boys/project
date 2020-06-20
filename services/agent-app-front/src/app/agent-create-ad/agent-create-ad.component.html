@@ -8,7 +8,7 @@
         <div class="card-header">
           <h4 class="card-title"> Create ad</h4>
         </div>
-        <div> {{ ad }}</div>
+
 
         <div class="card-body">
 
@@ -97,6 +97,67 @@
               </div>
             </div>
           </form>
+
+
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+              <tr>
+                <th>Title</th>
+                <th>Starts at</th>
+                <th>Ends at</th>
+              </tr>
+              </thead>
+          <tbody>
+          <tr *ngFor="let event of events">
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="event.title"
+                (keyup)="refresh.next()"
+              />
+            </td>
+          <td>
+            <input
+              class="form-control"
+              type="text"
+              mwlFlatpickr
+              [(ngModel)]="event.start"
+              (ngModelChange)="refresh.next()"
+              [altInput]="true"
+              [convertModelValue]="true"
+              [enableTime]="true"
+              dateFormat="Y-m-dTH:i"
+              altFormat="F j, Y H:i"
+              placeholder="Not set"
+            />
+          </td>
+          <td>
+            <input
+              class="form-control"
+              type="text"
+              mwlFlatpickr
+              [(ngModel)]="event.end"
+              (ngModelChange)="refresh.next()"
+              [altInput]="true"
+              [convertModelValue]="true"
+              [enableTime]="true"
+              dateFormat="Y-m-dTH:i"
+              altFormat="F j, Y H:i"
+              placeholder="Not set"
+            />
+          </td>
+          </tr>
+          </tbody>
+          </table>
+        </div>
+
+          <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
+          <input type="file" accept="image/*" (change)="updateSource($event)">
+
+          <!-- img placeholder when a file has been picked. shows only when 'source' is not empty -->
+          <img *ngIf="source" [src]="source" src="">
 
 
 
