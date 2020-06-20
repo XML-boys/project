@@ -112,11 +112,11 @@ public class Ad {
         this.cena = cena;
     }
 
-    public boolean isDamage() {
+    public Boolean isDamage() {
         return damage;
     }
 
-    public void setDamage(boolean damage) {
+    public void setDamage(Boolean damage) {
         this.damage = damage;
     }
 }

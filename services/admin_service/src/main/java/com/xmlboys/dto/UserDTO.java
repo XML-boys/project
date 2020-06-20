@@ -1,33 +1,11 @@
-package com.Tim5.model;
+package com.xmlboys.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
-
-@Entity
-@Table(name = "users")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column
+public class UserDTO {
     private String email;
-    @Column
     private Boolean approved;
-    @Column
     private String username;
-    @Column
-    @JsonIgnore
     private String password;
-    @Column
-    private ROLE role;
-
-
-
-    public long getId() {
-        return id;
-    }
+    private String role;
 
     public String getUsername() {
         return username;
@@ -45,16 +23,12 @@ public class User {
         this.password = password;
     }
 
-    public ROLE getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(ROLE role) {
-        this.role = role;
-    }
-
     public void setRole(String role) {
-        this.role = ROLE.valueOf(role);
+        this.role = role;
     }
 
     public String getEmail() {

@@ -2,6 +2,8 @@ import {PagesComponent} from './pages.component';
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {MyAdsComponent} from './my-ads/my-ads.component';
+import {NewAdComponent} from './new-ad/new-ad.component';
+import {NewVehicleComponent} from './new-vehicle/new-vehicle.component';
 
 const routes: Routes = [{
   path: '',
@@ -10,6 +12,14 @@ const routes: Routes = [{
     {
       path: 'my-ads',
       component: MyAdsComponent,
+    },
+    {
+      path: 'new-ad',
+      component: NewAdComponent,
+    },
+    {
+      path: 'new-vehicle',
+      component: NewVehicleComponent,
     },
   ]
 },

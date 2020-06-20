@@ -40,7 +40,7 @@ public class AuthenticationController {
     @Autowired
     private UserService userDetailsService;
 
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody UserLoginDTO authenticationRequest) throws Exception {
         System.out.println(authenticationRequest.getUsername() + ":" + authenticationRequest.getPassword());
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -53,10 +53,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(new ResponseDTO(token));
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
-        return ResponseEntity.ok(userDetailsService.save(user));
-    }
+
 
     @GetMapping()
     public ResponseEntity<UserValidateDTO> validate(HttpServletRequest request){

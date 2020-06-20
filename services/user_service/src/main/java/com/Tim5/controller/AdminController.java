@@ -1,5 +1,6 @@
 package com.Tim5.controller;
 
+import com.Tim5.dto.LongBoolDTO;
 import com.Tim5.dto.UserLoginDTO;
 import com.Tim5.model.Client;
 import com.Tim5.service.AdminService;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping(value = "/adminUser")
+@RequestMapping(value = "/userAdmin")
 public class AdminController {
 
     @Autowired
@@ -22,14 +23,9 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/block/{id}", method = RequestMethod.POST)
-    public void blockUser(@PathParam("id") Long id){
-        adminService.blockUser(id);
-    }
-
-    @RequestMapping(value = "/unblock/{id}", method = RequestMethod.POST)
-    public void unblockUser(@PathParam("id") Long id){
-        adminService.unblockUser(id);
+    @RequestMapping(method = RequestMethod.PUT)
+    public void blockUser(@RequestBody LongBoolDTO longBoolDTO){
+        adminService.blockUser(longBoolDTO);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -37,7 +33,7 @@ public class AdminController {
         userService.deleteUser(id);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping( method = RequestMethod.GET)
     public List<Client> getAllClients(){
         return adminService.getAll();
     }

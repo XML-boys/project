@@ -12,4 +12,7 @@ public interface UserDao extends CrudRepository<User, Long> {
 
     User findByUsername(String username);
 
+    @Query("UPDATE User set approved = ?2 WHERE id = ?1")
+    void approveUpdate(Long id, Boolean approved);
+
 }

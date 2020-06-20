@@ -8,5 +8,6 @@ psql --host database --user postgres --no-password -c 'create database "message_
 psql --host database --user postgres --no-password -c 'create database "order_db"'  -c 'grant ALL on database "order_db" to "postgres"'
 psql --host database --user postgres --no-password -c 'create database "user_db"'  -c 'grant ALL on database "user_db" to "postgres"'
 psql --host database --user postgres --no-password -c 'create database "vehicle_db"'  -c 'grant ALL on database "vehicle_db" to "postgres"'
+psql --host database --user postgres --no-password -c 'create database "admin_db"'  -c 'grant ALL on database "admin_db" to "postgres"'
 
 
