@@ -33,6 +33,10 @@ public class Ad {
     @JsonIgnore
     private Set<Reservation> ads;
 
+    @OneToMany(mappedBy = "reklamak", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Comment> comments;
+
     public Ad() {
     }
 
@@ -46,6 +50,20 @@ public class Ad {
         this.cena = cena;
         this.damage = damage;
         this.ads = ads;
+    }
+
+    public Ad(Long id, Long idAgenta, LocalDate startTime, LocalDate endDate, ArrayList<String> pictures, Long vehicleId, String location, String cena, Boolean damage, Set<Reservation> ads, Set<Comment> comments) {
+        this.id = id;
+        this.idAgenta = idAgenta;
+        this.startTime = startTime;
+        this.endDate = endDate;
+        this.pictures = pictures;
+        this.vehicleId = vehicleId;
+        this.location = location;
+        this.cena = cena;
+        this.damage = damage;
+        this.ads = ads;
+        this.comments = comments;
     }
 
     public Long getId() {
@@ -118,5 +136,25 @@ public class Ad {
 
     public void setDamage(Boolean damage) {
         this.damage = damage;
+    }
+
+    public Boolean getDamage() {
+        return damage;
+    }
+
+    public Set<Reservation> getAds() {
+        return ads;
+    }
+
+    public void setAds(Set<Reservation> ads) {
+        this.ads = ads;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 }

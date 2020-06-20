@@ -4,6 +4,8 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder} from '@angular/forms';
 import {AgentCreateAdService} from '../services/agent-create-ad.service';
 import {MatDatepicker} from '@angular/material';
+import {Subject} from 'rxjs';
+import {Ad} from '../classes/Ad';
 
 @Component({
   selector: 'app-agent-create-ad',
@@ -14,6 +16,7 @@ export class AgentCreateAdComponent implements OnInit {
   ads: any = [];
   locations: any = [];
   ad: any = [];
+  add: Ad;
   dropDisabled: boolean;
   selected = '';
 
@@ -22,6 +25,9 @@ export class AgentCreateAdComponent implements OnInit {
 
   dmgBTN: any;
   notdmgBTN: any;
+  events: any;
+  refresh: Subject<any> = new Subject();
+  source: any;
   constructor(private agentCreateAdService: AgentCreateAdService , private router: Router, private modalService: NgbModal,
               private formBuilder: FormBuilder) { }
 
@@ -60,4 +66,15 @@ export class AgentCreateAdComponent implements OnInit {
 
   open() {
   }
+
+  updateSource($event: Event) {
+    // this.add.pictures = $event.target[0];
+  }
+
+  submitPhoto() {
+  }
+
+  getFile($event: any) {}
+
+
 }
