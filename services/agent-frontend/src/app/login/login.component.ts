@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from '../@core/services/login.service';
-import {JWT} from '../@core/model/LogedUserData';
-import {map} from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-login',
@@ -15,8 +14,23 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isSubmitted  =  false;
 
-  constructor(private service: LoginService, private router: Router, private formBuilder: FormBuilder ) { }
+  constructor(private service: LoginService, private router: Router, private formBuilder: FormBuilder ) {
+    if (localStorage.getItem('jwt') !== undefined){
+      this.service.isLoggedIn().subscribe(
+        data => {
+          const str = JSON.stringify(data);
+          const d = JSON.parse(str);
+          localStorage.setItem('username', d.username);
+          this.router.navigate(['/agent/dashboard']);
+        }, error => {
+          console.log(error.status);
+        }
+      );
+    }
+  }
   ngOnInit(): void {
+
+
     this.loginForm  =  this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -40,6 +54,7 @@ export class LoginComponent implements OnInit {
         const str = JSON.stringify(data);
         const d = JSON.parse(str);
         localStorage.setItem('jwt', d.jwttoken);
+        this.router.navigate(['/agent']);
       }, error => {
         console.log(error.status);
       }

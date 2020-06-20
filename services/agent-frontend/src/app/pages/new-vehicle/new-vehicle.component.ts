@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewVehicleComponent implements OnInit {
 
+  dropDisabled;
+  selected;
+  disabledModel = true;
+  vendors: any[];
+
   constructor() { }
 
   ngOnInit(): void {

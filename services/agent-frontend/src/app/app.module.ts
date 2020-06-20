@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app.routing';
 import {HttpClientModule} from '@angular/common/http';
+
 import {
   NbCardModule,
   NbChatModule, NbCheckboxModule,
@@ -20,6 +21,7 @@ import {CoreModule} from './@core/core.module';
 import {RouterModule} from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {DropdownListModule} from 'ngx-dropdown-list';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     NbCheckboxModule,
     NbCardModule,
     ReactiveFormsModule,
+    DropdownListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

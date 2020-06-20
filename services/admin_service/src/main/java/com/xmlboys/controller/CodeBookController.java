@@ -53,6 +53,16 @@ public class CodeBookController {
         return ResponseEntity.ok(codeBookService.findAll());
     }
 
+    @GetMapping("/vendor")
+    public ResponseEntity<List<String>> findAllVendors() {
+        return ResponseEntity.ok(codeBookService.findAllVendor());
+    }
+
+    @GetMapping("/vendor/{name}")
+    public ResponseEntity<List<CodeItem>> findAllByVendor(@PathVariable("name") String name) {
+        return ResponseEntity.ok(codeBookService.findAllByVendor(name));
+    }
+
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<CodeItem> findById( @PathVariable("id") Long id) {
