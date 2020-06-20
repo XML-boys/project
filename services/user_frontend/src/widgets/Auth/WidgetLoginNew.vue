@@ -22,7 +22,7 @@ export default {
 	{
 		LoginService.login(this.data).then(response => {
 			console.log(response)
-			axios.defaults.headers.common['Authorization'] = response.data.jwttoken;
+			axios.defaults.headers.common['Authorization'] = "Bearer " + response.data.jwttoken;
 			LoginService.getProfile().then(response => {
 				console.log(response);
 				localStorage.setItem("username", this.data.username);;
