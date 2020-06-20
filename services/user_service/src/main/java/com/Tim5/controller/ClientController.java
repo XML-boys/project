@@ -65,5 +65,4 @@ public class ClientController {
         else
             return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
-
 }
