@@ -35,7 +35,7 @@ public class RestService {
     }
 
     public List<UserDTO> getUsers(String jwt) {
-        String url = "http://gateway:80/auth";
+        String url = "http://gateway:80/";
         HttpEntity request = new HttpEntity(setHeader(jwt));
         ResponseEntity<UserDTO[]> response = this.restTemplate.exchange(url, HttpMethod.GET, request,
                 UserDTO[].class);

@@ -2,6 +2,7 @@ package com.Tim5.service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.Tim5.dao.AgentRepository;
@@ -12,6 +13,7 @@ import com.Tim5.model.Agent;
 import com.Tim5.model.Client;
 import com.Tim5.model.ROLE;
 import com.Tim5.model.User;
+import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -56,11 +58,22 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
+    public User findUserById(Long id) {
+        User user = userDao.findById(id).orElse(null);
+        return user;
+    }
+
+    public User save(User user) {
+        return userDao.save(user);
+    }
+
     public User save(UserDTO user) {
         User newUser = new User();
         newUser.setUsername(user.getUsername());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         newUser.setRole(user.getRole());
+        newUser.setApproved(user.getApproved());
+        newUser.setEmail(user.getEmail());
 
         User savedUser = userDao.save(newUser);
         if(newUser.getRole() == ROLE.Agent){
@@ -78,4 +91,6 @@ public class UserService implements UserDetailsService {
     public void deleteUser(Long id) {
         userDao.deleteById(id);
     }
+
+    public List<User> findAll(){ return Lists.newArrayList(userDao.findAll());}
 }

@@ -9,6 +9,6 @@ public interface ClientRepository extends CrudRepository<Client, Long> {
     @Query("UPDATE Client set blocked = ?2 WHERE id = ?1")
     void blockUpdate(Long id, Boolean blocked);
 
-
+    Client findClientByUserId(Long id);
 
 }
