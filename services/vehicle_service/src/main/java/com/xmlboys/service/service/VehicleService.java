@@ -23,7 +23,7 @@ public class VehicleService {
 		return vehicleRepository.findAll();
 	}
 
-	public void save(Vehicle vehicle) {
-		vehicleRepository.save(vehicle);
+	public Vehicle save(Vehicle vehicle) {
+		return vehicleRepository.save(vehicle);
 	}
 }
