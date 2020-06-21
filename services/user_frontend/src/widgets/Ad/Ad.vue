@@ -8,6 +8,7 @@ export default {
     data: function () {
         return {
             data: {},
+            showOrder: true
         }
     },
     mounted: function () 
@@ -16,9 +17,9 @@ export default {
     },
     methods: 
     {
-    	deleteItem: function() 
+    	orderItem: function() 
 	{
-		AdService.delete(this.Ad).then(response => this.data = {});
+		AdService.order(this.data).then(response => this.showOrder = false);
 	}
 	// add additional methods here
     },
@@ -36,27 +37,33 @@ export default {
       <p>{{data.id}}</p>
       <div class="card-body">
         <h5 class="card-title">{{ data.location }} </h5>
-        <p class="card-text item-description"></p>
+        <p class="card-text item-description">Available from: {{ data.startTime}}</p>
+        <p class="card-text item-description">Available until: {{ data.endDate}}</p>
+        <p class="card-text item-description">Price: {{ data.cena}}</p>
+        <img v-for="kurconjero in this.data.pictures" :id="kurconjero" key="kurconjero" :src="kurconjero" />
       </div>
 
     
      <ul class="list-group list-group-flush">
-        <li class="list-group-item"></li>
+        <li class="list-group-item">Damage {{ data.damage}}</li>
      </ul>
 
     <div class="card-body">
-      <button class="btn btn-danger" @click="deleteItem" v-if="true">Delete</button>
-      <button class="btn btn-primary" @click="orderItem" v-if="true">Button</button>
+      <button class="btn btn-primary" @click="orderItem" v-if="this.orderItem">Make order</button>
     </div>
     </div>
 
-    <Vehicle :Vehicle="this.data.vehicleId" />
+    <Vehicle v-if="this.data.vehicleId != undefined" :Vehicle="this.data.vehicleId" />
     </div>
 
 </template>
 
 <style scoped> 
 
-
+.widget-Ad {
+    background-color: #ddffff;
+    padding: 5px;
+    margin: 50px;
+}
 
 </style>

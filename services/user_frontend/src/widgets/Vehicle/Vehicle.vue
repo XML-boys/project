@@ -29,9 +29,9 @@ export default {
     <span class="badge badge-pill badge-info">Vehicle: </span>
 
     <div class="card" style="width: 18rem;">
-      <p>TOP</p>
+      <p>Vehicle</p>
       <div class="card-body">
-        <h5 class="card-title"></h5>
+        <h5 class="card-title">{{ data.vendor}} {{ data.model}}</h5>
         <p class="card-text item-description"></p>
       </div>
 
@@ -42,8 +42,6 @@ export default {
 
 
     <div class="card-body">
-      <button class="btn btn-danger" @click="deleteItem" v-if="true">Delete</button>
-      <button class="btn btn-primary" @click="orderItem" v-if="true">Button</button>
     </div>
     </div>
     </div>
