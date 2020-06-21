@@ -2,6 +2,7 @@ package com.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class AdDTO {
     private Long id;
@@ -13,6 +14,8 @@ public class AdDTO {
     private ArrayList<String> pictures;
     private String cena;
     private Boolean damage;
+    private Set<Reservation> ads;
+    private Set<Comment> comments;
 
     public AdDTO() {
     }
@@ -26,6 +29,20 @@ public class AdDTO {
         this.pictures = pictures;
     }
 
+    public AdDTO(Long id, Long idAgenta, LocalDate startTime, LocalDate endDate, String location, Long vehicleId, ArrayList<String> pictures, String cena, Boolean damage, Set<Reservation> ads, Set<Comment> comments) {
+        this.id = id;
+        this.idAgenta = idAgenta;
+        this.startTime = startTime;
+        this.endDate = endDate;
+        this.location = location;
+        this.vehicleId = vehicleId;
+        this.pictures = pictures;
+        this.cena = cena;
+        this.damage = damage;
+        this.ads = ads;
+        this.comments = comments;
+    }
+
     public AdDTO(Ad ad) {
         this.id = ad.getId();
         this.startTime = ad.getStartTime();
@@ -36,6 +53,8 @@ public class AdDTO {
         this.pictures = ad.getPictures();
         this.cena = ad.getCena();
         this.damage = ad.isDamage();
+        this.ads = ad.getAds();
+        this.comments = ad.getComments();
     }
 
     public Long getIdAgenta() {

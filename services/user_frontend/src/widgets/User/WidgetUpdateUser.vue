@@ -19,7 +19,7 @@ export default {
 	},
     mounted: function()
     {
-        UserService.get(this.user).then(response => this.data = response.data);
+        UserService.get().then(response => this.data = response.data);
     }
 }
 </script>
@@ -30,23 +30,15 @@ export default {
     <div>
 	
 		<p>
-		<input type="text" class="form-control"  v-model="data.firstname" />
+		<input type="text" class="form-control" placeholder="First name"  v-model="data.firstName" />
 		</p>
 		
 		<p>
-		<input type="text" class="form-control"  v-model="data.lastname" />
+		<input type="text" class="form-control"  placeholder="Last name" v-model="data.lastName" />
 		</p>
 		
 		<p>
-		<input type="text" class="form-control" v-model="data.mobilePhone" />
-		</p>
-		
-		<p>
-		<input type="text" class="form-control"  v-model="data.address" />
-		</p>
-		
-		<p>
-		<input type="date" class="form-control" placeholder="birthday" v-model="data.birthday" />
+		<input type="text" class="form-control" placeholder="Address" v-model="data.adress" />
 		</p>
 		
 

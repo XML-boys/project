@@ -10,11 +10,15 @@ export default class VehicleService
 
     static list() 
     {
+		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
+
         return axios.get(API_URL + "/vehicles/");
     }
 
     static get(id) 
     {
+		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
+
         return axios.get(API_URL + "/vehicles/" + id);
     }
     
@@ -22,6 +26,8 @@ export default class VehicleService
     
     static order(id, data) 
     {
+		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
+
         return axios.post(API_URL + "/vehicles/" + id + "/order", data);
     }
     
@@ -29,16 +35,22 @@ export default class VehicleService
 
     static create(x)
     {
+		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
+
         return axios.post(API_URL + "/vehicles/", x);
     }
 
     static update(id, data) 
     {
+		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
+
         return axios.post(API_URL + "/vehicles/" + id, data);
     }
 
     static delete(id) 
     {
+		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
+
         return axios.delete(API_URL + "/vehicles/" + id);
     }
 }

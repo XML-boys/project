@@ -22,12 +22,20 @@ export default {
 	{
 		LoginService.login(this.data).then(response => {
 			console.log(response)
-			axios.defaults.headers.common['Authorization'] = response.data.jwttoken;
-			localStorage.setItem("username", this.data.username);;
-			localStorage.setItem("user", this.data.username);;
-			localStorage.setItem("email", this.data.username);;
-			localStorage.setItem("role", "LOGGED");;
-			window.location.href = "/frontend/";
+			var token = response.data.jwttoken;
+			localStorage.setItem("token", token);
+			axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
+			LoginService.getProfile().then(response => {
+				console.log(response);
+				localStorage.setItem("username", this.data.username);;
+				localStorage.setItem("user", this.data.username);;
+				localStorage.setItem("email", response.data.email);;
+				localStorage.setItem("clientId", response.data.id);;
+				localStorage.setItem("userId", response.data.userId);;
+				localStorage.setItem("role", "LOGGED");;
+				window.location.href = "/frontend/";
+			})
+			
 
 			
 		}
