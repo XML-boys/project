@@ -12,20 +12,26 @@ import {AdminUpravaService} from '../services/admin-uprava.service';
 export class AdminUpravaComponent implements OnInit {
 
 
+  constructor(private adminUpravaService: AdminUpravaService , private router: Router, private modalService: NgbModal,
+              private formBuilder: FormBuilder) { }
+
+
   users: any = [];
   coments: any = [];
   votes: any = [];
   clients: any = [];
 
-
-  constructor(private adminUpravaService: AdminUpravaService , private router: Router, private modalService: NgbModal,
-              private formBuilder: FormBuilder) { }
-
+  token: string;
   ngOnInit(): void {
     this.ucitajUsere();
     this.ucitajKomentare();
     this.ucitajOcene();
     this.ucitajKliente();
+    this.getToken();
+  }
+
+  getToken(){
+    this.token = localStorage.getItem('jwt');
   }
 
   ucitajUsere() {
@@ -98,26 +104,38 @@ export class AdminUpravaComponent implements OnInit {
     this.adminUpravaService.putUser(user, user.id);
   }
 
-  open8(coment) {
+  open8(coment, id) {
     coment.approved = true;
-    this.adminUpravaService.putComment(coment, coment.id);
+    console.log(id);
+    this.adminUpravaService.putCommentApproved(coment, id).subscribe();
+    this.ucitajKomentare();
   }
 
-  open9(coment) {
-    this.adminUpravaService.deleteComment(coment.id);
+  open9(id) {
+    this.adminUpravaService.deleteComment(id).subscribe();
   }
 
   open10(client) {
     client.blocked = true;
-    this.adminUpravaService.putClient(client, client.id);
+    this.adminUpravaService.putClient(client, client.id).subscribe();
   }
 
   open11(client) {
     client.blocked = false;
-    this.adminUpravaService.putClient(client, client.id);
+    this.adminUpravaService.putClient(client, client.id).subscribe();
   }
 
   open12(client) {
-    this.adminUpravaService.deleteClient(client.id);
+    this.adminUpravaService.deleteClient(client.id).subscribe();
+  }
+
+  open110(vote, id) {
+    vote.approved = true;
+    this.adminUpravaService.putVoteApproved(vote, id).subscribe();
+  }
+
+  open111(id) {
+    this.adminUpravaService.deleteVote(id).subscribe();
+    this.ucitajOcene();
   }
 }

@@ -8,6 +8,7 @@ import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Agent} from '../shared/agent';
 import {Client} from '../shared/client';
+import {AdminUpravaComponent} from '../admin-uprava/admin-uprava.component';
 
 
 @Injectable({
@@ -22,28 +23,49 @@ export class AdminUpravaService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
-    })
+    }).set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
   };
 
   getAllAgenti(): Observable<Agent> {
     return this.http.get<Agent>(this.configService.allAgents, this.httpOptions);
   }
 
-  getAllClients(): Observable<Client> {
-    return this.http.get<Client>(this.configService.allClients, this.httpOptions);
+  /*getAllClients(): Observable<Response> {
+    return this.http.get<Response>(this.configService.allClients, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
+  }*/
+
+  getAllClients(): Observable<Response> {
+    return this.http.get<Response>('http://localhost:6969/client', {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
   }
 
-  getAllComments(): Observable<Client> {
-    return this.http.get<Client>(this.configService.allComments, this.httpOptions);
+  getAllUsers(): Observable<any> {
+    console.log(localStorage.getItem('jwt'));
+    return this.http.get<any>('http://localhost:6969/user', {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('jwt')}`)
+    });
   }
 
-  getAllVotes(): Observable<Client> {
-    return this.http.get<Client>(this.configService.allVotes, this.httpOptions);
+  getAllComments(): Observable<Response> {
+    return this.http.get<Response>(this.configService.allComments, {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('jwt')}`)
+    });
   }
 
-  getAllUsers(): Observable<Client> {
-    return this.http.get<Client>(this.configService.allUsers, this.httpOptions);
+  getAllVotes(): Observable<Response> {
+    return this.http.get<Response>(this.configService.allVotes, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
   }
+
+  /*getAllUsers(): Observable<Response> {
+    return this.http.get<Response>(this.configService.allUsers, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
+  }*/
 
   deleteClient(id): Observable<any> {
     return this.http.delete(this.configService.deleteClient + id);
@@ -57,18 +79,39 @@ export class AdminUpravaService {
     return this.http.delete(this.configService.deleteComment + id);
   }
 
+  deleteVote(id): Observable<any> {
+    return this.http.delete(this.configService.deleteVote + id);
+  }
+
   putUser(user, id): Observable<any> {
-    return this.http.put(this.configService.putUser + id, user, {} );
+    return this.http.put(this.configService.putUser + id, user, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
   }
 
   putComment(comment, id): Observable<any> {
-    return this.http.put(this.configService.putComment + id, comment, {} );
+    return this.http.put(this.configService.putComment + id, comment, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
   }
-
   putClient(client, id): Observable<any> {
-    return this.http.put(this.configService.putClient + id, client, {} );
+    return this.http.put(this.configService.putClient + id, client, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
   }
 
+  putCommentApproved(comment, id): Observable<any> {
+    console.log('opaljen');
+    return this.http.put('http://localhost:6969/comment/' + id + '/approved/true', null , {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
+  }
+
+  putVoteApproved(vote, id): Observable<any> {
+    return this.http.put('http://localhost:6969/vote/' + id + '/approved/true', vote , {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
+  }
 
   /*kreiraj( id ): Observable<any> {
     return this.http.post<any>('http://localhost:8080/api/adminKC/kreirajKarton/' + id, {});

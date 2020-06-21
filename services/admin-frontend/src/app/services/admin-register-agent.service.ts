@@ -18,10 +18,15 @@ export class AdminRegisterAgentService {
   };
 
   getAgents(): Observable<Agent> {
-    return this.http.get<Agent>(this.configService.allAgents, this.httpOptions);
+    return this.http.get<Agent>(this.configService.allAgents, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
   }
 
   postAgents(Agents) {
-    return this.http.post(this.configService.postAgents, Agents);
+    console.log('okidanje-admina');
+    return this.http.post(this.configService.postAgents, Agents, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
   }
 }

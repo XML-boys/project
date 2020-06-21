@@ -26,7 +26,7 @@ public class CommentController {
         comment.setIdKomentatora(commentDTO.getIdKomentatora());
         comment.setReklamak(commentDTO.getReklamak());
         comment.setSadrzaj(commentDTO.getSadrzaj());
-        comment.setApproved(commentDTO.getApproved());
+        comment.setApproved(false);
         commentService.save(comment);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -43,7 +43,7 @@ public class CommentController {
                 return new ResponseEntity<>(commentDTOS,HttpStatus.OK);
             }
         }
-        return new ResponseEntity<>(commentDTOS, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(commentDTOS, HttpStatus.NOT_IMPLEMENTED);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -63,6 +63,7 @@ public class CommentController {
                     comment.setSadrzaj(commentDTO.getSadrzaj());
                     comment.setReklamak(commentDTO.getReklamak());
                     comment.setIdKomentatora(commentDTO.getIdKomentatora());
+                    comment.setApproved(commentDTO.getApproved());
                     commentService.save(comment);
                 }
             }
@@ -84,7 +85,7 @@ public class CommentController {
                 }
             }
         }
-        return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>( HttpStatus.OK);
     }
 
     @PutMapping(value = "/{id}/approved/true", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -96,11 +97,12 @@ public class CommentController {
             {
                 if(comment.getId() == id){
                     comment.setApproved(true);
+                    commentService.save(comment);
                     return new ResponseEntity<>(comment, HttpStatus.OK);
                 }
             }
         }
-        return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>( HttpStatus.OK);
     }
 
 }

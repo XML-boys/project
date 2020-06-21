@@ -11,6 +11,7 @@ export default class RegistrationFormService
 
     static submit(x)
     {
+		axios.defaults.headers.common['Authorization'] = "";
         return axios.post(API_URL + "/reg", x);
     }
 }

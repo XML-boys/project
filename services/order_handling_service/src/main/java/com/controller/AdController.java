@@ -2,9 +2,7 @@ package com.controller;
 
 import com.model.Ad;
 import com.model.AdDTO;
-import com.model.UserDTO;
 import com.service.AdService;
-import com.service.RestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -53,7 +51,7 @@ public class AdController {
                 return new ResponseEntity<>(adDTOS, HttpStatus.OK);
             }
         }
-        return new ResponseEntity<>(adDTOS, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(adDTOS, HttpStatus.NOT_IMPLEMENTED);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -133,7 +131,7 @@ public class AdController {
                 }
             }
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 

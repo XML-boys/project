@@ -37,10 +37,15 @@ export default class AdService
         return axios.post(API_URL + "/ad/" + id, data);
     }
 
-    static delete(id) 
+    static order(data) 
     {
 		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
 
-        return axios.delete(API_URL + "/ad/" + id);
+        return axios.post(API_URL + "/reservation/", {
+            reklama: data,
+            startTime: data.startTime,
+            endTime: data.endTime,
+            userId: localStorage.getItem("userId")
+        });
     }
 }

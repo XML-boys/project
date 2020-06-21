@@ -27,14 +27,14 @@ public class ReservationController {
         reservation.setReklama(reservationDTO.getReklama());
         reservation.setStartTime(reservationDTO.getStartTime());
         reservation.setEndTime(reservationDTO.getEndTime());
-        reservation.setState(reservationDTO.getState());
+        reservation.setState("Pending");
 
         reservationService.save(reservation);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping(consumes = "application/json")
+    @GetMapping(consumes = "application/json" , produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ReservationDTO>> getReservations() {
         List<Reservation> reservations = reservationService.findAll();
         List<ReservationDTO> reservationDTOS= new ArrayList<>();
@@ -66,7 +66,7 @@ public class ReservationController {
                     reservation.setReklama(reservationDTO.getReklama());
                     reservation.setStartTime(reservationDTO.getStartTime());
                     reservation.setEndTime(reservationDTO.getEndTime());
-                    reservation.setState(reservationDTO.getState());
+                    reservation.setState("Pending");
 
                     reservationService.save(reservation);
                 }

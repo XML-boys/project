@@ -16,13 +16,15 @@ import { AdminUpravaComponent } from './admin-uprava/admin-uprava.component';
 import { AdminSifrarnikComponent } from './admin-sifrarnik/admin-sifrarnik.component';
 import {DropdownListModule} from 'ngx-dropdown-list';
 import { AdminRegisterAgentComponent } from './admin-register-agent/admin-register-agent.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminUpravaComponent,
     AdminSifrarnikComponent,
-    AdminRegisterAgentComponent
+    AdminRegisterAgentComponent,
+    LoginComponent
   ],
     imports: [
         BrowserAnimationsModule,

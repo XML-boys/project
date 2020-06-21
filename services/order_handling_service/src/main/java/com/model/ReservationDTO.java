@@ -6,7 +6,6 @@ public class ReservationDTO {
     private Long userId;
     private LocalDate startTime;
     private LocalDate endTime;
-    private String state;
     private Ad reklama;
 
 
@@ -20,7 +19,6 @@ public class ReservationDTO {
         this.userId = reservation.getUserId();
         this.startTime = reservation.getStartTime();
         this.endTime = reservation.getEndTime();
-        this.state.valueOf(reservation.getState());
         this.reklama = reservation.getReklama();
     }
 
@@ -46,14 +44,6 @@ public class ReservationDTO {
 
     public void setEndTime(LocalDate endTime) {
         this.endTime = endTime;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state.valueOf(state);
     }
 
     public Ad getReklama() {

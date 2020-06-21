@@ -37,7 +37,7 @@ public class VehicleController {
 	}
 	
 	@PostMapping(consumes = "application/json")
-	public ResponseEntity<Long> save(@RequestBody VehicleDTO dto){
+	public ResponseEntity<Long> save(@RequestBody Vehicle dto){
 		
 		Vehicle vehicle = vehicleService.save(dto);
 		return new ResponseEntity<>(vehicle.getId(),HttpStatus.OK);

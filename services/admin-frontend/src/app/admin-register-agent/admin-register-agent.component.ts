@@ -37,6 +37,6 @@ export class AdminRegisterAgentComponent implements OnInit {
     this.agent.name = name;
     this.agent.companyIdentifier = companyIdentifier;
     this.agent.adress = adress;
-    this.adminRegisterAgentService.postAgents(this.agent);
+    this.adminRegisterAgentService.postAgents(this.agent).subscribe();
   }
 }
