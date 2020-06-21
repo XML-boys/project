@@ -24,7 +24,6 @@ public class VehicleService {
 	}
 
 	public Vehicle save(Vehicle vehicle) {
-		vehicleRepository.save(vehicle);
-		return vehicle;
+		return vehicleRepository.save(vehicle);
 	}
 }
