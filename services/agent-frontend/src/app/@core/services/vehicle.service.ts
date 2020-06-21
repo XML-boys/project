@@ -10,7 +10,7 @@ export class VehicleService {
 
   constructor(private http: HttpClient) { }
 
-  getAllVe(): Observable<Ad> {
-    return this.http.get<Ad>('http://localhost:6969/ad');
+  getAllVendors(): Observable<any> {
+    return this.http.get<any>('http://localhost:6969/codeBook/vendor');
   }
 }

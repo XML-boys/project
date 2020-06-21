@@ -5,7 +5,7 @@
     <div class="full-name-inputs">
 
             <label for="Brand">Brand: </label>
-           <nb-select id="Brand" placeholder="Brand" >
+           <nb-select id="Brand" placeholder="Brand" (selectedChange)="onChange()">
              <nb-option *ngFor="let vendor of vendors" [value]="vendor">{{ vendor }}</nb-option>
             </nb-select>
 
@@ -27,6 +27,8 @@
             -->
       <label for="Model">Model: </label>
       <nb-select id="Model" placeholder="Model" [disabled]="disabledModel">
+        <nb-option *ngFor="let model of models" [value]="model">{{ model }}</nb-option>
+
       </nb-select>
     </div>
       <br>
