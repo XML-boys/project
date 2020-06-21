@@ -27,7 +27,7 @@ public class ReservationController {
         reservation.setReklama(reservationDTO.getReklama());
         reservation.setStartTime(reservationDTO.getStartTime());
         reservation.setEndTime(reservationDTO.getEndTime());
-        reservation.setState(reservationDTO.getState());
+        reservation.setState("Pending");
 
         reservationService.save(reservation);
 
@@ -66,7 +66,7 @@ public class ReservationController {
                     reservation.setReklama(reservationDTO.getReklama());
                     reservation.setStartTime(reservationDTO.getStartTime());
                     reservation.setEndTime(reservationDTO.getEndTime());
-                    reservation.setState(reservationDTO.getState());
+                    reservation.setState("Pending");
 
                     reservationService.save(reservation);
                 }

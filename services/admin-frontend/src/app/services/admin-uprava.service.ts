@@ -8,6 +8,7 @@ import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Agent} from '../shared/agent';
 import {Client} from '../shared/client';
+import {AdminUpravaComponent} from '../admin-uprava/admin-uprava.component';
 
 
 @Injectable({
@@ -22,27 +23,35 @@ export class AdminUpravaService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
-    })
+    }).set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
   };
 
   getAllAgenti(): Observable<Agent> {
     return this.http.get<Agent>(this.configService.allAgents, this.httpOptions);
   }
 
-  getAllClients(): Observable<Client> {
-    return this.http.get<Client>(this.configService.allClients, this.httpOptions);
+  getAllClients(): Observable<Response> {
+    return this.http.get<Response>(this.configService.allClients, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
   }
 
-  getAllComments(): Observable<Client> {
-    return this.http.get<Client>(this.configService.allComments, this.httpOptions);
+  getAllComments(): Observable<Response> {
+    return this.http.get<Response>(this.configService.allComments, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
   }
 
-  getAllVotes(): Observable<Client> {
-    return this.http.get<Client>(this.configService.allVotes, this.httpOptions);
+  getAllVotes(): Observable<Response> {
+    return this.http.get<Response>(this.configService.allVotes, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
   }
 
-  getAllUsers(): Observable<Client> {
-    return this.http.get<Client>(this.configService.allUsers, this.httpOptions);
+  getAllUsers(): Observable<Response> {
+    return this.http.get<Response>(this.configService.allUsers, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
   }
 
   deleteClient(id): Observable<any> {
@@ -58,15 +67,20 @@ export class AdminUpravaService {
   }
 
   putUser(user, id): Observable<any> {
-    return this.http.put(this.configService.putUser + id, user, {} );
+    return this.http.put(this.configService.putUser + id, user, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
   }
 
   putComment(comment, id): Observable<any> {
-    return this.http.put(this.configService.putComment + id, comment, {} );
+    return this.http.put(this.configService.putComment + id, comment, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
   }
-
   putClient(client, id): Observable<any> {
-    return this.http.put(this.configService.putClient + id, client, {} );
+    return this.http.put(this.configService.putClient + id, client, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
   }
 
 

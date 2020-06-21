@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ConfigService {
 
-  private apiUri = 'http://localhost:6969/';
+  private apiUri = 'http://localhost:6969';
 
   get allAgents(): string {
     return this.apiUri + '/agent';

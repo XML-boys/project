@@ -30,6 +30,7 @@ export class AdminSifrarnikComponent implements OnInit {
   selected14 = '';
   closeResult: string;
   vendors: any = [];
+  loading = false;
 
   model: any;
 

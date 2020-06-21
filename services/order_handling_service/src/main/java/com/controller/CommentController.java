@@ -43,7 +43,7 @@ public class CommentController {
                 return new ResponseEntity<>(commentDTOS,HttpStatus.OK);
             }
         }
-        return new ResponseEntity<>(commentDTOS, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(commentDTOS, HttpStatus.NOT_IMPLEMENTED);
     }
 
     @DeleteMapping(value = "/{id}")

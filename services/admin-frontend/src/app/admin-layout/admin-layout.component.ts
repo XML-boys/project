@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-layout.component.css']
 })
 export class AdminLayoutComponent implements OnInit {
-
+  token: string;
   constructor() { }
 
   ngOnInit(): void {
+    this.getToken();
+  }
+
+  getToken(){
+    this.token = localStorage.getItem('jwt');
   }
 
 }

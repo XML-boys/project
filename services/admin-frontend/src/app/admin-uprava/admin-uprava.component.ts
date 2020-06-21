@@ -12,20 +12,31 @@ import {AdminUpravaService} from '../services/admin-uprava.service';
 export class AdminUpravaComponent implements OnInit {
 
 
+  constructor(private adminUpravaService: AdminUpravaService , private router: Router, private modalService: NgbModal,
+              private formBuilder: FormBuilder) { }
+
+
   users: any = [];
   coments: any = [];
   votes: any = [];
   clients: any = [];
 
+  token: string;
 
-  constructor(private adminUpravaService: AdminUpravaService , private router: Router, private modalService: NgbModal,
-              private formBuilder: FormBuilder) { }
+  static getToken() {
+    localStorage.getItem('jwt');
+  }
 
   ngOnInit(): void {
     this.ucitajUsere();
     this.ucitajKomentare();
     this.ucitajOcene();
     this.ucitajKliente();
+    this.getToken();
+  }
+
+  getToken(){
+    this.token = localStorage.getItem('jwt');
   }
 
   ucitajUsere() {

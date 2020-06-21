@@ -53,7 +53,7 @@ public class AdController {
                 return new ResponseEntity<>(adDTOS, HttpStatus.OK);
             }
         }
-        return new ResponseEntity<>(adDTOS, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(adDTOS, HttpStatus.NOT_IMPLEMENTED);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -133,7 +133,7 @@ public class AdController {
                 }
             }
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
