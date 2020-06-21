@@ -30,7 +30,7 @@ public class AdController {
         ad.setIdAgenta(adDTO.getIdAgenta());
         ad.setLocation(adDTO.getLocation());
         ad.setVehicleId(adDTO.getVehicleId());
-        ad.setPictures(adDTO.getPictures());
+     //   ad.setPictures(adDTO.getPictures());
         ad.setCena(adDTO.getCena());
         ad.setDamage(adDTO.isDamage());
 

@@ -13,4 +13,7 @@ export class MyAdsService {
   getAll(): Observable<Ad> {
     return this.http.get<Ad>('http://localhost:6969/ad');
   }
+  createAd(ad): Observable<any> {
+    return this.http.post<any>('http://localhost:6969/ad', ad);
+  }
 }

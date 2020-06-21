@@ -59,8 +59,8 @@ public class CodeBookController {
     }
 
     @GetMapping("/vendor/{name}")
-    public ResponseEntity<List<CodeItem>> findAllByVendor(@PathVariable("name") String name) {
-        return ResponseEntity.ok(codeBookService.findAllByVendor(name));
+    public ResponseEntity<List<VehicleModel>> findAllByVendor(@PathVariable("name") String name) {
+        return ResponseEntity.ok(codeBookService.findAllByVendor(name).getModels());
     }
 
 

@@ -1,56 +1,39 @@
 <nb-card>
   <nb-card-header>Register new vehicle</nb-card-header>
   <nb-card-body>
-    <form class="new-vehicle-form">
+    <form [formGroup]="VehicleForm" class="new-vehicle-form" (ngSubmit)="submit()">
     <div class="full-name-inputs">
 
-            <label for="Brand">Brand: </label>
-           <nb-select id="Brand" placeholder="Brand" (selectedChange)="onChange()">
+            <label for="vendor">Brand: </label>
+           <nb-select id="vendor" formControlName="vendor" placeholder="Brand" (selectedChange)="onChangeVendor($event)" >
              <nb-option *ngFor="let vendor of vendors" [value]="vendor">{{ vendor }}</nb-option>
             </nb-select>
 
-      <!--
-      <div class="form-group" >
-
-      <ngx-dropdown-list [items]="vendors"
-                         [disabled]="false"
-                         [multiSelection]="false"
-                         [placeHolder]="'Vendor'"
-                         [(selectedValue)]="selected"
-                         [suffixText]="''"
-                         [filterBox]="false"
-                         [formatNumber]="true"
-                         [disabled]="false"
-                         id="Brand">
-      </ngx-dropdown-list>
-      </div>
-            -->
-      <label for="Model">Model: </label>
-      <nb-select id="Model" placeholder="Model" [disabled]="disabledModel">
-        <nb-option *ngFor="let model of models" [value]="model">{{ model }}</nb-option>
-
+      <label for="model">Model: </label>
+      <nb-select id="model" formControlName="model" placeholder="Model" [disabled]="disabledModel" (selectedChange)="onChangeModel($event)">
+        <nb-option *ngFor="let model of models" [value]="model.name">{{ model.name }}</nb-option>
       </nb-select>
     </div>
       <br>
     <div class="full-name-inputs">
       <label for="oType">Oil Type: </label>
-      <nb-select id="oType" placeholder="Oil Type" >
-        <nb-option value="Diesel">Diesel</nb-option>
-        <nb-option value="Gas">Gas</nb-option>
-        <nb-option value="LPG">LPG</nb-option>
+      <nb-select id="oType" formControlName="oType" placeholder="Oil Type" [disabled]="disabledOil" (selectedChange)="onChangeOil($event)">
+        <nb-option *ngFor="let _oil of oil" [value]="_oil">{{ _oil }}</nb-option>
+
       </nb-select>
       <label for="gearType">Gear type </label>
-      <nb-select id="gearType" placeholder="Gearbox Type" >
-        <nb-option value="Manual">Manual</nb-option>
-        <nb-option value="Automat">Automat</nb-option>
+      <nb-select id="gearType" formControlName="gearType" placeholder="Gearbox Type" [disabled]="disabledGear" (selectedChange)="onChangeGear($event)">
+        <nb-option *ngFor="let _gear of gear" [value]="_gear">{{ _gear }}</nb-option>
+
       </nb-select>
     </div>
       <br>
     <div class="full-name-inputs">
       <label for="distance">Distance in KM:  </label>
-      <input type="number" id="distance" nbInput  placeholder="Distnance">
+      <input type="number" formControlName="distance" id="distance" #distance nbInput min="0" value="0"  placeholder="Distnance">
       <label for="seats">Number of kids seats:  </label>
-      <input type="number" id="seats" nbInput  placeholder="Kids seats">
+      <input type="number" formControlName="seats" id="seats" nbInput min="0" max="3"value="0"  placeholder="Kids seats">
+
     </div>
       <br>
       <button type="submit" nbButton status="primary">Save</button>

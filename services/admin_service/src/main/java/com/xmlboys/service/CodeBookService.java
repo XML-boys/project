@@ -19,7 +19,7 @@ public class CodeBookService {
 
     public List<CodeItem> findAll() {return Lists.newArrayList(codeBook.findAll());}
 
-    public List<CodeItem> findAllByVendor(String vendor) {return Lists.newArrayList(codeBook.findAllByVendor(vendor));}
+    public CodeItem findAllByVendor(String vendor) {return codeBook.findByVendor(vendor);}
 
     public CodeItem update(CodeItem item) {return codeBook.save(item);}
 
