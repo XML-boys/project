@@ -47,6 +47,7 @@ export default {
         <router-link v-if='data.role == "NOT_LOGGED" || data.role == null ' to='/register'>Registration</router-link>
         <router-link v-if='data.role != "NOT_LOGGED"' to='/profile'>My Profile</router-link>
         <router-link v-if='data.role != "NOT_LOGGED"' to='/updateUser'>Update Profile</router-link>
+        <router-link v-if='data.role != "NOT_LOGGED"' to='/reservations'>My Reservations</router-link>
         <router-link v-if='data.role != "NOT_LOGGED"' to='/logout'>Log out</router-link>
 
 
