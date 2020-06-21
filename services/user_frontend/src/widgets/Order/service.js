@@ -12,14 +12,14 @@ export default class OrderService
     {
 		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
 
-        return axios.get(API_URL + "/orders/");
+        return axios.get(API_URL + "/reservation/");
     }
 
     static get(id) 
     {
 		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
 
-        return axios.get(API_URL + "/orders/" + id);
+        return axios.get(API_URL + "/reservation/" + id);
     }
     
     
