@@ -36,18 +36,18 @@ public class VehicleController {
 		return new ResponseEntity<>(vehicleService.findOneByid(id), HttpStatus.OK);
 	}
 	
-	// @PostMapping(consumes = "application/json")
-	// public ResponseEntity<Long> save(@RequestBody VehicleDTO dto){
+	@PostMapping(consumes = "application/json")
+	public ResponseEntity<Long> save(@RequestBody VehicleDTO dto){
 		
-	// 	Vehicle vehicle = vehicleService.save(dto);
-	// 	return new ResponseEntity<>(vehicle.getId(),HttpStatus.OK);
-	// }
+		Vehicle vehicle = vehicleService.save(dto);
+		return new ResponseEntity<>(vehicle.getId(),HttpStatus.OK);
+	}
 	
 	
-	// @PostMapping(value="/{id}", consumes = "application/json")
-	// public ResponseEntity<Long> update(@RequestBody VehicleDTO dto){
+	@PostMapping(value="/{id}", consumes = "application/json")
+	public ResponseEntity<Long> update(@RequestBody Vehicle dto){
 		
-	// 	Vehicle data = vehicleService.save(dto);
-	// 	return new ResponseEntity<>(data.getId(),HttpStatus.OK);
-	// }
+		Vehicle data = vehicleService.save(dto);
+		return new ResponseEntity<>(data.getId(),HttpStatus.OK);
+	}
 }

@@ -17,6 +17,7 @@ import { MyAdsComponent } from './my-ads/my-ads.component';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import { NewAdComponent } from './new-ad/new-ad.component';
 import { NewVehicleComponent } from './new-vehicle/new-vehicle.component';
+import {DropdownListModule} from 'ngx-dropdown-list';
 
 
 
@@ -34,7 +35,8 @@ import { NewVehicleComponent } from './new-vehicle/new-vehicle.component';
         NbInputModule,
         NbButtonModule,
         NbDatepickerModule,
-        NbCheckboxModule
+        NbCheckboxModule,
+        DropdownListModule
     ]
 })
 export class PagesModule { }

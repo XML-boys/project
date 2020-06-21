@@ -10,11 +10,15 @@ export default class OrderService
 
     static list() 
     {
+		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
+
         return axios.get(API_URL + "/orders/");
     }
 
     static get(id) 
     {
+		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
+
         return axios.get(API_URL + "/orders/" + id);
     }
     
@@ -22,6 +26,8 @@ export default class OrderService
     
     static dummy(id) 
     {
+		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
+
         return axios.get(API_URL + "/orders/" + id + "/dummy");
     }
     
@@ -29,16 +35,22 @@ export default class OrderService
 
     static create(x)
     {
+		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
+
         return axios.post(API_URL + "/orders/", x);
     }
 
     static update(id, data) 
     {
+		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
+
         return axios.post(API_URL + "/orders/" + id, data);
     }
 
     static delete(id) 
     {
+		axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
+
         return axios.delete(API_URL + "/orders/" + id);
     }
 }
