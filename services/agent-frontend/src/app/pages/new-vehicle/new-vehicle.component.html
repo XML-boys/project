@@ -4,15 +4,29 @@
     <form class="new-vehicle-form">
     <div class="full-name-inputs">
 
-    <label for="Type">Type: </label>
-    <nb-select id="Type" placeholder="Vehicle type" >
-    </nb-select>
-      <label for="Brand">Brand: </label>
-      <nb-select id="Brand" placeholder="Brand" >
-      </nb-select>
+            <label for="Brand">Brand: </label>
+           <nb-select id="Brand" placeholder="Brand" >
+             <nb-option *ngFor="let vendor of vendors" [value]="vendor">{{ vendor }}</nb-option>
+            </nb-select>
 
+      <!--
+      <div class="form-group" >
+
+      <ngx-dropdown-list [items]="vendors"
+                         [disabled]="false"
+                         [multiSelection]="false"
+                         [placeHolder]="'Vendor'"
+                         [(selectedValue)]="selected"
+                         [suffixText]="''"
+                         [filterBox]="false"
+                         [formatNumber]="true"
+                         [disabled]="false"
+                         id="Brand">
+      </ngx-dropdown-list>
+      </div>
+            -->
       <label for="Model">Model: </label>
-      <nb-select id="Model" placeholder="Model" >
+      <nb-select id="Model" placeholder="Model" [disabled]="disabledModel">
       </nb-select>
     </div>
       <br>

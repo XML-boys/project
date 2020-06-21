@@ -4,7 +4,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Home',
     icon: 'home-outline',
-    link: '/agent',
+    link: '/agent/dashboard',
     home: true,
   },
   {
@@ -14,13 +14,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'My ads',
     icon: 'pricetags',
-    link: '/agent/my-ads',
+    link: '/agent/dashboard/my-ads',
     home: false,
   },
   {
     title: 'New ad',
     icon: 'plus-circle',
-    link: '/agent/new-ad',
+    link: '/agent/dashboard/new-ad',
     home: false,
   },
   {
@@ -30,7 +30,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Add vehicle',
     icon: 'car',
-    link: '/agent/new-vehicle',
+    link: '/agent/dashboard/new-vehicle',
     home: false,
   },
 ];
