@@ -18,7 +18,7 @@ public class AdService {
         return adRepository.save(ad);
     }
     public void remove(Long id) {
-        adRepository.removeById(id);
+        adRepository.deleteById(id);
     }
 
 }

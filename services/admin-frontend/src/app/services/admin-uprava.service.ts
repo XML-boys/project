@@ -30,15 +30,28 @@ export class AdminUpravaService {
     return this.http.get<Agent>(this.configService.allAgents, this.httpOptions);
   }
 
-  getAllClients(): Observable<Response> {
+  /*getAllClients(): Observable<Response> {
     return this.http.get<Response>(this.configService.allClients, {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
+  }*/
+
+  getAllClients(): Observable<Response> {
+    return this.http.get<Response>('http://localhost:6969/client', {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
+  }
+
+  getAllUsers(): Observable<any> {
+    console.log(localStorage.getItem('jwt'));
+    return this.http.get<any>('http://localhost:6969/user', {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('jwt')}`)
     });
   }
 
   getAllComments(): Observable<Response> {
     return this.http.get<Response>(this.configService.allComments, {
-      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+      headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('jwt')}`)
     });
   }
 
@@ -48,11 +61,11 @@ export class AdminUpravaService {
     });
   }
 
-  getAllUsers(): Observable<Response> {
+  /*getAllUsers(): Observable<Response> {
     return this.http.get<Response>(this.configService.allUsers, {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
     });
-  }
+  }*/
 
   deleteClient(id): Observable<any> {
     return this.http.delete(this.configService.deleteClient + id);
@@ -64,6 +77,10 @@ export class AdminUpravaService {
 
   deleteComment(id): Observable<any> {
     return this.http.delete(this.configService.deleteComment + id);
+  }
+
+  deleteVote(id): Observable<any> {
+    return this.http.delete(this.configService.deleteVote + id);
   }
 
   putUser(user, id): Observable<any> {
@@ -83,6 +100,18 @@ export class AdminUpravaService {
     });
   }
 
+  putCommentApproved(comment, id): Observable<any> {
+    console.log('opaljen');
+    return this.http.put('http://localhost:6969/comment/' + id + '/approved/true', null , {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
+  }
+
+  putVoteApproved(vote, id): Observable<any> {
+    return this.http.put('http://localhost:6969/vote/' + id + '/approved/true', vote , {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
+  }
 
   /*kreiraj( id ): Observable<any> {
     return this.http.post<any>('http://localhost:8080/api/adminKC/kreirajKarton/' + id, {});

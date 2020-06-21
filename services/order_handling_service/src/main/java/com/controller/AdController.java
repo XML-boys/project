@@ -2,9 +2,7 @@ package com.controller;
 
 import com.model.Ad;
 import com.model.AdDTO;
-import com.model.UserDTO;
 import com.service.AdService;
-import com.service.RestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

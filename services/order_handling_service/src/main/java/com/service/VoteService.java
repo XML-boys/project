@@ -17,7 +17,6 @@ public class VoteService {
     public Vote save(Vote vote) {
         return voteRepository.save(vote);
     }
-    public void remove(Long id) {
-        voteRepository.removeById(id);
+    public void remove(Long id) { voteRepository.deleteById(id);
     }
 }

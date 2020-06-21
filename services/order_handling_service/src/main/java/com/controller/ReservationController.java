@@ -34,7 +34,7 @@ public class ReservationController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping(consumes = "application/json")
+    @GetMapping(consumes = "application/json" , produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ReservationDTO>> getReservations() {
         List<Reservation> reservations = reservationService.findAll();
         List<ReservationDTO> reservationDTOS= new ArrayList<>();

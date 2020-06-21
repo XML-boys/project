@@ -13,6 +13,7 @@ import {AdminSifrarnikService} from '../services/admin-sifrarnik.service';
 export class AdminSifrarnikComponent implements OnInit {
 
   codeItems: any = [];
+  codeItem: any = [];
   dropDisabled: boolean;
   selected = '';
   selected1 = '';
@@ -29,7 +30,8 @@ export class AdminSifrarnikComponent implements OnInit {
   selected13 = '';
   selected14 = '';
   closeResult: string;
-  vendors: any = [];
+  vendors: string[][] = [];
+  vendors1: any = [];
   loading = false;
 
   model: any;
@@ -48,6 +50,8 @@ export class AdminSifrarnikComponent implements OnInit {
   ci1: any;
   gearAdd: any;
   oilAdd: any;
+  optionItems: any[];
+  item: any = [];
 
   constructor(private adminSifrarnikService: AdminSifrarnikService , private router: Router, private modalService: NgbModal,
               private formBuilder: FormBuilder) {
@@ -58,14 +62,21 @@ export class AdminSifrarnikComponent implements OnInit {
       .subscribe((data: {}) => {
           this.codeItems = data;
           console.log(data);
+          this.inicijalizacija();
         }
       );
+  }
 
-    let codeItem;
-    for (codeItem of this.codeItems){
-      this.vendors.add(codeItem.vendor);
-      if (codeItem.vendor === this.selected){
-        this.models = codeItem.models;
+  inicijalizacija(){
+    console.log('usao');
+    for (this.codeItem of this.codeItems){
+      this.vendors.push(this.codeItem.vendor);
+      console.log(this.codeItem.vendor);
+      console.log(this.vendors);
+      this.vendors1.push(this.codeItem.vendor);
+      console.log(this.vendors1);
+      if (this.codeItem.vendor === this.selected){
+        this.models = this.codeItem.models;
         for ( this.model of this.models ) {
           this.modelNames.add(this.model.name);
           this.oils = this.model.oil;
@@ -289,6 +300,26 @@ export class AdminSifrarnikComponent implements OnInit {
   open445(oilAdd: any) {
     this.model.oil.add(oilAdd);
     this.adminSifrarnikService.putModel(this.model, this.model.id);
+  }
+
+  open666(modal, tpkDTOs) {
+    this.fills(tpkDTOs);
+    this.modalService.open(modal, {size: 'xl'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed`;
+    });
+
+  }
+
+  fills(tpk) {
+    this.optionItems = [];
+    for (const item of tpk) {
+      // tslint:disable-next-line:max-line-length
+      this.optionItems.push({id: item.id + ',' + item.name + ',' + item.gear + item.oil, value: item.id + ',' + item.name + ',' + item.gear + item.oil, text: item.id + ',' + item.name + ',' + item.gear + item.oil});
+      console.log(item);
+      this.item = item.id + ',' + item.name + ',' + item.gear + item.oil;
+    }
   }
 }
 

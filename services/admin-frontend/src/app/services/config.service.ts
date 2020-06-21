@@ -48,11 +48,15 @@ export class ConfigService {
   }
 
   get deleteComment(): string {
-    return this.apiUri + '/comment';
+    return this.apiUri + '/comment/';
+  }
+
+  get deleteVote(): string {
+    return this.apiUri + '/vote/';
   }
 
   get putClient(): string {
-    return this.apiUri + '/client';
+    return this.apiUri + '/client/';
   }
 
   get putCodeItem(): string {
@@ -68,7 +72,7 @@ export class ConfigService {
   }
 
   get putComment(): string {
-    return this.apiUri + '/comment';
+    return this.apiUri + '/comment/';
   }
 
   get postCodeItem(): string {
@@ -80,5 +84,9 @@ export class ConfigService {
 
   get postAgents(): string {
     return this.apiUri + '/agents';
+  }
+
+  get putCommentApproved(): string {
+    return this.apiUri + '/comment/{id}/approved/true';
   }
 }

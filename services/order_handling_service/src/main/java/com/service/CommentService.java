@@ -22,6 +22,6 @@ public class CommentService {
     }
 
     public void remove(Long id) {
-        commentRepository.removeById(id);
+        commentRepository.deleteById(id);
     }
 }

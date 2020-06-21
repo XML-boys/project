@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.model.Comment;
 import com.model.Vote;
 import com.model.VoteDTO;
 import com.service.VoteService;
@@ -26,6 +27,7 @@ public class VoteController {
         vote.setIdKola(voteDTO.getIdKola());
         vote.setIdReklame(voteDTO.getIdReklame());
         vote.setVrednost(voteDTO.getVrednost());
+        vote.setApproved(false);
         voteService.save(vote);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -64,6 +66,7 @@ public class VoteController {
                     vote.setIdKola(voteDTO.getIdKola());
                     vote.setIdReklame(voteDTO.getIdReklame());
                     vote.setVrednost(voteDTO.getVrednost());
+                    vote.setApproved(voteDTO.getApproved());
                     voteService.save(vote);
                 }
             }
@@ -81,6 +84,23 @@ public class VoteController {
             for(Vote vote : votes)
             {
                 if(vote.getId() == id){
+                    return new ResponseEntity<>(vote, HttpStatus.OK);
+                }
+            }
+        }
+        return new ResponseEntity<>( HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/{id}/approved/true", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Vote> putVoteApproved(@PathVariable Long id) {
+        List<Vote> votes = voteService.findAll();
+        if(votes != null)
+        {
+            for(Vote vote : votes)
+            {
+                if(vote.getId() == id){
+                    vote.setApproved(true);
+                    voteService.save(vote);
                     return new ResponseEntity<>(vote, HttpStatus.OK);
                 }
             }

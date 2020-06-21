@@ -102,6 +102,12 @@
                 Id
               </th>
               <th>
+                Id komentatora
+              </th>
+              <th>
+                Sadrzaj
+              </th>
+              <th>
                 Approved
               </th>
               </thead>
@@ -109,14 +115,16 @@
               <ng-container *ngFor="let coment of coments">
                 <tr>
                   <td>{{coment.id}}</td>
+                  <td>{{coment.idKomentatora}}</td>
+                  <td>{{coment.sadrzaj}}</td>
                   <td>{{coment.approved}}</td>
 
                   <td>
                     <div ngbDropdown class="d-inline-block">
                       <button class="btn btn-outline-primary" id="dropdownBasic4" ngbDropdownToggle>Approval</button>
                       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <button ngbDropdownItem (click)="open8(coment)">Approve</button>
-                        <button ngbDropdownItem (click)="open9(coment)">Delete</button>
+                        <button ngbDropdownItem (click)="open8(coment,coment.id)">Approve</button>
+                        <button ngbDropdownItem (click)="open9(coment.id)">Delete</button>
                       </div>
                     </div>
                   </td>
@@ -152,6 +160,15 @@
                 Id
               </th>
               <th>
+                Id kola
+              </th>
+              <th>
+                Id reklame
+              </th>
+              <th>
+                Ocena
+              </th>
+              <th>
                 Approved
               </th>
               </thead>
@@ -159,14 +176,17 @@
               <ng-container *ngFor="let vote of votes">
                 <tr>
                   <td>{{vote.id}}</td>
-                  <td>{{vote.aprroved}}</td>
+                  <td>{{vote.idKola}}</td>
+                  <td>{{vote.idReklame}}</td>
+                  <td>{{vote.vrednost}}</td>
+                  <td>{{vote.approved}}</td>
 
                   <td>
                     <div ngbDropdown class="d-inline-block">
                       <button class="btn btn-outline-primary" id="dropdownBasic5" ngbDropdownToggle>Approval</button>
                       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <button ngbDropdownItem (click)="open8(vote)">Approve</button>
-                        <button ngbDropdownItem (click)="open9(vote)">Delete</button>
+                        <button ngbDropdownItem (click)="open110(vote,vote.id)">Approve</button>
+                        <button ngbDropdownItem (click)="open111(vote.id)">Delete</button>
                       </div>
                     </div>
                   </td>

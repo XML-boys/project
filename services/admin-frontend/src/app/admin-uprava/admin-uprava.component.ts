@@ -22,11 +22,6 @@ export class AdminUpravaComponent implements OnInit {
   clients: any = [];
 
   token: string;
-
-  static getToken() {
-    localStorage.getItem('jwt');
-  }
-
   ngOnInit(): void {
     this.ucitajUsere();
     this.ucitajKomentare();
@@ -109,26 +104,38 @@ export class AdminUpravaComponent implements OnInit {
     this.adminUpravaService.putUser(user, user.id);
   }
 
-  open8(coment) {
+  open8(coment, id) {
     coment.approved = true;
-    this.adminUpravaService.putComment(coment, coment.id);
+    console.log(id);
+    this.adminUpravaService.putCommentApproved(coment, id).subscribe();
+    this.ucitajKomentare();
   }
 
-  open9(coment) {
-    this.adminUpravaService.deleteComment(coment.id);
+  open9(id) {
+    this.adminUpravaService.deleteComment(id).subscribe();
   }
 
   open10(client) {
     client.blocked = true;
-    this.adminUpravaService.putClient(client, client.id);
+    this.adminUpravaService.putClient(client, client.id).subscribe();
   }
 
   open11(client) {
     client.blocked = false;
-    this.adminUpravaService.putClient(client, client.id);
+    this.adminUpravaService.putClient(client, client.id).subscribe();
   }
 
   open12(client) {
-    this.adminUpravaService.deleteClient(client.id);
+    this.adminUpravaService.deleteClient(client.id).subscribe();
+  }
+
+  open110(vote, id) {
+    vote.approved = true;
+    this.adminUpravaService.putVoteApproved(vote, id).subscribe();
+  }
+
+  open111(id) {
+    this.adminUpravaService.deleteVote(id).subscribe();
+    this.ucitajOcene();
   }
 }

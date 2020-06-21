@@ -13,6 +13,8 @@ public class Vote {
     private Long idReklame;
     @Column
     private Long vrednost;
+    @Column
+    private Boolean approved;
 
     public Vote() {
     }
@@ -22,6 +24,14 @@ public class Vote {
         this.idKola = idKola;
         this.idReklame = idReklame;
         this.vrednost = vrednost;
+    }
+
+    public Vote(Long id, Long idKola, Long idReklame, Long vrednost, Boolean approved) {
+        this.id = id;
+        this.idKola = idKola;
+        this.idReklame = idReklame;
+        this.vrednost = vrednost;
+        this.approved = approved;
     }
 
     public Long getId() {
@@ -54,5 +64,13 @@ public class Vote {
 
     public void setVrednost(Long vrednost) {
         this.vrednost = vrednost;
+    }
+
+    public Boolean getApproved() {
+        return approved;
+    }
+
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
     }
 }
