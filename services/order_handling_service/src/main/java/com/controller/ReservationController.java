@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -29,7 +30,7 @@ public class ReservationController {
     private AdService adService;
 
     @PostMapping(value = "/{id}")
-    public ResponseEntity<?> saveReservation(@PathVariable("id") Long id, @RequestBody Reservation reservation, HttpServletRequest httpServletRequest)  {
+    public ResponseEntity<Void> saveReservation(@PathVariable("id") Long id, @RequestBody Reservation reservation, HttpServletRequest httpServletRequest)  {
         String requestTokenHeader = httpServletRequest.getHeader("Authorization");
         String jwt = requestTokenHeader.substring(7);
         RestService restService = new RestService(new RestTemplateBuilder());
@@ -58,48 +59,43 @@ public class ReservationController {
         }else if(userValidateDTO.getRole().equals("Agent")){
             Ad ad = adService.findById(id);
             if(ad != null) {
-                Reservation rez = new Reservation();
-                rez.setUserId(reservation.getUserId());
-                rez.setState("Reserved");
-                rez.setEndTime(reservation.getEndTime());
-                rez.setStartTime(reservation.getStartTime());
-                rez.setReklama(ad);
-                ad.getReservations().add(reservationService.save(rez));
-                Ad a = adService.save(ad);
-                if(a != null){
-                    return new ResponseEntity<>(HttpStatus.CREATED);
-                }else
-                {
-                    return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+                if(reservation.getUserId() == ad.getIdAgenta()){
+                    Reservation rez = new Reservation();
+                    rez.setUserId(reservation.getUserId());
+                    rez.setState("Reserved");
+                    rez.setEndTime(reservation.getEndTime());
+                    rez.setStartTime(reservation.getStartTime());
+                    rez.setReklama(ad);
+                    ad.getReservations().add(reservationService.save(rez));
+                    Ad a = adService.save(ad);
+                    if(a != null){
+                        return new ResponseEntity<>(HttpStatus.CREATED);
+                    }else
+                    {
+                        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+                    }
+                }else{
+                    Reservation rez = new Reservation();
+                    rez.setUserId(reservation.getUserId());
+                    rez.setState("Pending");
+                    rez.setEndTime(reservation.getEndTime());
+                    rez.setStartTime(reservation.getStartTime());
+                    rez.setReklama(ad);
+                    ad.getReservations().add(reservationService.save(rez));
+                    Ad a = adService.save(ad);
+                    if(a != null){
+                        return new ResponseEntity<>(HttpStatus.CREATED);
+                    }else
+                    {
+                        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+                    }
                 }
-            }else{
-                return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
             }
+            return  new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+
         } else{
             return  new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-
-
-
-        /*Ad ad = adService.findById(id);
-        if(ad != null) {
-            Reservation rez = new Reservation();
-            rez.setUserId(reservation.getUserId());
-            rez.setState(reservation.getState());
-            rez.setEndTime(reservation.getEndTime());
-            rez.setStartTime(reservation.getStartTime());
-            rez.setReklama(ad);
-            ad.getReservations().add(reservationService.save(rez));
-            Ad a = adService.save(ad);
-            if(a != null){
-                return new ResponseEntity<>(HttpStatus.CREATED);
-            }else
-            {
-                return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
-            }
-        }else{
-            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
-        }*/
     }
 
     @GetMapping(value = "/{id}", produces = "application/json")
@@ -198,6 +194,25 @@ public class ReservationController {
             }
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping(value = "/{idAgenta}/agent", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Reservation>> getRezAgent(@PathVariable("idAgenta") Long idAgenta) {
+        List<Ad> ads = adService.findAllAds();
+        List<Reservation> returnReservation = new ArrayList<>();
+        if(ads != null) {
+            for(Ad ad : ads){
+                if(ad.getIdAgenta() == idAgenta){
+                    for(Reservation reservation : ad.getReservations()){
+                        returnReservation.add(reservation);
+                    }
+                }
+            }
+            return new ResponseEntity<>(returnReservation,HttpStatus.OK);
+        } else
+        {
+            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+        }
     }
 
 

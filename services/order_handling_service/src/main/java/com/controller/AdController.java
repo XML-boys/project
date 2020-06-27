@@ -135,6 +135,23 @@ public class AdController {
 
     }
 
+    @GetMapping(value = "/{idAgenta}/agent", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Ad>> getAdzAgent(@PathVariable("idAgenta") Long idAgenta) {
+        List<Ad> ads = adService.findAllAds();
+        List<Ad> returnAds = new ArrayList<>();
+        if(ads != null) {
+            for(Ad ad : ads){
+                if(ad.getIdAgenta() == idAgenta){
+                    returnAds.add(ad);
+                }
+            }
+            return new ResponseEntity<>(returnAds,HttpStatus.OK);
+        } else
+        {
+            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+        }
+    }
+
 
     /*@PostMapping(path = "/allReqAds", consumes = "application/json")
     public ResponseEntity<List<AdDTO>> getAdz(@RequestBody ADLSDDTO adlsddto) {
