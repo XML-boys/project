@@ -12,4 +12,8 @@ export class LoginService {
   login(user): Observable<Response> {
     return this.http.post<Response>('http://localhost:6969/auth', user);
   }
+
+  getToken(): string{
+    return localStorage.getItem('jwt');
+  }
 }

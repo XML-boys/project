@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterModule} from '@angular/router';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app.routing';
 import {AdminLayoutComponent} from './admin-layout/admin-layout.component';
@@ -17,6 +17,8 @@ import { AdminSifrarnikComponent } from './admin-sifrarnik/admin-sifrarnik.compo
 import {DropdownListModule} from 'ngx-dropdown-list';
 import { AdminRegisterAgentComponent } from './admin-register-agent/admin-register-agent.component';
 import { LoginComponent } from './login/login.component';
+import {TokenInterceptor} from './security/tokenInterceptor';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,10 @@ import { LoginComponent } from './login/login.component';
         FontAwesomeModule,
         DropdownListModule
     ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

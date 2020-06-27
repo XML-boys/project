@@ -6,7 +6,7 @@ public class ReservationDTO {
     private Long userId;
     private LocalDate startTime;
     private LocalDate endTime;
-    private Ad reklama;
+    private State state;
 
 
     public ReservationDTO(Long userId, LocalDate startTime, LocalDate endTime) {
@@ -19,7 +19,7 @@ public class ReservationDTO {
         this.userId = reservation.getUserId();
         this.startTime = reservation.getStartTime();
         this.endTime = reservation.getEndTime();
-        this.reklama = reservation.getReklama();
+        this.state = State.valueOf(reservation.getState());
     }
 
     public Long getUserId() {
@@ -46,11 +46,11 @@ public class ReservationDTO {
         this.endTime = endTime;
     }
 
-    public Ad getReklama() {
-        return reklama;
+    public String getState() {
+        return state.name();
     }
 
-    public void setReklama(Ad reklama) {
-        this.reklama = reklama;
+    public void setState(String state) {
+        this.state = State.valueOf(state);
     }
 }

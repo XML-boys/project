@@ -23,7 +23,7 @@ export class AdminUpravaService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
-    }).set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    })
   };
 
   getAllAgenti(): Observable<Agent> {
@@ -37,16 +37,12 @@ export class AdminUpravaService {
   }*/
 
   getAllClients(): Observable<Response> {
-    return this.http.get<Response>('http://localhost:6969/client', {
-      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
-    });
+    return this.http.get<Response>('http://localhost:6969/client');
   }
 
-  getAllUsers(): Observable<any> {
+  getAllUsers(): Observable<Response> {
     console.log(localStorage.getItem('jwt'));
-    return this.http.get<any>('http://localhost:6969/user', {
-      headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('jwt')}`)
-    });
+    return this.http.get<Response>('http://localhost:6969/user');
   }
 
   getAllComments(): Observable<Response> {
