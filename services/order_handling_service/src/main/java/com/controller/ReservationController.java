@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/reservation")
 public class ReservationController {
 
@@ -34,7 +35,7 @@ public class ReservationController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping(consumes = "application/json" , produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(consumes = "application/json" , produces = "application/json")
     public ResponseEntity<List<ReservationDTO>> getReservations() {
         List<Reservation> reservations = reservationService.findAll();
         List<ReservationDTO> reservationDTOS= new ArrayList<>();

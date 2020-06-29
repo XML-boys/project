@@ -19,11 +19,12 @@ import { NewAdComponent } from './new-ad/new-ad.component';
 import { NewVehicleComponent } from './new-vehicle/new-vehicle.component';
 import {DropdownListModule} from 'ngx-dropdown-list';
 import {ReactiveFormsModule} from '@angular/forms';
+import { ReservationsComponent } from './reservations/reservations.component';
 
 
 
 @NgModule({
-  declarations: [PagesComponent, MyAdsComponent, NewAdComponent, NewVehicleComponent],
+  declarations: [PagesComponent, MyAdsComponent, NewAdComponent, NewVehicleComponent, ReservationsComponent],
     imports: [
         CommonModule,
         ThemeModule,

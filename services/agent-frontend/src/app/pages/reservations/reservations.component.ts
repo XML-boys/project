@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {SmartTableData} from '../../@core/data/smart-table';
 import {LocalDataSource} from 'ng2-smart-table';
 import {MyAdsService} from '../../@core/services/my-ads.service';
+import {ReservationsService} from '../../@core/services/reservations.service';
 
 @Component({
-  selector: 'app-my-ads',
-  templateUrl: './my-ads.component.html',
-  styleUrls: ['./my-ads.component.scss']
+  selector: 'app-reservations',
+  templateUrl: './reservations.component.html',
+  styleUrls: ['./reservations.component.css']
 })
-export class MyAdsComponent implements OnInit {
+export class ReservationsComponent implements OnInit {
+
   settings = {
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
@@ -24,14 +25,16 @@ export class MyAdsComponent implements OnInit {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
     },
+    custom: [
+      { name: 'accept', title: '<i class="fa fa-eye"></i>'}],
     update: true,
     columns: {
       id: {
-        title: 'Ad ID',
+        title: 'Reservation ID',
         type: 'number',
       },
-      vehicleId: {
-        title: 'Vehicle ID',
+      adId: {
+        title: 'Ad ID',
         type: 'number',
       },
       startTime: {
@@ -46,16 +49,17 @@ export class MyAdsComponent implements OnInit {
         title: 'Location',
         type: 'string',
       },
-      cena: {
-        title: 'Price',
+      accept: {
+        title: 'Location',
         type: 'string',
-      },
+      }
     },
   };
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: MyAdsService) {
+
+  constructor(private service: ReservationsService) {
 
   }
 
@@ -63,11 +67,10 @@ export class MyAdsComponent implements OnInit {
     for (const item of data) {
       const tmp = {
         id: item.id,
-        vehicleId: item.vehicleId,
+        adId: item.reklama.id,
         startTime: item.startTime,
         endDate: item.endDate,
-        location: item.location,
-        cena: item.cena,
+        location: item.reklama.location,
       };
       this.source.add(tmp);
 
@@ -84,7 +87,7 @@ export class MyAdsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.getAll().subscribe((data: {}) => {
+    this.service.getAllReservations().subscribe((data: {}) => {
         this.loadAds(data);
         console.log(data);
         this.source.refresh();
