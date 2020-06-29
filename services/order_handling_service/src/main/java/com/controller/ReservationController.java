@@ -216,7 +216,7 @@ public class ReservationController {
             return new ResponseEntity<>(returnReservation,HttpStatus.OK);
         } else
         {
-            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+            return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
         }
     }
 
