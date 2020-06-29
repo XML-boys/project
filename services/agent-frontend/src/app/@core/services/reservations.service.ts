@@ -9,8 +9,8 @@ export class ReservationsService {
 
   constructor(private http: HttpClient) { }
 
-  getAllReservations(): Observable<any> {
-    return this.http.get<any>('http://localhost:6969/reservation', {
+  getAllReservations(id): Observable<any> {
+    return this.http.get<any>('http://localhost:6969/' + id + '/agent', {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
   }

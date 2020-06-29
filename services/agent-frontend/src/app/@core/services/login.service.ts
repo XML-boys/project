@@ -17,9 +17,14 @@ export class LoginService {
   }
 
   isLoggedIn(): Observable<Response> {
-    return this.http.get<Response>('http://localhost:6969/auth', {
-      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
-    });
+    return this.http.get<Response>('http://localhost:6969/auth');
+  }
+  getToken(): string {
+    return localStorage.getItem('jwt');
+  }
+
+  myInfo(): Observable<any> {
+    return this.http.get<any>('http://localhost:6969/agent/me/user/1');
   }
 
 

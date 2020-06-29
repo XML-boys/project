@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app.routing';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import {
   NbCardModule,
@@ -22,6 +22,8 @@ import {RouterModule} from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {DropdownListModule} from 'ngx-dropdown-list';
+import {DatePipe} from '@angular/common';
+import {TokenInterceptor} from './@core/HttpHeader/tokenInterceptor';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,10 @@ import {DropdownListModule} from 'ngx-dropdown-list';
     ReactiveFormsModule,
     DropdownListModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

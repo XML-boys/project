@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
 import {MyAdsService} from '../../@core/services/my-ads.service';
 import {ReservationsService} from '../../@core/services/reservations.service';
+import {LoginService} from '../../@core/services/login.service';
 
 @Component({
   selector: 'app-reservations',
@@ -59,7 +60,7 @@ export class ReservationsComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
 
 
-  constructor(private service: ReservationsService) {
+  constructor(private service: ReservationsService, private auth: LoginService) {
 
   }
 
@@ -87,12 +88,20 @@ export class ReservationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.getAllReservations().subscribe((data: {}) => {
+    let myInfo;
+    this.auth.myInfo().subscribe((data: {}) => {
+      myInfo = data;
+      this.getMyReservations(myInfo.id);
+    });
+
+  }
+
+  getMyReservations(id) {
+    this.service.getAllReservations(id).subscribe((data: {}) => {
         this.loadAds(data);
         console.log(data);
         this.source.refresh();
       }
     );
   }
-
 }
