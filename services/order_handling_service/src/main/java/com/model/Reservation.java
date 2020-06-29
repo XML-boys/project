@@ -20,7 +20,6 @@ public class Reservation {
     private State state;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    //@JoinColumn(name = "reklama")
     private Ad reklama;
 
     public Reservation() {
@@ -74,11 +73,12 @@ public class Reservation {
         this.endTime = endTime;
     }
 
-    public State getState() {
-        return state;
+    public String getState() {
+        return state.name();
     }
 
     public void setState(String state) {
-        this.state.valueOf(state);
+        this.state = State.valueOf(state);
     }
+
 }

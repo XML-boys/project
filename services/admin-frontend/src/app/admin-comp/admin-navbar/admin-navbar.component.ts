@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ROUTES} from '../admin-sidebar/admin-sidebar.component';
+import {LoginService} from '../../services/login.service';
 
 @Component({
   selector: 'app-admin-navbar',
@@ -16,6 +17,7 @@ export class AdminNavbarComponent implements OnInit {
   private sidebarVisible: boolean;
 
   public isCollapsed = true;
+
   collapse() {
     this.isCollapsed = !this.isCollapsed;
     const navbar = document.getElementsByTagName('nav')[0];
@@ -30,7 +32,7 @@ export class AdminNavbarComponent implements OnInit {
 
   }
 
-  constructor(  private element: ElementRef, private router: Router) {
+  constructor(private element: ElementRef, private router: Router, private loginService: LoginService) {
     this.sidebarVisible = false;
   }
 
@@ -51,7 +53,7 @@ export class AdminNavbarComponent implements OnInit {
 
   sidebarOpen() {
     const toggleButton = this.toggleButton;
-    const mainPanel =  document.getElementsByClassName('main-panel')[0] as HTMLElement;
+    const mainPanel = document.getElementsByClassName('main-panel')[0] as HTMLElement;
     const html = document.getElementsByTagName('html')[0];
     if (window.innerWidth < 991) {
       mainPanel.style.position = 'fixed';
@@ -70,7 +72,7 @@ export class AdminNavbarComponent implements OnInit {
   sidebarClose() {
     const html = document.getElementsByTagName('html')[0];
     this.toggleButton.classList.remove('toggled');
-    const mainPanel =   document.getElementsByClassName('main-panel')[0] as HTMLElement;
+    const mainPanel = document.getElementsByClassName('main-panel')[0] as HTMLElement;
 
     if (window.innerWidth < 991) {
       // tslint:disable-next-line:only-arrow-functions
@@ -84,7 +86,7 @@ export class AdminNavbarComponent implements OnInit {
 
 
   logout() {
-    // this.logovanjeService.logout();
+    this.loginService.logout();
 
   }
 }

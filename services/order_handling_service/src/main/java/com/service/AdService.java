@@ -21,4 +21,8 @@ public class AdService {
         adRepository.deleteById(id);
     }
 
+    public Ad findById(Long id){
+        return adRepository.findAdById(id);
+    }
+
 }
