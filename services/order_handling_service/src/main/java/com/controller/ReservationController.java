@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @CrossOrigin
@@ -100,9 +101,12 @@ public class ReservationController {
 
 
     @GetMapping(value = "/{id}", produces = "application/json")
-    public ResponseEntity<List<Reservation>> getReservations() {
-        List<Reservation> reservations = reservationService.findAll();
-        return new ResponseEntity<>(reservations, HttpStatus.OK);
+    public ResponseEntity<Set<Reservation>> getReservations(@PathVariable Long id) {
+        Ad ad = adService.findById(id);
+        if (ad != null){
+            return new ResponseEntity<>(ad.getReservations(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}/{idReservation}")
