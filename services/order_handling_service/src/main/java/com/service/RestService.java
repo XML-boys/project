@@ -1,5 +1,6 @@
 package com.service;
 
+import com.model.AgentDataDTO;
 import com.model.UserDTO;
 import com.model.UserValidateDTO;
 import org.assertj.core.util.Lists;
@@ -33,6 +34,15 @@ public class RestService {
         HttpEntity request = new HttpEntity(setHeader(jwt));
         ResponseEntity<UserValidateDTO> response = this.restTemplate.exchange(url, HttpMethod.GET, request,
                 UserValidateDTO.class);
+
+        return response.getBody();
+    }
+
+    public AgentDataDTO getAgent(String jwt) {
+        String url = "http://gateway:80/agent/me/user/1";
+        HttpEntity request = new HttpEntity(setHeader(jwt));
+        ResponseEntity<AgentDataDTO> response = this.restTemplate.exchange(url, HttpMethod.GET, request,
+                AgentDataDTO.class);
 
         return response.getBody();
     }

@@ -45,4 +45,7 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  open() {
+    this.router.navigate(['/admin/register']);
+  }
 }

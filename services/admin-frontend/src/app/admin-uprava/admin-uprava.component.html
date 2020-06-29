@@ -26,9 +26,6 @@
               <th>
                 Approved
               </th>
-              <th>
-                Blocked
-              </th>
               </thead>
               <tbody>
               <ng-container *ngFor="let user of users">
@@ -37,26 +34,13 @@
                   <td>{{user.username}}</td>
                   <td>{{user.role}}</td>
                   <td>{{user.approved}}</td>
-                  <td>{{user.blocked}}</td>
 
                   <td>
                     <div ngbDropdown class="d-inline-block">
                       <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Registracija</button>
                       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <button ngbDropdownItem (click)="open(user)">Obriši</button>
-                        <button ngbDropdownItem (click)="open1(user)">Dodaj</button>
-                      </div>
-                    </div>
-                  </td>
-
-
-
-                  <td>
-                    <div ngbDropdown class="d-inline-block">
-                      <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>Blokiraj</button>
-                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <button ngbDropdownItem (click)="open4(user)">Block</button>
-                        <button ngbDropdownItem (click)="open5(user)">Unblock</button>
+                        <button ngbDropdownItem (click)="open(user)">Obriši registraciju</button>
+                        <button ngbDropdownItem (click)="open1(user)">Registruj</button>
                       </div>
                     </div>
                   </td>
@@ -221,7 +205,10 @@
                 Id
               </th>
               <th>
-                Username
+                First name
+              </th>
+              <th>
+                Last name
               </th>
               <th>
                 Blocked
@@ -231,7 +218,8 @@
               <ng-container *ngFor="let client of clients">
                 <tr>
                   <td>{{client.id}}</td>
-                  <td>{{client.username}}</td>
+                  <td>{{client.firstName}}</td>
+                  <td>{{client.lastName}}</td>
                   <td>{{client.blocked}}</td>
 
                   <td>

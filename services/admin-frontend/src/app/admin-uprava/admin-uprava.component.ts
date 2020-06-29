@@ -90,18 +90,15 @@ export class AdminUpravaComponent implements OnInit {
   }
 
   open3(user) {
-    user.role = 'Client';
-    this.adminUpravaService.putUser(user, user.id);
+    this.adminUpravaService.putUser('Client', user.id);
   }
 
   open6(user) {
-    user.role = 'Agent';
-    this.adminUpravaService.putUser(user, user.id);
+    this.adminUpravaService.putUser('Agent', user.id);
   }
 
   open7(user) {
-    user.role = 'ADMIN';
-    this.adminUpravaService.putUser(user, user.id);
+    this.adminUpravaService.putUser('ADMIN', user.id);
   }
 
   open8(coment, id) {
