@@ -1,0 +1,43 @@
+<div class="panel-header panel-header-sm">
+</div>
+
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Register admin</h4>
+        </div>
+
+
+        <div class="card-body">
+          <form [formGroup]="AdminForm" (ngSubmit)="submit()">
+
+            <div class="full-name-inputs">
+              <label  for="username"></label>
+              <input formControlName="username" type="text" id="username" nbInput  placeholder="Username">
+            </div>
+            <div class="full-name-inputs">
+              <label  for="password"></label>
+              <input formControlName="password" type="password" id="password" nbInput  placeholder="Password">
+            </div>
+            <div class="full-name-inputs">
+              <label  for="email"></label>
+              <input formControlName="email" type="text" id="email" nbInput  placeholder="Email">
+            </div>
+            <div class="full-name-inputs">
+              <label  for="firstName"></label>
+              <input formControlName="firstName" type="text" id="firstName" nbInput  placeholder="First name">
+            </div>
+            <div class="full-name-inputs">
+              <label  for="lastName"></label>
+              <input formControlName="lastName" type="text" id="lastName" nbInput  placeholder="Last name">
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

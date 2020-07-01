@@ -14,11 +14,12 @@ import {AdminLayoutModule} from './admin-layout/admin-layout.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AdminUpravaComponent } from './admin-uprava/admin-uprava.component';
 import { AdminSifrarnikComponent } from './admin-sifrarnik/admin-sifrarnik.component';
-import {DropdownListModule} from 'ngx-dropdown-list';
 import { AdminRegisterAgentComponent } from './admin-register-agent/admin-register-agent.component';
 import { LoginComponent } from './login/login.component';
 import {TokenInterceptor} from './security/tokenInterceptor';
 import {DatePipe} from '@angular/common';
+import { AdminRegisterAdminComponent } from './admin-register-admin/admin-register-admin.component';
+import {NbSelectModule} from '@nebular/theme';
 
 @NgModule({
   declarations: [
@@ -26,20 +27,21 @@ import {DatePipe} from '@angular/common';
     AdminUpravaComponent,
     AdminSifrarnikComponent,
     AdminRegisterAgentComponent,
-    LoginComponent
+    LoginComponent,
+    AdminRegisterAdminComponent
   ],
-    imports: [
-        BrowserAnimationsModule,
-        FormsModule,
-        HttpClientModule,
-        RouterModule,
-        AppRoutingModule,
-        NgbModule,
-        ReactiveFormsModule,
-        AdminLayoutModule,
-        FontAwesomeModule,
-        DropdownListModule
-    ],
+  imports: [
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    RouterModule,
+    AppRoutingModule,
+    NgbModule,
+    ReactiveFormsModule,
+    AdminLayoutModule,
+    FontAwesomeModule,
+    NbSelectModule
+  ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
     DatePipe

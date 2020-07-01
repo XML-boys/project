@@ -16,7 +16,6 @@ export class LoginService {
   }
 
   getToken(): string {
-    console.log(localStorage.getItem('jwt'));
     return localStorage.getItem('jwt');
   }
 

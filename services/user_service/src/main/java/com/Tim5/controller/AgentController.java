@@ -85,7 +85,7 @@ public class AgentController {
         return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
 
-    @PostMapping()
+    @PostMapping(consumes = "application/json")
     public HttpStatus save(@RequestBody AgentRegisterDTO agentRegisterDTO){
         if(agentRegisterDTO != null){
             UserDTO userDTO = new UserDTO();

@@ -71,34 +71,23 @@ export class AdminUpravaComponent implements OnInit {
   }
 
   open(user) {
-    user.approved = true;
-    this.adminUpravaService.putUser(user, user.id);
+    this.adminUpravaService.putUserApproved(user.id);
   }
 
   open1(user) {
     this.adminUpravaService.deleteUser(user.id);
   }
 
-  open4(user) {
-    user.blocked = true;
-    this.adminUpravaService.putUser(user, user.id);
-  }
-
-  open5(user) {
-    user.blocked = false;
-    this.adminUpravaService.putUser(user, user.id);
-  }
-
   open3(user) {
-    this.adminUpravaService.putUser('Client', user.id);
+    this.adminUpravaService.putUserRole('Client', user.id);
   }
 
   open6(user) {
-    this.adminUpravaService.putUser('Agent', user.id);
+    this.adminUpravaService.putUserRole('Agent', user.id);
   }
 
   open7(user) {
-    this.adminUpravaService.putUser('ADMIN', user.id);
+    this.adminUpravaService.putUserRole('ADMIN', user.id);
   }
 
   open8(coment, id) {
@@ -113,17 +102,11 @@ export class AdminUpravaComponent implements OnInit {
   }
 
   open10(client) {
-    client.blocked = true;
-    this.adminUpravaService.putClient(client, client.id).subscribe();
+    this.adminUpravaService.putClientBlock(client.id).subscribe();
   }
 
   open11(client) {
-    client.blocked = false;
-    this.adminUpravaService.putClient(client, client.id).subscribe();
-  }
-
-  open12(client) {
-    this.adminUpravaService.deleteClient(client.id).subscribe();
+    this.adminUpravaService.putClientBlockN(client.id).subscribe();
   }
 
   open110(vote, id) {

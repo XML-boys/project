@@ -40,11 +40,11 @@ export class ConfigService {
   }
 
   get deleteUser(): string {
-    return this.apiUri + '/user';
+    return this.apiUri + '/user/';
   }
 
   get deleteVendor(): string {
-    return this.apiUri + '/codeBook';
+    return this.apiUri + '/codeBook/';
   }
 
   get deleteComment(): string {
@@ -67,10 +67,6 @@ export class ConfigService {
     return this.apiUri + '/vehicleModel';
   }
 
-  get putUser(): string {
-    return this.apiUri + '/user';
-  }
-
   get putComment(): string {
     return this.apiUri + '/comment/';
   }
@@ -83,10 +79,22 @@ export class ConfigService {
   }
 
   get postAgents(): string {
-    return this.apiUri + '/agents';
+    return this.apiUri + '/agent';
   }
 
   get putCommentApproved(): string {
     return this.apiUri + '/comment/{id}/approved/true';
+  }
+
+  get postAdmin(): string {
+    return this.apiUri + '/admin';
+  }
+
+  get allVendors(): string {
+    return this.apiUri + '/codeBook/vendor';
+  }
+
+  get getModels(): string {
+    return this.apiUri + '/codeBook/vendor/';
   }
 }

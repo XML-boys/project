@@ -21,12 +21,16 @@ export class AdminSifrarnikService {
     return this.http.get<any>(this.configService.allItems, this.httpOptions);
   }
 
-  deleteVendor(id): Observable<any> {
-    return this.http.delete(this.configService.deleteVendor + id);
+  getAllVendors(): Observable<any> {
+    return this.http.get<any>(this.configService.allVendors, this.httpOptions);
+  }
+
+  deleteVendor(Vendor): Observable<any> {
+    return this.http.delete(this.configService.deleteVendor + Vendor);
   }
 
   deleteModel(idVehicle, idModel): Observable<any> {
-    return this.http.delete(this.configService.deleteModel + idVehicle + idModel);
+    return this.http.delete('http://localhost:6969/codeBook/' + idVehicle + 'model' + idModel);
   }
 
   putModel(model, id): Observable<any> {
@@ -43,5 +47,17 @@ export class AdminSifrarnikService {
 
   postModel(Model) {
     return this.http.post(this.configService.postModel, Model);
+  }
+
+  postVendor(Vendor) {
+    return this.http.post(this.configService.postCodeItem, Vendor, this.httpOptions);
+  }
+
+  putVendor(id, ci): Observable<any> {
+    return this.http.put(this.configService.putCodeItem + id, ci, this.httpOptions);
+  }
+
+  getModels(vendor): Observable<any> {
+    return this.http.get<any>('http://localhost:6969/codeBook/vendor/' + vendor);
   }
 }

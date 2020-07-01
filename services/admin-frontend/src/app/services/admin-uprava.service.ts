@@ -79,8 +79,20 @@ export class AdminUpravaService {
     return this.http.delete(this.configService.deleteVote + id);
   }
 
-  putUser(user, id): Observable<any> {
-    return this.http.put(this.configService.putUser + id, user, {
+  putUser(id): Observable<any> {
+    return this.http.put('http://localhost:6969/user/' + id + '/approved/true', {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
+  }
+
+  putUserApproved(id): Observable<any> {
+    return this.http.put('http://localhost:6969/user/' + id + '/approved/true', {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
+  }
+
+  putUserRole(role, id): Observable<any> {
+    return this.http.put('http://localhost:6969/user/' + id + '/' + role, {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
     });
   }
@@ -92,6 +104,18 @@ export class AdminUpravaService {
   }
   putClient(client, id): Observable<any> {
     return this.http.put(this.configService.putClient + id, client, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
+  }
+
+  putClientBlock(id): Observable<any> {
+    return this.http.put('http://localhost:6969/client/' + id + '/blocked/true', {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
+  }
+
+  putClientBlockN(id): Observable<any> {
+    return this.http.put('http://localhost:6969/client/' + id + '/blocked/false', {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
     });
   }
