@@ -12,23 +12,16 @@ import {LoginService} from '../../@core/services/login.service';
 export class ReservationsComponent implements OnInit {
 
   settings = {
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
+    actions: {
+      add: false,
+      edit: false,
+      delete: true,
+      custom: [{ name: 'accept', title: '<i class="nb-checkmark" aria-hidden="true"></i>' }]
     },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
     },
-    custom: [
-      { name: 'accept', title: '<i class="fa fa-eye"></i>'}],
-    update: true,
     columns: {
       id: {
         title: 'Reservation ID',
@@ -42,18 +35,10 @@ export class ReservationsComponent implements OnInit {
         title: 'Start date',
         type: 'string',
       },
-      endDate: {
+      endTime: {
         title: 'End date',
         type: 'string',
       },
-      location: {
-        title: 'Location',
-        type: 'string',
-      },
-      accept: {
-        title: 'Location',
-        type: 'string',
-      }
     },
   };
 

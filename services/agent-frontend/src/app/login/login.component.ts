@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
         const str = JSON.stringify(data);
         const d = JSON.parse(str);
         localStorage.setItem('jwt', d.jwttoken);
-        this.router.navigate(['/agent']);
+        this.router.navigate(['/agent/dashboard']);
       }, error => {
         console.log(error.status);
       }

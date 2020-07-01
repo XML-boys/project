@@ -10,21 +10,23 @@ import {MyAdsService} from '../../@core/services/my-ads.service';
 })
 export class MyAdsComponent implements OnInit {
   settings = {
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
+    actions: {
+      add: false,
+      edit: false,
+      delete: false,
+      custom: [    {
+        name: 'edit',
+        title: '<i class="nb-trash"></i>'
+      },
+      ],
+      position: 'right'
     },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
+    accept: {
+      custom: [          {
+        name: 'save',
+        title: '<i class="nb-checkmark"></i>' }
+      ],
     },
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
-    },
-    update: true,
     columns: {
       id: {
         title: 'Ad ID',
@@ -50,6 +52,10 @@ export class MyAdsComponent implements OnInit {
         title: 'Price',
         type: 'string',
       },
+      proba: {
+        title: 'proba',
+        type: 'html',
+      },
     },
   };
 
@@ -68,6 +74,7 @@ export class MyAdsComponent implements OnInit {
         endDate: item.endDate,
         location: item.location,
         cena: item.cena,
+        proba: '<button click= "prb(' + item.id + ') >save </button>'
       };
       this.source.add(tmp);
 
@@ -90,6 +97,14 @@ export class MyAdsComponent implements OnInit {
         this.source.refresh();
       }
     );
+  }
+
+  onReserve(event) {
+    console.log(event.data.id);
+  }
+
+  prb(event) {
+    console.log(event);
   }
 
 }

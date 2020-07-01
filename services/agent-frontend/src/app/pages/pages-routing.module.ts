@@ -5,6 +5,7 @@ import {MyAdsComponent} from './my-ads/my-ads.component';
 import {NewAdComponent} from './new-ad/new-ad.component';
 import {NewVehicleComponent} from './new-vehicle/new-vehicle.component';
 import {ReservationsComponent} from './reservations/reservations.component';
+import {NewReservationComponent} from './new-reservation/new-reservation.component';
 
 const routes: Routes = [{
   path: '',
@@ -25,6 +26,10 @@ const routes: Routes = [{
     {
       path: 'reservations',
       component: ReservationsComponent,
+    },
+    {
+      path: 'reserve',
+      component: NewReservationComponent,
     },
   ]
 },

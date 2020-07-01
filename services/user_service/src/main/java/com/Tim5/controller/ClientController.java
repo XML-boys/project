@@ -29,9 +29,9 @@ public class ClientController {
     private UserService userService;
 
 
-    @RequestMapping(value = "/{id}/blocked/1", method = RequestMethod.PUT)
-    public ResponseEntity<?> blockUser(@RequestBody LongBoolDTO longBoolDTO){
-        clientService.blockUser(longBoolDTO);
+    @RequestMapping(value = "/{id}/blocked/true", method = RequestMethod.PUT)
+    public ResponseEntity<?> blockUser(@PathVariable ("id") Long id){
+        clientService.blockUser(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
