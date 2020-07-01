@@ -22,4 +22,5 @@ public class AgentService {
 
     public List<Agent> findAll() {return Lists.newArrayList(agentRepository.findAll());}
 
+    public void delete(Long id) {agentRepository.deleteById(id);}
 }

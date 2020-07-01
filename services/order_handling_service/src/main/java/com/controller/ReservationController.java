@@ -203,7 +203,7 @@ public class ReservationController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "/{idAgenta}/agent", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{idAgenta}/agent", produces = "application/json")
     public ResponseEntity<List<Reservation>> getRezAgent(@PathVariable("idAgenta") Long idAgenta) {
         List<Ad> ads = adService.findAllAds();
         List<Reservation> returnReservation = new ArrayList<>();
