@@ -6,6 +6,7 @@ import {AdminCompModule} from '../admin-comp/admin-comp.module';
 import {AdminLayoutRutes} from './admin-layout.routing';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AdminSifrarnikComponent} from '../admin-sifrarnik/admin-sifrarnik.component';
 
 
 

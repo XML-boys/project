@@ -60,7 +60,7 @@ export class ConfigService {
   }
 
   get putCodeItem(): string {
-    return this.apiUri + '/codeItem';
+    return this.apiUri + '/codeBook/';
   }
 
   get putModel(): string {
@@ -72,10 +72,10 @@ export class ConfigService {
   }
 
   get postCodeItem(): string {
-    return this.apiUri + '/codeItem';
+    return this.apiUri + '/codeBook';
   }
   get postModel(): string {
-    return this.apiUri + '/vehicleModel';
+    return this.apiUri + '/codeBook/';
   }
 
   get postAgents(): string {

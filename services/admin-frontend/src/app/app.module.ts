@@ -19,7 +19,11 @@ import { LoginComponent } from './login/login.component';
 import {TokenInterceptor} from './security/tokenInterceptor';
 import {DatePipe} from '@angular/common';
 import { AdminRegisterAdminComponent } from './admin-register-admin/admin-register-admin.component';
-import {NbSelectModule} from '@nebular/theme';
+import {MatFormFieldModule, MatSelectModule} from '@angular/material';
+import { AddModelComponent } from './add-model/add-model.component';
+import {AdminNavbarComponent} from './admin-comp/admin-navbar/admin-navbar.component';
+import {AdminSidebarComponent} from './admin-comp/admin-sidebar/admin-sidebar.component';
+import { EditModelComponent } from './edit-model/edit-model.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,9 @@ import {NbSelectModule} from '@nebular/theme';
     AdminSifrarnikComponent,
     AdminRegisterAgentComponent,
     LoginComponent,
-    AdminRegisterAdminComponent
+    AdminRegisterAdminComponent,
+    AddModelComponent,
+    EditModelComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -40,8 +46,10 @@ import {NbSelectModule} from '@nebular/theme';
     ReactiveFormsModule,
     AdminLayoutModule,
     FontAwesomeModule,
-    NbSelectModule
+    MatFormFieldModule,
+    MatSelectModule
   ],
+  exports: [],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
     DatePipe

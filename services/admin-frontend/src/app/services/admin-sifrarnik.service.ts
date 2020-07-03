@@ -16,6 +16,23 @@ export class AdminSifrarnikService {
       'Content-Type': 'application/json'
     })
   };
+  id;
+  model;
+  evoId(id){
+    return this.id = id;
+  }
+
+  uzmiId(){
+    return this.id;
+  }
+
+  evoModel(model){
+    this.model = model;
+  }
+
+  uzmiModel(){
+    return this.model;
+  }
 
   getAllItems(): Observable<any> {
     return this.http.get<any>(this.configService.allItems, this.httpOptions);
@@ -30,11 +47,11 @@ export class AdminSifrarnikService {
   }
 
   deleteModel(idVehicle, idModel): Observable<any> {
-    return this.http.delete('http://localhost:6969/codeBook/' + idVehicle + 'model' + idModel);
+    return this.http.delete('http://localhost:6969/codeBook/' + idVehicle + '/model/' + idModel);
   }
 
-  putModel(model, id): Observable<any> {
-    return this.http.put(this.configService.putModel + id, model, {} );
+  putModel(idCodeItem, idModela, model): Observable<any> {
+    return this.http.put('http://localhost:6969/codeBook/' + idCodeItem + '/model/' + idModela, model, this.httpOptions );
   }
 
   putCodeItem(ci, id): Observable<any> {
@@ -45,8 +62,9 @@ export class AdminSifrarnikService {
     return this.http.post(this.configService.postCodeItem, CodeItems);
   }
 
-  postModel(Model) {
-    return this.http.post(this.configService.postModel, Model);
+  postModel(model, id) {
+    console.log(JSON.stringify(model));
+    return this.http.post('http://localhost:6969/codeBook/' + id + '/model', JSON.stringify(model) , this.httpOptions );
   }
 
   postVendor(Vendor) {
