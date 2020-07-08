@@ -24,11 +24,13 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {DropdownListModule} from 'ngx-dropdown-list';
 import {DatePipe} from '@angular/common';
 import {TokenInterceptor} from './@core/HttpHeader/tokenInterceptor';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

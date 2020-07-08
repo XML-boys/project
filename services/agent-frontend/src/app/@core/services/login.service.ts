@@ -27,5 +27,9 @@ export class LoginService {
     return this.http.get<any>('http://localhost:6969/agent/me/user/1');
   }
 
+  register(user): Observable<Response> {
+    return this.http.post<Response>('http://localhost:6969/reg', user);
+  }
+
 
 }

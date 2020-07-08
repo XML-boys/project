@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Role;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +32,8 @@ public class AdminController {
     private UserService userService;
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private PasswordEncoder bcryptEncoder;
 
 
 
@@ -41,7 +44,7 @@ public class AdminController {
         user.setEmail(dto.getEmail());
         user.setRole(ROLE.ADMIN);
         user.setApproved(true);
-        user.setPassword(dto.getPassword());
+        user.setPassword(bcryptEncoder.encode(dto.getPassword()));
 
         User u = this.userService.save(user);
 
