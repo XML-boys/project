@@ -6,7 +6,6 @@ import {RouterModule} from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
-
 @NgModule({
   declarations: [AdminNavbarComponent, AdminSidebarComponent],
   exports: [AdminNavbarComponent, AdminSidebarComponent],

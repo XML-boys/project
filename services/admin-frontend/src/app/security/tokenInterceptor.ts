@@ -11,13 +11,11 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log('pokrenut interseptor');
         request = request.clone({
           setHeaders: {
             Authorization: `Bearer ${this.auth.getToken()}`
           }
         });
-        console.log('prosledjen');
         return next.handle(request);
   }
 

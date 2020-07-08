@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {AdminRegisterAgentService} from '../services/admin-register-agent.service';
 import {AgentRegister} from '../shared/agentRegister';
 
@@ -12,31 +12,26 @@ import {AgentRegister} from '../shared/agentRegister';
 })
 export class AdminRegisterAgentComponent implements OnInit {
 
-  agents: any = [];
-  agent: any = [];
+  AgentForm: FormGroup;
+
+
   constructor(private adminRegisterAgentService: AdminRegisterAgentService , private router: Router, private modalService: NgbModal,
               private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.getAgents();
+    this.AgentForm  =  this.formBuilder.group({
+      username: [''],
+      password: [''],
+      email: [''],
+      name: [''],
+      companyIdentifier: [''],
+      adress: ['']
+    });
+
   }
 
-  getAgents(){
-    this.adminRegisterAgentService.getAgents()
-      .subscribe((data: {}) => {
-          this.agents = data;
-          console.log(data);
-        }
-      );
-  }
+  submit() {
+    this.adminRegisterAgentService.postAgents(this.AgentForm.value).subscribe((data: {}) => {console.log(data); });
 
-  open(username: any, password: any, email: any, name: any, companyIdentifier: any, adress: any) {
-    this.agent.username = username;
-    this.agent.password = password;
-    this.agent.email = email;
-    this.agent.name = name;
-    this.agent.companyIdentifier = companyIdentifier;
-    this.agent.adress = adress;
-    this.adminRegisterAgentService.postAgents(this.agent).subscribe();
   }
 }

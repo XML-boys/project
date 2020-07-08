@@ -130,11 +130,11 @@ public class ReservationController {
     }
 
     @PutMapping(value = "/{id}/{idReservation}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> putReservation(@RequestBody ReservationDTO reservationDTO, @PathVariable Long id, @PathVariable("idReservation") Long idReservation)  {
+    public ResponseEntity<?> putReservation(@RequestBody ReservationDTO reservationDTO, @PathVariable Long id, @PathVariable("idReservation") Long idReservation)  {
         Ad ad = adService.findById(id);
         if(ad != null ){
             for(Reservation rez : ad.getReservations()){
-                if(rez.getId() == idReservation){
+                if(rez.getId() == idReservation && rez.getState() != "Reserved"){
                     rez.setUserId(reservationDTO.getUserId());
                     rez.setState(reservationDTO.getState());
                     rez.setEndTime(reservationDTO.getEndTime());
@@ -146,6 +146,8 @@ public class ReservationController {
                     }else{
                         return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
                     }
+                }else if (rez.getState() == "Reserved"){
+                    return new ResponseEntity<>("Rezervisana vec",HttpStatus.OK);
                 }
 
             }

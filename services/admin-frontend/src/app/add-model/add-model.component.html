@@ -1,0 +1,38 @@
+
+<div class="card-body">
+  <form [formGroup]="EditForm2" (ngSubmit)="open6()">
+
+    <div class="full-name-inputs">
+      <label  for="addModelName"></label>
+      <input formControlName="addModelName" type="text" id="addModelName" nbInput  placeholder="Models name">
+    </div>
+
+
+    <div>
+      <mat-form-field >
+        <mat-label>Gears</mat-label>
+        <mat-select multiple formControlName="gear">
+          <mat-option id="gear"  *ngFor="let gear of gears" [value]="gear">{{gear}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Oils</mat-label>
+        <mat-select multiple formControlName="oil">
+          <mat-option id="oil"  *ngFor="let oil of oils" [value]="oil">{{oil}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+
+
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+
+
+
+
+
+</div>

@@ -11,92 +11,34 @@
 
 
         <div class="card-body">
+          <form [formGroup]="AgentForm" (ngSubmit)="submit()">
 
-          <div class="row">
-            <div class="col-md-4 pr-1">
-              <div class="form-group" >
-                <input type="text" [(ngModel)]="agent.username"
-                       class="form-control"
-                       id="usernameAgent"
-                       placeholder="Username"
-                       name="usernameAgent"
-                       value="{{agent.username}}"
-                       required #name="ngModel">
-              </div>
+            <div class="full-name-inputs">
+              <label  for="username"></label>
+              <input formControlName="username" type="text" id="username" nbInput  placeholder="Username">
             </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-4 pr-1">
-              <div class="form-group" >
-                <input type="text" [(ngModel)]="agent.password"
-                       class="form-control"
-                       id="passwordAgent"
-                       name="passwordAgent"
-                       placeholder="Password"
-                       value="{{agent.password}}"
-                       required #name="ngModel">
-              </div>
+            <div class="full-name-inputs">
+              <label  for="password"></label>
+              <input formControlName="password" type="password" id="password" nbInput  placeholder="Password">
             </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-4 pr-1">
-              <div class="form-group" >
-                <input type="text" [(ngModel)]="agent.email"
-                       class="form-control"
-                       id="emailAgent"
-                       name="emailAgent"
-                       placeholder="Email"
-                       value="{{agent.email}}"
-                       required #name="ngModel">
-              </div>
+            <div class="full-name-inputs">
+              <label  for="email"></label>
+              <input formControlName="email" type="text" id="email" nbInput  placeholder="Email">
             </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-4 pr-1">
-              <div class="form-group" >
-                <input type="text" [(ngModel)]="agent.name"
-                       class="form-control"
-                       id="nazivAgenta"
-                       name="nazivAgenta"
-                       placeholder="Name"
-                       value="{{agent.name}}"
-                       required #name="ngModel">
-              </div>
+            <div class="full-name-inputs">
+              <label  for="name"></label>
+              <input formControlName="name" type="text" id="name" nbInput  placeholder="Name">
             </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-4 pr-1">
-              <div class="form-group" >
-                <input type="text" [(ngModel)]="agent.companyIdentifier"
-                       class="form-control"
-                       id="companyIdentifier"
-                       name="companyIdentifier"
-                       placeholder="Company Identifier"
-                       value="{{agent.companyIdentifier}}"
-                       required #name="ngModel">
-              </div>
+            <div class="full-name-inputs">
+              <label  for="companyIdentifier"></label>
+              <input formControlName="companyIdentifier" type="number" id="companyIdentifier" nbInput  placeholder="Company identifier">
             </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-4 pr-1">
-              <div class="form-group" >
-                <input type="text" [(ngModel)]="agent.adress"
-                       class="form-control"
-                       id="adress"
-                       name="adress"
-                       placeholder="Adress"
-                       value="{{agent.adress}}"
-                       required #name="ngModel">
-              </div>
+            <div class="full-name-inputs">
+              <label  for="adress"></label>
+              <input formControlName="adress" type="text" id="adress" nbInput  placeholder="Adress">
             </div>
-          </div>
-
-          <button  class="btn btn-primary btn-block" (click)="open(agent.username, agent.password, agent.email, agent.name, agent.companyIdentifier, agent.adress)">Save</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </form>
         </div>
       </div>
     </div>

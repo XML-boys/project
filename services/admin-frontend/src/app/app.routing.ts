@@ -5,6 +5,8 @@ import { BrowserModule  } from '@angular/platform-browser';
 
 import {AdminLayoutComponent} from './admin-layout/admin-layout.component';
 import {LoginComponent} from './login/login.component';
+import {AddModelComponent} from './add-model/add-model.component';
+import {EditModelComponent} from './edit-model/edit-model.component';
 
 const routes: Routes = [
 
@@ -25,6 +27,16 @@ const routes: Routes = [
   {
     path: 'admin/login',
     component: LoginComponent,
+    children: [
+    ]},
+  {
+    path: 'admin/addModel',
+    component: AddModelComponent,
+    children: [
+    ]},
+  {
+    path: 'admin/editModel',
+    component: EditModelComponent,
     children: [
     ]}
 ];

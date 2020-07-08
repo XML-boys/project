@@ -82,7 +82,7 @@ public class CodeBookController {
     }
 
 
-    @PostMapping(value = "/{id}/model")
+    @PostMapping(value = "/{id}/model", consumes = "application/json")
     public ResponseEntity<?> addModel(@PathVariable("id") Long id, @RequestBody VehicleModel vehicleModel) {
 
         CodeItem codeItem = codeBookService.findById(id);

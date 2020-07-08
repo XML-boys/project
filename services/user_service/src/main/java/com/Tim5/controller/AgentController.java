@@ -88,9 +88,10 @@ public class AgentController {
         return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
 
-    @PostMapping()
-    public HttpStatus save(@RequestBody AgentRegisterDTO agentRegisterDTO) {
-        if (agentRegisterDTO != null) {
+
+    @PostMapping(consumes = "application/json")
+    public HttpStatus save(@RequestBody AgentRegisterDTO agentRegisterDTO){
+        if(agentRegisterDTO != null){
             UserDTO userDTO = new UserDTO();
             userDTO.setUsername(agentRegisterDTO.getUsername());
             userDTO.setEmail(agentRegisterDTO.getEmail());

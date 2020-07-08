@@ -82,7 +82,7 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping(value = "/{id}/role")
+    @PutMapping(value = "/{id}/role", consumes = "application/json")
     public HttpStatus updateRole(@PathVariable("id") Long id, @RequestBody String role) {
         User user = userService.findUserById(id);
         if(user.getRole().equals(ROLE.Client)){
