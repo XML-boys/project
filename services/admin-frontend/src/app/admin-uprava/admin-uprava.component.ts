@@ -71,23 +71,28 @@ export class AdminUpravaComponent implements OnInit {
   }
 
   open(user) {
-    this.adminUpravaService.putUserApproved(user.id);
+    this.adminUpravaService.putUserApproved(user.id).subscribe();
+    this.ucitajUsere();
   }
 
   open1(user) {
-    this.adminUpravaService.deleteUser(user.id);
+    this.adminUpravaService.deleteUser(user.id).subscribe();
+    this.ucitajUsere();
   }
 
   open3(user) {
-    this.adminUpravaService.putUserRole('Client', user.id);
+    this.adminUpravaService.putUserRole('Client', user.id).subscribe();
+    this.ucitajUsere();
   }
 
   open6(user) {
-    this.adminUpravaService.putUserRole('Agent', user.id);
+    this.adminUpravaService.putUserRole('Agent', user.id).subscribe();
+    this.ucitajUsere();
   }
 
   open7(user) {
-    this.adminUpravaService.putUserRole('ADMIN', user.id);
+    this.adminUpravaService.putUserRole('ADMIN', user.id).subscribe();
+    this.ucitajUsere();
   }
 
   open8(coment, id) {
@@ -99,19 +104,23 @@ export class AdminUpravaComponent implements OnInit {
 
   open9(id) {
     this.adminUpravaService.deleteComment(id).subscribe();
+    this.ucitajKomentare();
   }
 
   open10(client) {
     this.adminUpravaService.putClientBlock(client.id).subscribe();
+    this.ucitajKliente();
   }
 
   open11(client) {
     this.adminUpravaService.putClientBlockN(client.id).subscribe();
+    this.ucitajKliente();
   }
 
   open110(vote, id) {
     vote.approved = true;
     this.adminUpravaService.putVoteApproved(vote, id).subscribe();
+    this.ucitajOcene();
   }
 
   open111(id) {

@@ -92,9 +92,7 @@ export class AdminUpravaService {
   }
 
   putUserRole(role, id): Observable<any> {
-    return this.http.put('http://localhost:6969/user/' + id + '/' + role, {
-      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
-    });
+    return this.http.put('http://localhost:6969/user/' + id + '/role', role , this.httpOptions);
   }
 
   putComment(comment, id): Observable<any> {
@@ -109,9 +107,7 @@ export class AdminUpravaService {
   }
 
   putClientBlock(id): Observable<any> {
-    return this.http.put('http://localhost:6969/client/' + id + '/blocked/true', {
-      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
-    });
+    return this.http.put('http://localhost:6969/client/' + id + '/blocked/true', 'caos');
   }
 
   putClientBlockN(id): Observable<any> {
