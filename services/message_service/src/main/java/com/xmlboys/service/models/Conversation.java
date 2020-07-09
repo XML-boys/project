@@ -1,4 +1,4 @@
-package com.xmlboyz.service.models;
+package com.xmlboys.service.models;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -39,10 +39,10 @@ public class Conversation {
 	}
 	
 	
-	public Long getOrder_id() {
+	public Long getOrderId() {
 		return order_id;
 	}
-	public void setOrder_id(Long order_id) {
+	public void setOrderId(Long order_id) {
 		this.order_id = order_id;
 	}
 	
