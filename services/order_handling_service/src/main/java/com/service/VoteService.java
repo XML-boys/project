@@ -1,5 +1,6 @@
 package com.service;
 
+import com.model.Ad;
 import com.model.Vote;
 import com.repository.VoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,8 @@ public class VoteService {
         return voteRepository.save(vote);
     }
     public void remove(Long id) { voteRepository.deleteById(id);
+    }
+    public Vote findById(Long id){
+        return voteRepository.findAdById(id);
     }
 }

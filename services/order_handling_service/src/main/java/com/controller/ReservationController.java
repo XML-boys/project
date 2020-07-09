@@ -1,9 +1,6 @@
 package com.controller;
 
-import com.model.Ad;
-import com.model.Reservation;
-import com.model.ReservationDTO;
-import com.model.UserValidateDTO;
+import com.model.*;
 import com.service.AdService;
 import com.service.ReservationService;
 import com.service.RestService;
@@ -36,6 +33,8 @@ public class ReservationController {
         String jwt = requestTokenHeader.substring(7);
         RestService restService = new RestService(new RestTemplateBuilder());
         UserValidateDTO userValidateDTO = restService.getUserValidate(jwt);
+        AgentDataDTO agentDataDTO = restService.getAgent(jwt);
+        //ClientDataDTO clientDataDTO = restService.getClient(jwt);
 
         if(userValidateDTO.getRole().equals("Client")){
             Ad ad = adService.findById(id);
@@ -49,6 +48,7 @@ public class ReservationController {
                 ad.getReservations().add(reservationService.save(rez));
                 Ad a = adService.save(ad);
                 if(a != null){
+
                     return new ResponseEntity<>(HttpStatus.CREATED);
                 }else
                 {
@@ -62,7 +62,7 @@ public class ReservationController {
             if(ad != null) {
                 if(reservation.getUserId() == ad.getIdAgenta()){
                     Reservation rez = new Reservation();
-                    rez.setUserId(reservation.getUserId());
+                    rez.setUserId(agentDataDTO.getUserId());
                     rez.setState("Reserved");
                     rez.setEndTime(reservation.getEndTime());
                     rez.setStartTime(reservation.getStartTime());
@@ -77,7 +77,7 @@ public class ReservationController {
                     }
                 }else{
                     Reservation rez = new Reservation();
-                    rez.setUserId(reservation.getUserId());
+                    rez.setUserId(agentDataDTO.getUserId());
                     rez.setState("Pending");
                     rez.setEndTime(reservation.getEndTime());
                     rez.setStartTime(reservation.getStartTime());
@@ -108,6 +108,7 @@ public class ReservationController {
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 
     @DeleteMapping(value = "/{id}/{idReservation}")
     public ResponseEntity<Void> deleteReservation(@PathVariable Long id, @PathVariable("idReservation") Long idReservation) {
@@ -221,6 +222,8 @@ public class ReservationController {
             return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
         }
     }
+
+
 
 
 

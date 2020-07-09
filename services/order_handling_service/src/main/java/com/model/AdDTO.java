@@ -16,6 +16,7 @@ public class AdDTO {
     private Boolean damage;
     private Set<Reservation> ads;
     private Set<Comment> comments;
+    private Set<Vote> votes;
 
     public AdDTO() {
     }
@@ -54,6 +55,7 @@ public class AdDTO {
         this.cena = ad.getCena();
         this.damage = ad.isDamage();
         this.comments = ad.getComments();
+        this.votes = ad.getVotes();
     }
 
     public Long getIdAgenta() {

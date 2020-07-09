@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ROUTES} from '../agent-sidebar/agent-sidebar.component';
+import {LoginServiceService} from '../../services/login-service.service';
 
 @Component({
   selector: 'app-agent-navbar',
@@ -28,7 +29,7 @@ export class AgentNavbarComponent implements OnInit {
     }
 
   }
-  constructor(private element: ElementRef, private router: Router) {
+  constructor(private element: ElementRef, private router: Router, private loginServiceService: LoginServiceService) {
     this.sidebarVisible = false;
   }
 
@@ -81,8 +82,7 @@ export class AgentNavbarComponent implements OnInit {
 
 
   logout() {
-    // this.logovanjeService.logout();
-
+    this.loginServiceService.logout();
   }
 
 }

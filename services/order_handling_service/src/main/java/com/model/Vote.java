@@ -12,21 +12,24 @@ public class Vote {
     @Column
     private Long idReklame;
     @Column
-    private Long vrednost;
+    private Double vrednost;
     @Column
     private Boolean approved;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    //@JoinColumn(name = "reklamaz")
+    private Ad reklamaz;
 
     public Vote() {
     }
 
-    public Vote(Long id, Long idKola, Long idReklame, Long vrednost) {
+    public Vote(Long id, Long idKola, Long idReklame, Double vrednost) {
         this.id = id;
         this.idKola = idKola;
         this.idReklame = idReklame;
         this.vrednost = vrednost;
     }
 
-    public Vote(Long id, Long idKola, Long idReklame, Long vrednost, Boolean approved) {
+    public Vote(Long id, Long idKola, Long idReklame, Double vrednost, Boolean approved) {
         this.id = id;
         this.idKola = idKola;
         this.idReklame = idReklame;
@@ -58,11 +61,11 @@ public class Vote {
         this.idReklame = idReklame;
     }
 
-    public Long getVrednost() {
+    public Double getVrednost() {
         return vrednost;
     }
 
-    public void setVrednost(Long vrednost) {
+    public void setVrednost(Double vrednost) {
         this.vrednost = vrednost;
     }
 
@@ -72,5 +75,13 @@ public class Vote {
 
     public void setApproved(Boolean approved) {
         this.approved = approved;
+    }
+
+    public Ad getReklamaz() {
+        return reklamaz;
+    }
+
+    public void setReklamaz(Ad reklamaz) {
+        this.reklamaz = reklamaz;
     }
 }

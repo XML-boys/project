@@ -14,4 +14,12 @@ export class ConfigService {
   get allLocations(): string {
     return this.apiUri + '/location';
   }
+
+  get allVendors(): string {
+    return this.apiUri + '/codeBook/vendor';
+  }
+
+  get allItems(): string {
+    return this.apiUri + '/codeBook';
+  }
 }
