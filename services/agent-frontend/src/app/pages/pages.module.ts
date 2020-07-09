@@ -24,11 +24,13 @@ import { NewReservationComponent } from './new-reservation/new-reservation.compo
 import { ProfileComponent } from './profile/profile.component';
 import { StatsComponent } from './stats/stats.component';
 import { ChatComponent } from './chat/chat.component';
+import { VehiclesComponent } from './vehicles/vehicles.component';
+import { ReserveFormComponent } from './my-ads/reserve-form/reserve-form.component';
 
 
 
 @NgModule({
-  declarations: [PagesComponent, MyAdsComponent, NewAdComponent, NewVehicleComponent, ReservationsComponent, NewReservationComponent, ProfileComponent, StatsComponent, ChatComponent],
+  declarations: [PagesComponent, MyAdsComponent, NewAdComponent, NewVehicleComponent, ReservationsComponent, NewReservationComponent, ProfileComponent, StatsComponent, ChatComponent, VehiclesComponent, ReserveFormComponent],
     imports: [
         CommonModule,
         ThemeModule,

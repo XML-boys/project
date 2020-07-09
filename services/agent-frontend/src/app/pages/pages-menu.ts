@@ -49,4 +49,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/agent/dashboard/new-vehicle',
     home: false,
   },
+  {
+    title: 'My vehicle',
+    icon: 'car',
+    link: '/agent/dashboard/vehicles',
+    home: false,
+  },
 ];

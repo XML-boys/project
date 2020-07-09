@@ -13,11 +13,17 @@
       <nb-select id="model" formControlName="model" placeholder="Model" [disabled]="disabledModel" (selectedChange)="onChangeModel($event)">
         <nb-option *ngFor="let model of models" [value]="model.name">{{ model.name }}</nb-option>
       </nb-select>
+
+
+      <label for="class">Class: </label>
+      <nb-select id="class" formControlName="vehicleClass" placeholder="Class" >
+        <nb-option *ngFor="let class of classes" [value]="class">{{ class }}</nb-option>
+      </nb-select>
     </div>
       <br>
     <div class="full-name-inputs">
       <label for="oType">Oil Type: </label>
-      <nb-select id="oType" formControlName="oType" placeholder="Oil Type" [disabled]="disabledOil" (selectedChange)="onChangeOil($event)">
+      <nb-select id="oType" formControlName="oilType" placeholder="Oil Type" [disabled]="disabledOil" (selectedChange)="onChangeOil($event)">
         <nb-option *ngFor="let _oil of oil" [value]="_oil">{{ _oil }}</nb-option>
 
       </nb-select>
@@ -30,9 +36,9 @@
       <br>
     <div class="full-name-inputs">
       <label for="distance">Distance in KM:  </label>
-      <input type="number" formControlName="distance" id="distance" #distance nbInput min="0" value="0"  placeholder="Distnance">
+      <input type="number" formControlName="distanceKM" id="distance" #distance nbInput min="0" value="0"  placeholder="Distnance">
       <label for="seats">Number of kids seats:  </label>
-      <input type="number" formControlName="seats" id="seats" nbInput min="0" max="3"value="0"  placeholder="Kids seats">
+      <input type="number" formControlName="kidSeats" id="seats" nbInput min="0" max="3"value="0"  placeholder="Kids seats">
 
     </div>
       <br>

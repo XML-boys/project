@@ -37,4 +37,8 @@ export class VehicleService {
   getAllVehicle(): Observable<any> {
     return this.http.get<any>('http://localhost:6969/vehicles/');
   }
+
+  deleteVehicle(id): Observable<any> {
+    return this.http.delete<any>('http://localhost:6969/vehicles/' + id);
+  }
 }

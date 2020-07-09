@@ -9,6 +9,7 @@ import {NewReservationComponent} from './new-reservation/new-reservation.compone
 import {ProfileComponent} from './profile/profile.component';
 import {StatsComponent} from './stats/stats.component';
 import {ChatComponent} from './chat/chat.component';
+import {VehiclesComponent} from './vehicles/vehicles.component';
 
 const routes: Routes = [{
   path: '',
@@ -45,6 +46,10 @@ const routes: Routes = [{
     {
       path: 'messages',
       component: ChatComponent,
+    },
+    {
+      path: 'vehicles',
+      component: VehiclesComponent,
     },
   ]
 },
