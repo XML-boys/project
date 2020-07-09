@@ -17,7 +17,9 @@ export class AgentMyAdsComponent implements OnInit {
   ngOnInit(): void {
     this.agentCreateAdService.getAds().subscribe((data: {}) => {
       this.ads = data;
+      console.log(this.ads);
     });
+
   }
 
 }

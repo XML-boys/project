@@ -26,7 +26,7 @@ export class AgentCreateAdService {
   }
 
   getAds(): Observable<any> {
-    return this.http.get<any>(this.configService.allAds, this.httpOptions);
+    return this.http.get<any>(this.configService.agentAds, this.httpOptions);
   }
 
   getLocations(): Observable<any> {

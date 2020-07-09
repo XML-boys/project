@@ -29,16 +29,20 @@ public class VoteController {
     public ResponseEntity<Void> saveVote(@RequestBody VoteDTO voteDTO,@PathVariable("idAd") Long idAd)  {
         Vote vote = new Vote();
         Ad ad = adService.findById(idAd);
-        vote.setIdKola(ad.getVehicleId());
-        vote.setIdReklame(idAd);
-        vote.setVrednost(voteDTO.getVrednost());
-        vote.setReklamaz(ad);
-        vote.setApproved(false);
-        voteService.save(vote);
-        ad.getVotes().add(vote);
-        adService.save(ad);
-
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        if(ad != null){
+            vote.setIdKola(ad.getVehicleId());
+            vote.setIdReklame(idAd);
+            vote.setVrednost(voteDTO.getVrednost());
+            vote.setReklamaz(ad);
+            vote.setApproved(false);
+            ad.getVotes().add(voteService.save(vote));
+            Ad adz = adService.save(ad);
+            if (adz != null)
+                return new ResponseEntity<>(HttpStatus.CREATED);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+        } else
+            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
     @GetMapping(produces = "application/json")

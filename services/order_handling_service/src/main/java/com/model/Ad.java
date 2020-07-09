@@ -30,15 +30,12 @@ public class Ad {
     private Boolean damage;
 
     @OneToMany(mappedBy = "reklama", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
     private Set<Reservation> reservations;
 
     @OneToMany(mappedBy = "reklamak", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
     private Set<Comment> comments;
 
     @OneToMany(mappedBy = "reklamaz", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
     private Set<Vote> votes;
 
     public Ad() {

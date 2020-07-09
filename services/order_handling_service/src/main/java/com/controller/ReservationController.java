@@ -1,5 +1,6 @@
 package com.controller;
 
+import ch.qos.logback.core.net.server.Client;
 import com.model.*;
 import com.service.AdService;
 import com.service.ReservationService;
@@ -33,14 +34,14 @@ public class ReservationController {
         String jwt = requestTokenHeader.substring(7);
         RestService restService = new RestService(new RestTemplateBuilder());
         UserValidateDTO userValidateDTO = restService.getUserValidate(jwt);
-        AgentDataDTO agentDataDTO = restService.getAgent(jwt);
-        //ClientDataDTO clientDataDTO = restService.getClient(jwt);
+
 
         if(userValidateDTO.getRole().equals("Client")){
             Ad ad = adService.findById(id);
             if(ad != null) {
+                ClientDataDTO clientDataDTO = restService.getClient(jwt);
                 Reservation rez = new Reservation();
-                rez.setUserId(reservation.getUserId());
+                rez.setUserId(clientDataDTO.getUserId());
                 rez.setState(reservation.getState());
                 rez.setEndTime(reservation.getEndTime());
                 rez.setStartTime(reservation.getStartTime());
@@ -61,6 +62,7 @@ public class ReservationController {
             Ad ad = adService.findById(id);
             if(ad != null) {
                 if(reservation.getUserId() == ad.getIdAgenta()){
+                    AgentDataDTO agentDataDTO = restService.getAgent(jwt);
                     Reservation rez = new Reservation();
                     rez.setUserId(agentDataDTO.getUserId());
                     rez.setState("Reserved");
@@ -76,6 +78,7 @@ public class ReservationController {
                         return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
                     }
                 }else{
+                    AgentDataDTO agentDataDTO = restService.getAgent(jwt);
                     Reservation rez = new Reservation();
                     rez.setUserId(agentDataDTO.getUserId());
                     rez.setState("Pending");

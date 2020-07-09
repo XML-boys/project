@@ -14,7 +14,7 @@ public class AdDTO {
     private ArrayList<String> pictures;
     private String cena;
     private Boolean damage;
-    private Set<Reservation> ads;
+    private Set<Reservation> ads; // ovo treba da se zove reservations inace da vas ne buni
     private Set<Comment> comments;
     private Set<Vote> votes;
 

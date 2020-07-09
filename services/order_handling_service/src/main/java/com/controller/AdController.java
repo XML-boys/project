@@ -150,21 +150,30 @@ public class AdController {
 
     }
 
-    @GetMapping(value = "/{idAgenta}/agent", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Ad>> getAdzAgent(@PathVariable("idAgenta") Long idAgenta) {
+    @GetMapping(value = "/agent/1", produces = "application/json")
+    public ResponseEntity<List<Ad>> getAdzAgent( HttpServletRequest httpServletRequest) {
+        String requestTokenHeader = httpServletRequest.getHeader("Authorization");
+        String jwt = requestTokenHeader.substring(7);
+        RestService restService = new RestService(new RestTemplateBuilder());
+        UserValidateDTO userValidateDTO = restService.getUserValidate(jwt);
+        AgentDataDTO agentDataDTO = restService.getAgent(jwt);
         List<Ad> ads = adService.findAllAds();
         List<Ad> returnAds = new ArrayList<>();
-        if(ads != null) {
-            for(Ad ad : ads){
-                if(ad.getIdAgenta() == idAgenta){
-                    returnAds.add(ad);
+
+        if(userValidateDTO.getRole().equals("Agent")){
+            if(ads != null) {
+                for(Ad ad : ads){
+                    if(ad.getIdAgenta() == agentDataDTO.getId()){
+                        returnAds.add(ad);
+                    }
                 }
+                return new ResponseEntity<>(returnAds,HttpStatus.OK);
+            } else
+            {
+                return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
             }
-            return new ResponseEntity<>(returnAds,HttpStatus.OK);
-        } else
-        {
-            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
         }
+        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
 

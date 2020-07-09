@@ -1,5 +1,7 @@
 package com.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 @Entity
 public class Comment {
@@ -14,7 +16,7 @@ public class Comment {
     private Boolean approved;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    //@JoinColumn(name = "reklamak")
+    @JsonIgnore
     private Ad reklamak;
 
     public Comment() {

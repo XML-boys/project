@@ -11,6 +11,10 @@ export class ConfigService {
     return this.apiUri + '/ad';
   }
 
+  get agentAds(): string {
+    return this.apiUri + '/ad/agent/1';
+  }
+
   get allLocations(): string {
     return this.apiUri + '/location';
   }

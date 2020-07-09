@@ -32,17 +32,22 @@ public class CommentController {
         RestService restService = new RestService(new RestTemplateBuilder());
         ClientDataDTO clientDataDTO = restService.getClient(jwt);
 
-        Comment comment = new Comment();
-        Ad ad = adService.findById(idAd);
-        comment.setIdKomentatora(clientDataDTO.getUserId());
-        comment.setReklamak(ad);
-        comment.setSadrzaj(commentDTO.getSadrzaj());
-        comment.setApproved(false);
-        commentService.save(comment);
-        ad.getComments().add(comment);
-        adService.save(ad);
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        Ad ad = adService.findById(idAd);
+        if(ad!= null){
+            Comment comment = new Comment();
+            comment.setIdKomentatora(clientDataDTO.getUserId());
+            comment.setSadrzaj(commentDTO.getSadrzaj());
+            comment.setApproved(false);
+            comment.setReklamak(ad);
+            ad.getComments().add(commentService.save(comment));
+            Ad adz = adService.save(ad);
+            if(adz != null)
+                return new ResponseEntity<>(HttpStatus.CREATED);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+        } else
+            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
     @GetMapping(produces = "application/json")

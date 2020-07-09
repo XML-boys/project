@@ -1,5 +1,7 @@
 package com.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,7 +18,7 @@ public class Vote {
     @Column
     private Boolean approved;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    //@JoinColumn(name = "reklamaz")
+    @JsonIgnore
     private Ad reklamaz;
 
     public Vote() {
