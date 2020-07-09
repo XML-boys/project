@@ -18,4 +18,5 @@ public class AdminService {
 
     public Admin findByUserId(Long id) {return  adminRepository.findAdminByUserId(id);}
 
+    public void delete(Long id) {adminRepository.deleteById(id);}
 }

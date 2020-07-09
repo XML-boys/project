@@ -31,7 +31,7 @@ public class Ad {
 
     @OneToMany(mappedBy = "reklama", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
-    private Set<Reservation> ads;
+    private Set<Reservation> reservations;
 
     @OneToMany(mappedBy = "reklamak", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
@@ -40,7 +40,7 @@ public class Ad {
     public Ad() {
     }
 
-    public Ad(Long idAgenta, LocalDate startTime, LocalDate endDate, ArrayList<String> pictures, Long vehicleId, String location, String cena, boolean damage, Set<Reservation> ads) {
+    public Ad(Long idAgenta, LocalDate startTime, LocalDate endDate, ArrayList<String> pictures, Long vehicleId, String location, String cena, boolean damage, Set<Reservation> reservations) {
         this.idAgenta = idAgenta;
         this.startTime = startTime;
         this.endDate = endDate;
@@ -49,10 +49,10 @@ public class Ad {
         this.location = location;
         this.cena = cena;
         this.damage = damage;
-        this.ads = ads;
+        this.reservations = reservations;
     }
 
-    public Ad(Long id, Long idAgenta, LocalDate startTime, LocalDate endDate, ArrayList<String> pictures, Long vehicleId, String location, String cena, Boolean damage, Set<Reservation> ads, Set<Comment> comments) {
+    public Ad(Long id, Long idAgenta, LocalDate startTime, LocalDate endDate, ArrayList<String> pictures, Long vehicleId, String location, String cena, Boolean damage, Set<Reservation> reservations, Set<Comment> comments) {
         this.id = id;
         this.idAgenta = idAgenta;
         this.startTime = startTime;
@@ -62,7 +62,7 @@ public class Ad {
         this.location = location;
         this.cena = cena;
         this.damage = damage;
-        this.ads = ads;
+        this.reservations = reservations;
         this.comments = comments;
     }
 
@@ -142,12 +142,12 @@ public class Ad {
         return damage;
     }
 
-    public Set<Reservation> getAds() {
-        return ads;
+    public Set<Reservation> getReservations() {
+        return reservations;
     }
 
-    public void setAds(Set<Reservation> ads) {
-        this.ads = ads;
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
     }
 
     public Set<Comment> getComments() {

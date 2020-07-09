@@ -4,7 +4,10 @@ com/model/CommentDTO.class
 com/controller/CommentController.class
 com/OrderMain.class
 com/service/AdService.class
+<<<<<<< HEAD
 com/model/Vote.class
+=======
+>>>>>>> 5213aaac456584fa825d3f5515db525a2b44fdf4
 com/controller/VoteController.class
 com/model/Ad.class
 com/service/ReservationService.class

@@ -42,8 +42,10 @@ public class CommentController {
                 commentDTOS.add(new CommentDTO(comment));
                 return new ResponseEntity<>(commentDTOS,HttpStatus.OK);
             }
+        }else{
+            return new ResponseEntity<>(HttpStatus.OK);
         }
-        return new ResponseEntity<>(commentDTOS, HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")

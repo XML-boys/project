@@ -71,37 +71,28 @@ export class AdminUpravaComponent implements OnInit {
   }
 
   open(user) {
-    user.approved = true;
-    this.adminUpravaService.putUser(user, user.id);
+    this.adminUpravaService.putUserApproved(user.id).subscribe();
+    this.ucitajUsere();
   }
 
   open1(user) {
-    this.adminUpravaService.deleteUser(user.id);
-  }
-
-  open4(user) {
-    user.blocked = true;
-    this.adminUpravaService.putUser(user, user.id);
-  }
-
-  open5(user) {
-    user.blocked = false;
-    this.adminUpravaService.putUser(user, user.id);
+    this.adminUpravaService.deleteUser(user.id).subscribe();
+    this.ucitajUsere();
   }
 
   open3(user) {
-    user.role = 'Client';
-    this.adminUpravaService.putUser(user, user.id);
+    this.adminUpravaService.putUserRole('Client', user.id).subscribe();
+    this.ucitajUsere();
   }
 
   open6(user) {
-    user.role = 'Agent';
-    this.adminUpravaService.putUser(user, user.id);
+    this.adminUpravaService.putUserRole('Agent', user.id).subscribe();
+    this.ucitajUsere();
   }
 
   open7(user) {
-    user.role = 'ADMIN';
-    this.adminUpravaService.putUser(user, user.id);
+    this.adminUpravaService.putUserRole('ADMIN', user.id).subscribe();
+    this.ucitajUsere();
   }
 
   open8(coment, id) {
@@ -113,25 +104,23 @@ export class AdminUpravaComponent implements OnInit {
 
   open9(id) {
     this.adminUpravaService.deleteComment(id).subscribe();
+    this.ucitajKomentare();
   }
 
   open10(client) {
-    client.blocked = true;
-    this.adminUpravaService.putClient(client, client.id).subscribe();
+    this.adminUpravaService.putClientBlock(client.id).subscribe();
+    this.ucitajKliente();
   }
 
   open11(client) {
-    client.blocked = false;
-    this.adminUpravaService.putClient(client, client.id).subscribe();
-  }
-
-  open12(client) {
-    this.adminUpravaService.deleteClient(client.id).subscribe();
+    this.adminUpravaService.putClientBlockN(client.id).subscribe();
+    this.ucitajKliente();
   }
 
   open110(vote, id) {
     vote.approved = true;
     this.adminUpravaService.putVoteApproved(vote, id).subscribe();
+    this.ucitajOcene();
   }
 
   open111(id) {

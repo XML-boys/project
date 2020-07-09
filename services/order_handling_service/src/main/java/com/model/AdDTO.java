@@ -53,7 +53,6 @@ public class AdDTO {
         this.pictures = ad.getPictures();
         this.cena = ad.getCena();
         this.damage = ad.isDamage();
-        this.ads = ad.getAds();
         this.comments = ad.getComments();
     }
 

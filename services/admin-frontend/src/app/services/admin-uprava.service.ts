@@ -23,7 +23,7 @@ export class AdminUpravaService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
-    }).set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    })
   };
 
   getAllAgenti(): Observable<Agent> {
@@ -37,16 +37,12 @@ export class AdminUpravaService {
   }*/
 
   getAllClients(): Observable<Response> {
-    return this.http.get<Response>('http://localhost:6969/client', {
-      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
-    });
+    return this.http.get<Response>('http://localhost:6969/client');
   }
 
-  getAllUsers(): Observable<any> {
+  getAllUsers(): Observable<Response> {
     console.log(localStorage.getItem('jwt'));
-    return this.http.get<any>('http://localhost:6969/user', {
-      headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('jwt')}`)
-    });
+    return this.http.get<Response>('http://localhost:6969/user');
   }
 
   getAllComments(): Observable<Response> {
@@ -83,10 +79,20 @@ export class AdminUpravaService {
     return this.http.delete(this.configService.deleteVote + id);
   }
 
-  putUser(user, id): Observable<any> {
-    return this.http.put(this.configService.putUser + id, user, {
+  putUser(id): Observable<any> {
+    return this.http.put('http://localhost:6969/user/' + id + '/approved/true', {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
     });
+  }
+
+  putUserApproved(id): Observable<any> {
+    return this.http.put('http://localhost:6969/user/' + id + '/approved/true', {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
+  }
+
+  putUserRole(role, id): Observable<any> {
+    return this.http.put('http://localhost:6969/user/' + id + '/role', role , this.httpOptions);
   }
 
   putComment(comment, id): Observable<any> {
@@ -96,6 +102,16 @@ export class AdminUpravaService {
   }
   putClient(client, id): Observable<any> {
     return this.http.put(this.configService.putClient + id, client, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
+    });
+  }
+
+  putClientBlock(id): Observable<any> {
+    return this.http.put('http://localhost:6969/client/' + id + '/blocked/true', 'caos');
+  }
+
+  putClientBlockN(id): Observable<any> {
+    return this.http.put('http://localhost:6969/client/' + id + '/blocked/false', {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
     });
   }

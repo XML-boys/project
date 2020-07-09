@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,23 +34,25 @@ public class AgentController {
     private UserService userService;
     @Autowired
     private AgentService agentService;
+    @Autowired
+    private PasswordEncoder bcryptEncoder;
 
 
     @GetMapping()
-    public ResponseEntity<List<Agent>> getAll ( ) {
+    public ResponseEntity<List<Agent>> getAll() {
         return ResponseEntity.ok(agentService.findAll());
     }
 
-    @GetMapping(value="/{id}")
-    public ResponseEntity<Agent> getAgent (@PathVariable("id") Long id) {
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Agent> getAgent(@PathVariable("id") Long id) {
         Agent agent = agentService.findById(id);
-        if(agent != null)
+        if (agent != null)
             return ResponseEntity.ok(agent);
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value = "/me/user/1", method = RequestMethod.GET)
-    public ResponseEntity<AgentDataDTO> myInfo (HttpServletRequest request){
+    public ResponseEntity<AgentDataDTO> myInfo(HttpServletRequest request) {
         String requestTokenHeader = request.getHeader("Authorization");
         String username = null;
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
@@ -64,11 +67,11 @@ public class AgentController {
         } else {
             System.out.println("JWT Token does not begin with Bearer String");
         }
-        if(username != null) {
+        if (username != null) {
             User user = userService.findUserByUsername(username);
-            if(user != null ) {
+            if (user != null) {
                 Agent agent = agentService.findByUserId(user.getId());
-                if(agent != null && user.getRole() == ROLE.Agent) {
+                if (agent != null && user.getRole() == ROLE.Agent) {
                     AgentDataDTO dataDTO = new AgentDataDTO();
                     dataDTO.setId(agent.getId());
                     dataDTO.setUserId(user.getId());
@@ -85,13 +88,14 @@ public class AgentController {
         return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
 
-    @PostMapping()
+
+    @PostMapping(consumes = "application/json")
     public HttpStatus save(@RequestBody AgentRegisterDTO agentRegisterDTO){
         if(agentRegisterDTO != null){
             UserDTO userDTO = new UserDTO();
             userDTO.setUsername(agentRegisterDTO.getUsername());
             userDTO.setEmail(agentRegisterDTO.getEmail());
-            userDTO.setPassword(agentRegisterDTO.getPassword());
+            userDTO.setPassword(bcryptEncoder.encode(agentRegisterDTO.getPassword()));
             userDTO.setApproved(true);
             userDTO.setRole("Agent");
             User user = userService.save(userDTO);
@@ -101,10 +105,26 @@ public class AgentController {
             agent.setCompanyIdentifier(agentRegisterDTO.getCompanyIdentifier());
             agent.setAdress(agentRegisterDTO.getAdress());
             Agent a = agentService.save(agent);
-            if(a!= null && user != null){
+            if (a != null && user != null) {
                 return HttpStatus.CREATED;
             }
         }
         return HttpStatus.NOT_IMPLEMENTED;
+    }
+
+    @PutMapping(value = "/{id}")
+    public HttpStatus update(@PathVariable("id") Long id, @RequestBody AgentDataDTO agentDataDTO) {
+        Agent agent = agentService.findById(id);
+        User user = userService.findUserById(agent.getUserId());
+        agent.setIme(agentDataDTO.getName());
+        agent.setAdress(agentDataDTO.getAdress());
+        agent.setCompanyIdentifier(agentDataDTO.getCompanyIdentifier());
+        user.setEmail(agentDataDTO.getEmail());
+
+        Agent a = this.agentService.save(agent);
+        User u = this.userService.save(user);
+        if(a != null && u != null)
+            return HttpStatus.OK;
+        return HttpStatus.NOT_MODIFIED;
     }
 }

@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('username', d.username);
           this.router.navigate(['/agent/dashboard']);
         }, error => {
+          localStorage.clear();
           console.log(error.status);
         }
       );
@@ -54,7 +55,7 @@ export class LoginComponent implements OnInit {
         const str = JSON.stringify(data);
         const d = JSON.parse(str);
         localStorage.setItem('jwt', d.jwttoken);
-        this.router.navigate(['/agent']);
+        this.router.navigate(['/agent/dashboard']);
       }, error => {
         console.log(error.status);
       }

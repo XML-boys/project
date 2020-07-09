@@ -24,9 +24,14 @@ export class AdminRegisterAgentService {
   }
 
   postAgents(Agents) {
-    console.log('okidanje-admina');
-    return this.http.post(this.configService.postAgents, Agents, {
-      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwt'))
-    });
+    return this.http.post(this.configService.postAgents, JSON.stringify(Agents) , {
+      headers: new HttpHeaders().append('Content-Type', 'application/json')
+    } );
+  }
+
+  postAdmin(Admin) {
+    return this.http.post(this.configService.postAdmin, JSON.stringify(Admin) , {
+      headers: new HttpHeaders().append('Content-Type', 'application/json')
+    } );
   }
 }

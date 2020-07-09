@@ -22,3 +22,4 @@ services/order_handling_service/.settings
 .idea
 services/user_frontend/node_modules
 services/user_frontend/dist
+services/agent_frontend/node_modules

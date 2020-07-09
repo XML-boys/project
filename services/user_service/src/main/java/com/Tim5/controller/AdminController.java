@@ -3,6 +3,7 @@ package com.Tim5.controller;
 
 import com.Tim5.config.JwtTokenUtil;
 import com.Tim5.dto.AdminDataDTO;
+import com.Tim5.dto.AdminRegisterDTO;
 import com.Tim5.dto.ClienDataDTO;
 import com.Tim5.model.Admin;
 import com.Tim5.model.Client;
@@ -12,8 +13,10 @@ import com.Tim5.service.AdminService;
 import com.Tim5.service.UserService;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Role;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +32,33 @@ public class AdminController {
     private UserService userService;
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private PasswordEncoder bcryptEncoder;
 
+
+
+    @PostMapping(consumes = "application/json")
+    public HttpStatus save(@RequestBody AdminRegisterDTO dto) {
+        User user = new User();
+        user.setUsername(dto.getUsername());
+        user.setEmail(dto.getEmail());
+        user.setRole(ROLE.ADMIN);
+        user.setApproved(true);
+        user.setPassword(bcryptEncoder.encode(dto.getPassword()));
+
+        User u = this.userService.save(user);
+
+        Admin admin = new Admin();
+        admin.setUserId(u.getId());
+        admin.setIme(dto.getFirstName());
+        admin.setPrezime(dto.getLastName());
+
+        this.adminService.save(admin);
+
+        if(u!= null && admin != null)
+            return HttpStatus.OK;
+        return HttpStatus.NOT_IMPLEMENTED;
+    }
 
     @RequestMapping(value = "/me/user/1", method = RequestMethod.GET)
     public ResponseEntity<AdminDataDTO> myInfo (HttpServletRequest request){

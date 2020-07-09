@@ -24,6 +24,22 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: false,
   },
   {
+    title: 'Reservation',
+    group: true,
+  },
+  {
+    title: 'Waiting Reservations',
+    icon: 'pricetags',
+    link: '/agent/dashboard/reservations',
+    home: false,
+  },
+  {
+    title: 'Reserve',
+    icon: 'plus-circle',
+    link: '/agent/dashboard/reserve',
+    home: false,
+  },
+  {
     title: 'Vehicles',
     group: true,
   },

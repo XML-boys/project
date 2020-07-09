@@ -15,8 +15,8 @@ public class ClientService {
     private ClientRepository clientRepository;
 
 
-    public void blockUser(LongBoolDTO longBoolDTO) {
-        clientRepository.blockUpdate(longBoolDTO.getId(), longBoolDTO.getBlocked());
+    public void blockUser(Long id, boolean blocked ) {
+        clientRepository.blockUpdate(id, blocked);
     }
 
     public List<Client> getAll() {return  Lists.newArrayList(clientRepository.findAll());}
@@ -26,5 +26,7 @@ public class ClientService {
     public Client save(Client client) { return  clientRepository.save(client);}
 
     public Client findByUserId(Long id) {return  clientRepository.findClientByUserId(id);}
+
+    public void delete(Long id) { clientRepository.deleteById(id);}
 
 }

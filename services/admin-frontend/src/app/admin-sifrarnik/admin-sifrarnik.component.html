@@ -1,431 +1,175 @@
 <div class="panel-header panel-header-sm">
 </div>
 
+
+<div class="container">
+
+  <h1>Odabir vendora</h1>
+
+
+
 <div class="main-content">
 
-  <div class="row">
-    <div class="col-md-4 pr-1">
-      <div class="form-group" >
-        <ngx-dropdown-list [items]="codeItem"
-                           [disabled]="dropDisabled"
-                           [multiSelection]="false"
-                           [placeHolder]="'Vendor'"
-                           [(selectedValue)]="selected"
-                           [suffixText]="''"
-                           [filterBox]="false"
-                           [formatNumber]="true"
-                           [disabled]="false"
-                           id="VendorCodeItema">
-        </ngx-dropdown-list>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-group">
+
+      <select formControlName="vendor" class="form-control" (change)="changeVendor($event)">
+        <option disabled>Select vendor</option>
+        <option *ngFor="let vendor of vendors">{{vendor}}</option>
+      </select>
+      <div *ngIf="f.vendor.touched && f.vendor.invalid" class="alert alert-danger">
+        <div *ngIf="f.vendor.errors.required">Name is required.</div>
       </div>
-      <button  class="btn btn-primary btn-block" (click)="open(selected)">Obrisi vendora</button>
-      <button  class="btn btn-primary btn-block" (click)="open1(selected,editProfil)">Edituj vendora</button>
-      <button  class="btn btn-primary btn-block" (click)="addVendor(addVendorModal)">Add vendora</button>
     </div>
+    <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Submit</button>
 
+  </form>
 
-
-
-  </div>
+  <button class="btn btn-primary" (click)="deleteV()"> Obrisi vendora</button>
+  <button class="btn btn-primary" (click)="addV(profil)"> Dodaj vendora</button>
+  <button class="btn btn-primary" (click)="editV(editVe)"> Edituj vendora</button>
 
 </div>
-
-  <ng-template #editProfil let-modal windowClass="modal-dialog">
-    <div class="modal-header">
-      <h4 class="modal-title" class="text-right" id="modal-basic-title3">Model</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-
-      <div class="row">
-        <div class="col-md-4 pr-1">
-          <div class="form-group" >
-            <ngx-dropdown-list [items]="modelNames"
-                               [disabled]="dropDisabled"
-                               [multiSelection]="false"
-                               [placeHolder]="'Models'"
-                               [(selectedValue)]="selected2"
-                               [suffixText]="''"
-                               [filterBox]="false"
-                               [formatNumber]="true"
-                               [disabled]="false"
-                               id="ModelCodeItema1">
-            </ngx-dropdown-list>
-          </div>
-          <button  class="btn btn-primary btn-block" (click)="open3(selected2)">Obrisi model</button>
-          <button  class="btn btn-primary btn-block" (click)="open333(addModelModule)">Add model</button>
-        </div>
-
-        <div class="row">
-          <div class="col-md-4 pr-1">
-            <div class="form-group" >
-              <input type="text" [(ngModel)]="model.name"
-                     class="form-control"
-                     id="nazivModela"
-                     name="nazivModela"
-                     value="{{model.name}}"
-                     required #name="ngModel">
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group" >
-          <ngx-dropdown-list [items]="oils"
-                             [disabled]="dropDisabled"
-                             [multiSelection]="false"
-                             [placeHolder]="'Oils'"
-                             [(selectedValue)]="selected4"
-                             [suffixText]="''"
-                             [filterBox]="false"
-                             [formatNumber]="true"
-                             [disabled]="false"
-                             id="oilSelect">
-          </ngx-dropdown-list>
-          <button  class="btn btn-primary btn-block" (click)="open2(editOil)">Edituj oil</button>
-          <button  class="btn btn-primary btn-block" (click)="open335(selected4,selected2)">Delete oil</button>
-          <button  class="btn btn-primary btn-block" (click)="open337(addOil)">Add oil</button>
-
-        </div>
-
-        <div class="form-group" >
-          <ngx-dropdown-list [items]="gears"
-                             [disabled]="dropDisabled"
-                             [multiSelection]="false"
-                             [placeHolder]="'Gears'"
-                             [(selectedValue)]="selected5"
-                             [suffixText]="''"
-                             [filterBox]="false"
-                             [formatNumber]="true"
-                             [disabled]="false"
-                             id="gearSelected">
-          </ngx-dropdown-list>
-          <button  class="btn btn-primary btn-block" (click)="open4(editGear)">Edituj gear</button>
-          <button  class="btn btn-primary btn-block" (click)="open336(selected5,selected2)">Delete gear</button>
-          <button  class="btn btn-primary btn-block" (click)="open338(addGear)">Ad gear</button>
-        </div>
-
-        <button  class="btn btn-primary btn-block" (click)="open33()">Save model</button>
-
-      </div>
-      <div class="modal-footer">
-
-      </div>
-    </div>
-  </ng-template>
-
-  <ng-template #editOil let-modal windowClass="modal-dialog">
-    <div class="modal-header">
-      <h4 class="modal-title" class="text-right" id="modal-basic-title2">Edit oil</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-
-      <div class="row">
-        <div class="col-md-4 pr-1">
-          <div class="form-group" >
-            <input type="text" [(ngModel)]="oil"
-                   class="form-control"
-                   id="oilNovi"
-                   name="oilNovi"
-                   value="{{oil}}"
-                   required #name="ngModel">
-          </div>
-        </div>
-      </div>
-
-      <button  class="btn btn-primary btn-block" (click)="open11()">Save</button>
-
-      <div class="modal-footer">
-
-      </div>
-    </div>
-  </ng-template>
+</div>
 
 
-<ng-template #editGear let-modal windowClass="modal-dialog">
+
+
+<ng-template #profil let-modal windowClass="modal-dialog">
   <div class="modal-header">
-    <h4 class="modal-title" class="text-right" id="modal-basic-title4">Edit gear</h4>
+    <h4 class="modal-title" class="text-right" id="modal-basic-title1">Add vendora</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
 
-    <div class="row">
-      <div class="col-md-4 pr-1">
-        <div class="form-group" >
-          <input type="text" [(ngModel)]="gear"
-                 class="form-control"
-                 id="gearNovi"
-                 name="gearNovi"
-                 value="{{gear}}"
-                 required #name="ngModel">
+    <div class="card-body">
+      <form [formGroup]="AdminForm" (ngSubmit)="open3()">
+
+        <div class="full-name-inputs">
+          <label  for="vendorName"></label>
+          <input formControlName="vendorName" type="text" id="vendorName" nbInput  placeholder="Vendors name">
         </div>
-      </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
     </div>
+  </div>
 
-    <button  class="btn btn-primary btn-block" (click)="open22()">Save</button>
+  <div class="modal-footer">
 
-    <div class="modal-footer">
-
-    </div>
   </div>
 </ng-template>
 
 
-<ng-template #addVendorModal let-modal windowClass="modal-dialog">
+
+
+<ng-template #editVe let-modal windowClass="modal-dialog">
   <div class="modal-header">
-    <h4 class="modal-title" class="text-right" id="modal-basic-title5">Add vendor</h4>
+    <h4 class="modal-title" class="text-right" id="modal-basic-title2">Edit vendora</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
 
-    <div class="row">
-      <div class="col-md-4 pr-1">
-        <div class="form-group" >
-          <input type="text" [(ngModel)]="vendorName"
-                 class="form-control"
-                 id="vendorName"
-                 name="vendorName"
-                 placeholder="Vendor name"
-                 value="{{vendorName}}"
-                 required #name="ngModel">
+    <div class="card-body">
+      <form [formGroup]="EditForm" (ngSubmit)="open4()">
+
+        <div class="full-name-inputs">
+          <label  for="editVendor"></label>
+          <input formControlName="editVendor" type="text" id="editVendor" nbInput  placeholder="Vendors name">
         </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
+
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead class=" text-primary">
+          <th>
+            Id
+          </th>
+          <th>
+            Name
+          </th>
+          <th>
+            Gear
+          </th>
+          <th>
+            Oil
+          </th>
+          <th>
+            Menage
+          </th>
+          </thead>
+          <tbody>
+          <ng-container *ngFor="let model of models">
+            <tr>
+              <td>{{model.id}}</td>
+              <td>{{model.name}}</td>
+              <td>{{model.gear}}</td>
+              <td>{{model.oil}}</td>
+
+              <td>
+                <div ngbDropdown class="d-inline-block">
+                  <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Uprava</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem (click)="editM(model,editMo)">Edit model</button>
+                    <button ngbDropdownItem (click)="deleteM(model.id)">Delete model</button>
+                  </div>
+                </div>
+              </td>
+
+
+            </tr>
+          </ng-container>
+          </tbody>
+        </table>
+
+        <button class="btn btn-primary" (click)="addM()"> Add model</button>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-4 pr-1">
-        <div class="form-group" >
-          <ngx-dropdown-list [items]="modelNames"
-                             [disabled]="dropDisabled"
-                             [multiSelection]="false"
-                             [placeHolder]="'Model_1'"
-                             [(selectedValue)]="selected1"
-                             [suffixText]="''"
-                             [filterBox]="false"
-                             [formatNumber]="true"
-                             [disabled]="false"
-                             id="ModelCodeItema2">
-          </ngx-dropdown-list>
 
-          <ngx-dropdown-list [items]="modelNames"
-                             [disabled]="dropDisabled"
-                             [multiSelection]="false"
-                             [placeHolder]="'Model_2'"
-                             [(selectedValue)]="selected6"
-                             [suffixText]="''"
-                             [filterBox]="false"
-                             [formatNumber]="true"
-                             [disabled]="false"
-                             id="ModelCodeItema3">
-          </ngx-dropdown-list>
-
-          <ngx-dropdown-list [items]="modelNames"
-                             [disabled]="dropDisabled"
-                             [multiSelection]="false"
-                             [placeHolder]="'Model_3'"
-                             [(selectedValue)]="selected7"
-                             [suffixText]="''"
-                             [filterBox]="false"
-                             [formatNumber]="true"
-                             [disabled]="false"
-                             id="ModelCodeItema4">
-          </ngx-dropdown-list>
-        </div>
-      </div>
-    </div>
-    <button  class="btn btn-primary btn-block" (click)="open44(vendorName,selected1,selected6,selected7)">Save</button>
-
-    <div class="modal-footer">
 
     </div>
+  </div>
+
+  <div class="modal-footer">
+
   </div>
 </ng-template>
 
 
-<ng-template #addModelModule let-modal windowClass="modal-dialog">
+
+
+<ng-template #editMo let-modal windowClass="modal-dialog">
   <div class="modal-header">
-    <h4 class="modal-title" class="text-right" id="modal-basic-title6">Add model</h4>
+    <h4 class="modal-title" class="text-right" id="modal-basic-title4">Edit model</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
 
-    <div class="row">
-      <div class="col-md-4 pr-1">
-        <div class="form-group" >
-          <input type="text" [(ngModel)]="addModelName"
-                 class="form-control"
-                 id="addModelName"
-                 name="addModelName"
-                 value="{{addModelName}}"
-                 required #name="ngModel">
+
+    <div class="card-body">
+      <form [formGroup]="EditForm1" (ngSubmit)="open5()">
+
+        <div class="full-name-inputs">
+          <label  for="editModel"></label>
+          <input formControlName="editModel" type="text" id="editModel" nbInput  placeholder="Models name">
         </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
       </div>
-    </div>
-
-    <div class="form-group" >
-      <ngx-dropdown-list [items]="oils"
-                         [disabled]="dropDisabled"
-                         [multiSelection]="false"
-                         [placeHolder]="'Oil_1'"
-                         [(selectedValue)]="selected8"
-                         [suffixText]="''"
-                         [filterBox]="false"
-                         [formatNumber]="true"
-                         [disabled]="false"
-                         id="addOil">
-      </ngx-dropdown-list>
-      <ngx-dropdown-list [items]="oils"
-                         [disabled]="dropDisabled"
-                         [multiSelection]="false"
-                         [placeHolder]="'Oil_2'"
-                         [(selectedValue)]="selected12"
-                         [suffixText]="''"
-                         [filterBox]="false"
-                         [formatNumber]="true"
-                         [disabled]="false"
-                         id="addOil1">
-      </ngx-dropdown-list>
-      <ngx-dropdown-list [items]="oils"
-                         [disabled]="dropDisabled"
-                         [multiSelection]="false"
-                         [placeHolder]="'Oil_3'"
-                         [(selectedValue)]="selected13"
-                         [suffixText]="''"
-                         [filterBox]="false"
-                         [formatNumber]="true"
-                         [disabled]="false"
-                         id="addOil2">
-      </ngx-dropdown-list>
-    </div>
-
-    <div class="form-group" >
-      <ngx-dropdown-list [items]="gears"
-                         [disabled]="dropDisabled"
-                         [multiSelection]="false"
-                         [placeHolder]="'Gear_1'"
-                         [(selectedValue)]="selected9"
-                         [suffixText]="''"
-                         [filterBox]="false"
-                         [formatNumber]="true"
-                         [disabled]="false"
-                         id="addGear">
-      </ngx-dropdown-list>
-      <ngx-dropdown-list [items]="gears"
-                         [disabled]="dropDisabled"
-                         [multiSelection]="false"
-                         [placeHolder]="'Gear_2'"
-                         [(selectedValue)]="selected10"
-                         [suffixText]="''"
-                         [filterBox]="false"
-                         [formatNumber]="true"
-                         [disabled]="false"
-                         id="addGear1">
-      </ngx-dropdown-list>
-      <ngx-dropdown-list [items]="gears"
-                         [disabled]="dropDisabled"
-                         [multiSelection]="false"
-                         [placeHolder]="'Gear_3'"
-                         [(selectedValue)]="selected11"
-                         [suffixText]="''"
-                         [filterBox]="false"
-                         [formatNumber]="true"
-                         [disabled]="false"
-                         id="addGear2">
-      </ngx-dropdown-list>
-
-      <ngx-dropdown-list [items]="vendors"
-                         [disabled]="dropDisabled"
-                         [multiSelection]="false"
-                         [placeHolder]="'Vendors'"
-                         [(selectedValue)]="selected14"
-                         [suffixText]="''"
-                         [filterBox]="false"
-                         [formatNumber]="true"
-                         [disabled]="false"
-                         id="addModelUVendora">
-      </ngx-dropdown-list>
 
     </div>
 
-    <button  class="btn btn-primary btn-block" (click)="open334(addModelName, selected8, selected12, selected13, selected9, selected10, selected11,selected14)">Add model</button>
+  <div class="modal-footer">
 
-    <div class="modal-footer">
-
-    </div>
   </div>
 </ng-template>
-
-
-<ng-template #addGear let-modal windowClass="modal-dialog">
-  <div class="modal-header">
-    <h4 class="modal-title" class="text-right" id="modal-basic-title8">Add gear</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-
-    <div class="row">
-      <div class="col-md-4 pr-1">
-        <div class="form-group" >
-          <input type="text" [(ngModel)]="gearAdd"
-                 class="form-control"
-                 id="gearAdd"
-                 name="gearAdd"
-                 value="{{gearAdd}}"
-                 required #name="ngModel">
-        </div>
-      </div>
-    </div>
-
-    <button  class="btn btn-primary btn-block" (click)="open444(gearAdd)">Save</button>
-
-    <div class="modal-footer">
-
-    </div>
-  </div>
-</ng-template>
-
-<ng-template #addOil let-modal windowClass="modal-dialog">
-  <div class="modal-header">
-    <h4 class="modal-title" class="text-right" id="modal-basic-title9">Add oil</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-
-    <div class="row">
-      <div class="col-md-4 pr-1">
-        <div class="form-group" >
-          <input type="text" [(ngModel)]="oilAdd"
-                 class="form-control"
-                 id="oilAdd"
-                 name="oilAdd"
-                 value="{{oilAdd}}"
-                 required #name="ngModel">
-        </div>
-      </div>
-    </div>
-
-    <button  class="btn btn-primary btn-block" (click)="open445(oilAdd)">Save</button>
-
-    <div class="modal-footer">
-
-    </div>
-  </div>
-</ng-template>
-
 
 
 

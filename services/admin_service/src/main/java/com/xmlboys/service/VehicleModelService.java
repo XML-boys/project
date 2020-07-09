@@ -14,4 +14,6 @@ public class VehicleModelService {
 
     public void delete(Long id) {vehicleModelRepository.deleteById(id);}
 
+    public VehicleModel findById(Long id) { return vehicleModelRepository.findById(id).orElseGet(null);}
+
 }

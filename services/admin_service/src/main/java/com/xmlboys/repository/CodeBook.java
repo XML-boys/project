@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface CodeBook extends CrudRepository<CodeItem, Long> {
 
-    List<CodeItem> findAllByVendor(String vendor);
+    CodeItem findByVendor(String vendor);
 }

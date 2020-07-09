@@ -45,7 +45,7 @@ public class VoteController {
                 return new ResponseEntity<>(voteDTOS, HttpStatus.OK);
             }
         }
-        return new ResponseEntity<>(voteDTOS, HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -87,6 +87,8 @@ public class VoteController {
                     return new ResponseEntity<>(vote, HttpStatus.OK);
                 }
             }
+        }else{
+            return new ResponseEntity<>( HttpStatus.OK);
         }
         return new ResponseEntity<>( HttpStatus.OK);
     }
