@@ -1,8 +1,8 @@
-package com.xmlboyz.service.repository;
+package com.xmlboys.service.repository;
 
 import java.util.List;
 
-import com.xmlboyz.service.models.Conversation;
+import com.xmlboys.service.models.Conversation;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ConversationRepository extends JpaRepository<Conversation, Long> {
