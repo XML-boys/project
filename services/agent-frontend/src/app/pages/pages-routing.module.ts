@@ -6,11 +6,18 @@ import {NewAdComponent} from './new-ad/new-ad.component';
 import {NewVehicleComponent} from './new-vehicle/new-vehicle.component';
 import {ReservationsComponent} from './reservations/reservations.component';
 import {NewReservationComponent} from './new-reservation/new-reservation.component';
+import {ProfileComponent} from './profile/profile.component';
+import {StatsComponent} from './stats/stats.component';
+import {ChatComponent} from './chat/chat.component';
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
+    {
+      path: '',
+      component: StatsComponent,
+    },
     {
       path: 'my-ads',
       component: MyAdsComponent,
@@ -30,6 +37,14 @@ const routes: Routes = [{
     {
       path: 'reserve',
       component: NewReservationComponent,
+    },
+    {
+      path: 'profile',
+      component: ProfileComponent,
+    },
+    {
+      path: 'messages',
+      component: ChatComponent,
     },
   ]
 },

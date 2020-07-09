@@ -15,8 +15,8 @@ public class ClientService {
     private ClientRepository clientRepository;
 
 
-    public void blockUser(Long id ) {
-        clientRepository.blockUpdate(id, true);
+    public void blockUser(Long id, boolean blocked ) {
+        clientRepository.blockUpdate(id, blocked);
     }
 
     public List<Client> getAll() {return  Lists.newArrayList(clientRepository.findAll());}

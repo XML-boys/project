@@ -5,6 +5,7 @@ import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-header',
@@ -46,6 +47,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private themeService: NbThemeService,
               private userService: UserData,
               private layoutService: LayoutService,
+              private router: Router,
               private breakpointService: NbMediaBreakpointsService) {
   }
 
@@ -71,6 +73,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
       )
       .subscribe(themeName => this.currentTheme = themeName);
+
+    this.menuService.onItemClick().subscribe(( event ) => {
+      console.log(event.item.title);
+      if (event.item.title === 'Log out'){
+        localStorage.clear();
+        this.router.navigate(['/agent']);
+      }
+      if (event.item.title === 'Profile'){
+        this.router.navigate(['/agent/dashboard/profile']);
+      }
+    });
   }
 
   ngOnDestroy() {

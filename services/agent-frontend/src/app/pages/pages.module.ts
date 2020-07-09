@@ -21,11 +21,14 @@ import {DropdownListModule} from 'ngx-dropdown-list';
 import {ReactiveFormsModule} from '@angular/forms';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { NewReservationComponent } from './new-reservation/new-reservation.component';
+import { ProfileComponent } from './profile/profile.component';
+import { StatsComponent } from './stats/stats.component';
+import { ChatComponent } from './chat/chat.component';
 
 
 
 @NgModule({
-  declarations: [PagesComponent, MyAdsComponent, NewAdComponent, NewVehicleComponent, ReservationsComponent, NewReservationComponent],
+  declarations: [PagesComponent, MyAdsComponent, NewAdComponent, NewVehicleComponent, ReservationsComponent, NewReservationComponent, ProfileComponent, StatsComponent, ChatComponent],
     imports: [
         CommonModule,
         ThemeModule,

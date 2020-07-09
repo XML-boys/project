@@ -9,9 +9,13 @@ import {FormBuilder} from '@angular/forms';
   templateUrl: './pages.component.html',
   styleUrls: []
 })
-export class PagesComponent {
+export class PagesComponent implements OnInit{
 
   constructor(private service: LoginService, private router: Router) {
+  }
+  menu = MENU_ITEMS;
+
+  ngOnInit(): void {
     if (localStorage.getItem('jwt') === undefined){
       this.router.navigate(['/agent/login']);
     }
@@ -28,5 +32,4 @@ export class PagesComponent {
       );
     }
   }
-  menu = MENU_ITEMS;
 }

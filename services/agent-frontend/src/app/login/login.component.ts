@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('username', d.username);
           this.router.navigate(['/agent/dashboard']);
         }, error => {
+          localStorage.clear();
           console.log(error.status);
         }
       );
