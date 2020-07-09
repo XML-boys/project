@@ -37,6 +37,10 @@ public class Ad {
     @JsonIgnore
     private Set<Comment> comments;
 
+    @OneToMany(mappedBy = "reklamaz", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Vote> votes;
+
     public Ad() {
     }
 
@@ -156,5 +160,13 @@ public class Ad {
 
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
+    }
+
+    public Set<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Set<Vote> votes) {
+        this.votes = votes;
     }
 }

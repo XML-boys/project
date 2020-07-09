@@ -18,6 +18,10 @@ public class Reservation {
     private LocalDate endTime;
     @Column
     private State state;
+    @Column
+    private String opis;
+    @Column
+    private Integer predjenaKM;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Ad reklama;
@@ -81,4 +85,19 @@ public class Reservation {
         this.state = State.valueOf(state);
     }
 
+    public String getOpis() {
+        return opis;
+    }
+
+    public void setOpis(String opis) {
+        this.opis = opis;
+    }
+
+    public Integer getPredjenaKM() {
+        return predjenaKM;
+    }
+
+    public void setPredjenaKM(Integer predjenaKM) {
+        this.predjenaKM = predjenaKM;
+    }
 }

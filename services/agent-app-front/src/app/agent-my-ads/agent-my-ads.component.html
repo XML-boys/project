@@ -1,0 +1,76 @@
+<div class="panel-header panel-header-sm">
+</div>
+
+<h1>My ads</h1>
+<div>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead class=" text-primary">
+    <th>
+      Id
+    </th>
+    <th>
+      Id agenta
+    </th>
+    <th>
+      Start date
+    </th>
+    <th>
+      End date
+    </th>
+    <th>
+      Location
+    </th>
+    <th>
+      Vehicle id
+    </th>
+    <th>
+      Price
+    </th>
+    <th>
+      Damage
+    </th>
+    <th>
+      Reservations
+    </th>
+    <th>
+      Comments
+    </th>
+    <th>
+      Vote
+    </th>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let ad of ads">
+      <tr>
+        <td>{{ad.id}}</td>
+        <td>{{ad.idAgenta}}</td>
+        <td>{{ad.startTime}}</td>
+        <td>{{ad.endDate}}</td>
+        <td>{{ad.location}}</td>
+        <td>{{ad.vehicleId}}</td>
+        <td>{{ad.cena}}</td>
+        <td>{{ad.damage}}</td>
+        <td>{{ad.ads}}</td>
+        <td>{{ad.comments}}</td>
+        <td>{{ad.vote}}</td>
+
+        <td>
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Uprava</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+             <!-- <button ngbDropdownItem (click)="editM(model,editMo)">Edit model</button>
+              <button ngbDropdownItem (click)="deleteM(model.id)">Delete model</button>-->
+            </div>
+          </div>
+        </td>
+
+
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+
+ <!-- <button class="btn btn-primary" (click)="addM()"> Add model</button>-->
+</div>
+</div>

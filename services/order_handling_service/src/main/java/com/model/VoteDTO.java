@@ -4,13 +4,13 @@ public class VoteDTO {
     private Long id;
     private Long idKola;
     private Long idReklame;
-    private Long vrednost;
+    private Double vrednost;
     private Boolean approved;
 
     public VoteDTO() {
     }
 
-    public VoteDTO(Long id, Long idKola, Long idReklame, Long vrednost) {
+    public VoteDTO(Long id, Long idKola, Long idReklame, Double vrednost) {
         this.id = id;
         this.idKola = idKola;
         this.idReklame = idReklame;
@@ -49,11 +49,11 @@ public class VoteDTO {
         this.idReklame = idReklame;
     }
 
-    public Long getVrednost() {
+    public Double getVrednost() {
         return vrednost;
     }
 
-    public void setVrednost(Long vrednost) {
+    public void setVrednost(Double vrednost) {
         this.vrednost = vrednost;
     }
 

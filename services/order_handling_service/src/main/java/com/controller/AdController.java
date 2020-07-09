@@ -168,30 +168,6 @@ public class AdController {
     }
 
 
-    /*@PostMapping(path = "/allReqAds", consumes = "application/json")
-    public ResponseEntity<List<AdDTO>> getAdz(@RequestBody ADLSDDTO adlsddto) {
-        List<Ad> ads = adService.findAllAds();
-        List<AdDTO> adDTOS = new ArrayList<>();
-        if(ads != null){
-            for(Ad a : ads){
-                if(a.getLocation().equals(adlsddto.getLocation()) && a.getStartTime().isAfter(adlsddto.getStartTime()) && a.getEndDate().isBefore(adlsddto.getEndDate())){
-                    adDTOS.add(new AdDTO(a));
-                }
-            }
-        }
-        return new ResponseEntity<>(adDTOS, HttpStatus.OK);
-    }*/
-
-    /*@GetMapping(path = "/allLocations/reqAd/{id}/",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AdDTO> getOneAd(@PathVariable Long id){
-        List<Ad> ads = adService.findAllAds();
-        AdDTO adDTO = new AdDTO();
-        for(Ad a : ads){
-            if(a.getId() == id)
-                new AdDTO(a);
-        }
-        return new ResponseEntity<>(adDTO, HttpStatus.OK);
-    }*/
 
 
 

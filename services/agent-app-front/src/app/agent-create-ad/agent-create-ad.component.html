@@ -1,162 +1,58 @@
 <div class="panel-header panel-header-sm">
 </div>
 
-<div class="main-content">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-header">
-          <h4 class="card-title"> Create ad</h4>
-        </div>
+<div class="card-body">
+    <h4 class="card-title"> Create ad</h4>
 
+  <form [formGroup]="AdForm" (ngSubmit)="perica()">
 
-        <div class="card-body">
-
-          <div class="row">
-            <div class="col-md-4 pr-1">
-              <div class="form-group" >
-                <!-- lokacija -->
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-4 pr-1">
-              <div class="form-group" >
-                <label>Cena</label>
-                <input type="numbers" [(ngModel)]="ad.cena"
-                       class="form-control"
-                       id="adCena"
-                       name="adCena"
-                       value="{{ad.cena}}"
-                       required #name="ngModel">
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4 pr-1">
-            <div class="form-group">
-              <label>Pocetak</label>
-              <div class="input-group">
-                <input type="datetime-local" [(ngModel)]="ad.startTime"
-                       class="form-control"
-                       id="myDate1"
-                       name="myDate1"
-                       value="yyyy-mm-dd"
-                       required #name="ngModel">
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4 pr-1">
-            <div class="form-group">
-              <label>Kraj</label>
-              <div class="input-group">
-                <input type="datetime-local" [(ngModel)]="ad.endDate"
-                       class="form-control"
-                       id="myDate2"
-                       name="myDate2"
-                       value="yyyy-mm-dd"
-                       required #name="ngModel">
-              </div>
-            </div>
-          </div>
-
-          <form>
-            <div class="col-md-16 pr-7">
-              <label>Zakazi</label>
-              <div class="form-group">
-                <div>
-                  <input id="dmg" [(ngModel)]="dmg"
-                         (change)="onItemChange($event)"
-                         style="transform: scale(1.3)"
-                         type="radio"
-                         value="dmg"
-                         name="requestFor">
-                  <label for="dmg" class="ml-2">Damaged </label>
-                </div>
-                <div>
-                  <input id="notdmg" [(ngModel)]="notdmg"
-                         (change)="onItemChange($event)"
-                         style="transform: scale(1.3)"
-                         type="radio"
-                         value="notdmg"
-                         name="requestFor">
-                  <label for="notdmg" class="ml-2">Not damaged </label>
-                </div>
-              </div>
-            </div>
-          </form>
-
-
-          <div class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-              <tr>
-                <th>Title</th>
-                <th>Starts at</th>
-                <th>Ends at</th>
-              </tr>
-              </thead>
-          <tbody>
-          <tr *ngFor="let event of events">
-            <td>
-              <input
-                type="text"
-                class="form-control"
-                [(ngModel)]="event.title"
-                (keyup)="refresh.next()"
-              />
-            </td>
-          <td>
-            <input
-              class="form-control"
-              type="text"
-              mwlFlatpickr
-              [(ngModel)]="event.start"
-              (ngModelChange)="refresh.next()"
-              [altInput]="true"
-              [convertModelValue]="true"
-              [enableTime]="true"
-              dateFormat="Y-m-dTH:i"
-              altFormat="F j, Y H:i"
-              placeholder="Not set"
-            />
-          </td>
-          <td>
-            <input
-              class="form-control"
-              type="text"
-              mwlFlatpickr
-              [(ngModel)]="event.end"
-              (ngModelChange)="refresh.next()"
-              [altInput]="true"
-              [convertModelValue]="true"
-              [enableTime]="true"
-              dateFormat="Y-m-dTH:i"
-              altFormat="F j, Y H:i"
-              placeholder="Not set"
-            />
-          </td>
-          </tr>
-          </tbody>
-          </table>
-        </div>
-
-          <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
-          <input type="file" accept="image/*" (change)="updateSource($event)">
-
-          <!-- img placeholder when a file has been picked. shows only when 'source' is not empty -->
-          <img *ngIf="source" [src]="source" src="">
-
-
-
-
-        </div>
-
-          <button  class="btn btn-primary btn-block" (click)="open()">Save</button>
-        </div>
-      </div>
+    <div class="full-name-inputs">
+      <label for="price">Price:  </label>
+      <input type="number" formControlName="cena" id="price" #price nbInput min="0" value="0"  placeholder="Price">
+      <label for="price">Damage:  </label>
+      <input type="checkbox" id="damage" formControlName="damage" />
     </div>
-  </div>
 
+    <div>
+      <mat-form-field >
+        <mat-label>Locations</mat-label>
+        <mat-select formControlName="location">
+          <mat-option id="location"  *ngFor="let location of lokacije" [value]="location">{{location}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field >
+        <mat-label>Vehicle id</mat-label>
+        <mat-select formControlName="vehicleId">
+          <mat-option id="vehicleId"  *ngFor="let vehicle of vehicles" [value]="vehicle.id">{{vehicle.id}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+      <div>
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="startTime">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </div>
+    <br>
+    <div>
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="endDate">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </div>
+
+
+
+
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+
+
+
+
+
+</div>

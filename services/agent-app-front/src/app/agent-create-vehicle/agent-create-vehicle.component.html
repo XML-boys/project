@@ -1,0 +1,64 @@
+<div class="panel-header panel-header-sm">
+</div>
+
+<div class="card-body">
+  <h4 class="card-title"> Create vehicle</h4>
+
+  <form [formGroup]="VehicleForm" (ngSubmit)="open()">
+
+    <div>
+      <mat-form-field >
+        <mat-label>Brand</mat-label>
+        <mat-select formControlName="vendor" (selectionChange)="onChangeVendor($event)">
+          <mat-option id="location"  *ngFor="let vendor of vendors" [value]="vendor">{{vendor}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field >
+        <mat-label>Model</mat-label>
+        <mat-select formControlName="model" (selectionChange)="onChangeModel($event)">
+          <mat-option id="model"  *ngFor="let model of models" [value]="model.name">{{model.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field >
+        <mat-label>Oil</mat-label>
+        <mat-select formControlName="oilType" (selectionChange)="onChangeOil($event)">
+          <mat-option id="oilType"  *ngFor="let oil of oils" [value]="oil">{{oil}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field >
+        <mat-label>Gear</mat-label>
+        <mat-select formControlName="gearType" (selectionChange)="onChangeGear($event)">
+          <mat-option id="gearType"  *ngFor="let gear of gears" [value]="gear">{{gear}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field >
+        <mat-label>Vehicle class</mat-label>
+        <mat-select formControlName="vehicleClass">
+          <mat-option id="vehicleClass"  *ngFor="let klasa of classes" [value]="klasa">{{klasa}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="full-name-inputs">
+      <label for="distance">Distance in KM:  </label>
+      <input type="number" formControlName="distanceKM" id="distance" #distance nbInput min="0" value="0"  placeholder="Distnance">
+      <label for="seats">Number of kids seats:  </label>
+      <input type="number" formControlName="kidSeats" id="seats" nbInput min="0" max="3"value="0"  placeholder="Kids seats">
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>

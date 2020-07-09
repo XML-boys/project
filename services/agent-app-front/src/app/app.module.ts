@@ -15,12 +15,17 @@ import {FlatpickrModule} from 'angularx-flatpickr';
 import {DatePipe} from '@angular/common';
 import {TokenInterceptor} from './security/TokenInterceptor';
 import { LoginAgentComponent } from './login-agent/login-agent.component';
+import {MatButtonModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatSelectModule} from '@angular/material';
+import { AgentCreateVehicleComponent } from './agent-create-vehicle/agent-create-vehicle.component';
+import { AgentMyAdsComponent } from './agent-my-ads/agent-my-ads.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AgentCreateAdComponent,
-    LoginAgentComponent
+    LoginAgentComponent,
+    AgentCreateVehicleComponent,
+    AgentMyAdsComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -32,7 +37,13 @@ import { LoginAgentComponent } from './login-agent/login-agent.component';
     ReactiveFormsModule,
     AgentLayoutModule,
     FontAwesomeModule,
-    FlatpickrModule.forRoot()
+    FlatpickrModule.forRoot(),
+    MatFormFieldModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatNativeDateModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
