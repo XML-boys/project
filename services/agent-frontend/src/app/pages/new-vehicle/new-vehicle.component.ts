@@ -19,6 +19,7 @@ export class NewVehicleComponent implements OnInit {
   models: any = [];
   oil: any = [];
   gear: any = [];
+  classes = ['SUV', 'Cabrio', 'Limousine', 'Hatchback'];
 
   selectedVendor;
   selectedModel;
@@ -34,10 +35,11 @@ export class NewVehicleComponent implements OnInit {
   this.VehicleForm  =  this.formBuilder.group({
     vendor: [''],
     model: [''],
-    oType: [''],
+    oilType: [''],
     gearType: [''],
-    distance: [''],
-    seats: ['']
+    distanceKM: [''],
+    kidSeats: [''],
+    vehicleClass : ['']
   });
 
 

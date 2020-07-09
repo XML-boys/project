@@ -14,4 +14,8 @@ export class ReservationsService {
       headers: new HttpHeaders().append('Content-Type', 'application/json')
     });
   }
+
+  reserve(id, body): Observable<any> {
+    return this.http.post<any>('http://localhost:6969/reservation/' + id, body);
+  }
 }

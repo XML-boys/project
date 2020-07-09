@@ -1,32 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {SmartTableData} from '../../@core/data/smart-table';
 import {LocalDataSource} from 'ng2-smart-table';
 import {MyAdsService} from '../../@core/services/my-ads.service';
+import {NbDateService, NbWindowService} from '@nebular/theme';
+import {ReserveFormComponent} from './reserve-form/reserve-form.component';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {ReservationsService} from '../../@core/services/reservations.service';
 
 @Component({
   selector: 'app-my-ads',
   templateUrl: './my-ads.component.html',
   styleUrls: ['./my-ads.component.scss']
 })
+
+
 export class MyAdsComponent implements OnInit {
+  @ViewChild('disabledEsc', { read: TemplateRef, static: true }) disabledEscTemplate: TemplateRef<HTMLElement>;
+  id;
+  min: Date;
+  max: Date;
   settings = {
-    actions: {
-      add: false,
-      edit: false,
-      delete: false,
-      custom: [    {
-        name: 'edit',
-        title: '<i class="nb-trash"></i>'
+      hideSubHeader: true,
+      actions: {
+        custom: [
+          {
+            name: 'reserve',
+            title: '<i class="ion-document" title="Manual reservation"></i>'
+          },
+          {
+            name: 'delete',
+            title: '<i class="far fa-trash-alt" title="delete"></i>'
+          }
+        ],
+        add: false,
+        edit: false,
+        delete: false
       },
-      ],
-      position: 'right'
-    },
-    accept: {
-      custom: [          {
-        name: 'save',
-        title: '<i class="nb-checkmark"></i>' }
-      ],
-    },
     columns: {
       id: {
         title: 'Ad ID',
@@ -52,16 +61,13 @@ export class MyAdsComponent implements OnInit {
         title: 'Price',
         type: 'string',
       },
-      proba: {
-        title: 'proba',
-        type: 'html',
-      },
     },
   };
-
+  ReerveForm: FormGroup;
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: MyAdsService) {
+  constructor(private service: MyAdsService, private windowService: NbWindowService, protected dateService: NbDateService<Date>,
+              private formBuilder: FormBuilder, private reservationService: ReservationsService) {
 
   }
 
@@ -97,14 +103,50 @@ export class MyAdsComponent implements OnInit {
         this.source.refresh();
       }
     );
+
+    this.ReerveForm = this.formBuilder.group({
+      startTime: [''],
+      endTime: [''],
+    });
   }
 
   onReserve(event) {
-    console.log(event.data.id);
+    console.log(event);
+    if (event.action === 'reserve'){
+      console.log('reserve');
+      this.id = event.data.id;
+      this.min = this.dateService.parse(event.data.startTime, 'DD.MM.YYYY');
+      this.max = this.dateService.parse(event.data.endDate, 'DD.MM.YYYY');
+      this.openWindowWithoutBackdrop();
+    }
+    else if (event.action === 'delete'){
+      console.log('delete');
+    }
   }
 
-  prb(event) {
-    console.log(event);
+
+  openWindowWithoutBackdrop() {
+    this.windowService.open(
+      this.disabledEscTemplate,
+      {
+        title: 'Manual reservation',
+        hasBackdrop: false,
+        closeOnEsc: true,
+      },
+    );
   }
+
+  submit() {
+    this.reservationService.reserve(this.id, this.ReerveForm.value).subscribe();
+  }
+
+  onEditConfirm(event): void {
+    if (window.confirm('Are you sure you want to edit?')) {
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
+  }
+
 
 }
