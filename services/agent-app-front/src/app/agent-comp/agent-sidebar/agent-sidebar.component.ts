@@ -11,6 +11,9 @@ export const ROUTES: RouteInfo[] = [
   { path: '/agent-app/createAd', title: 'Create ad',  icon: '', class: '' },
   { path: '/agent-app/createVehicle', title: 'Create vehicle',  icon: '', class: '' },
   { path: '/agent-app/myAds', title: 'My ads',  icon: '', class: '' },
+  { path: '/agent-app/myProfile', title: 'My profile',  icon: '', class: '' },
+  { path: '/agent-app/allAds', title: 'All ads',  icon: '', class: '' },
+  { path: '/agent-app/myVehicles', title: 'My vehicles',  icon: '', class: '' },
 ];
 
 @Component({

@@ -18,6 +18,10 @@ import { LoginAgentComponent } from './login-agent/login-agent.component';
 import {MatButtonModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatSelectModule} from '@angular/material';
 import { AgentCreateVehicleComponent } from './agent-create-vehicle/agent-create-vehicle.component';
 import { AgentMyAdsComponent } from './agent-my-ads/agent-my-ads.component';
+import { AgentReserveForMyselfComponent } from './agent-reserve-for-myself/agent-reserve-for-myself.component';
+import { ProfilAgentAppComponent } from './profil-agent-app/profil-agent-app.component';
+import { AllAddsAgentAppComponent } from './all-adds-agent-app/all-adds-agent-app.component';
+import { AllVehiclesAgentAppComponent } from './all-vehicles-agent-app/all-vehicles-agent-app.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { AgentMyAdsComponent } from './agent-my-ads/agent-my-ads.component';
     AgentCreateAdComponent,
     LoginAgentComponent,
     AgentCreateVehicleComponent,
-    AgentMyAdsComponent
+    AgentMyAdsComponent,
+    AgentReserveForMyselfComponent,
+    ProfilAgentAppComponent,
+    AllAddsAgentAppComponent,
+    AllVehiclesAgentAppComponent
   ],
   imports: [
     BrowserAnimationsModule,

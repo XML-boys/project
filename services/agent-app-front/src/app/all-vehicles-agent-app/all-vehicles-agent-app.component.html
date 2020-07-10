@@ -1,0 +1,66 @@
+<div class="panel-header panel-header-sm">
+</div>
+
+
+<h1>My vehicles</h1>
+<div>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead class=" text-primary">
+      <th>
+        Id
+      </th>
+      <th>
+        Vendor
+      </th>
+      <th>
+        Model
+      </th>
+      <th>
+        Oil type
+      </th>
+      <th>
+        Gear type
+      </th>
+      <th>
+        Vehicle class
+      </th>
+      <th>
+        Distance (KM)
+      </th>
+      <th>
+        Kids seats
+      </th>
+      <th>
+        Managment
+      </th>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let vehicle of vehicles">
+        <tr>
+          <td>{{vehicle.id}}</td>
+          <td>{{vehicle.vendor}}</td>
+          <td>{{vehicle.model}}</td>
+          <td>{{vehicle.oilType}}</td>
+          <td>{{vehicle.gearType}}</td>
+          <td>{{vehicle.vehicleClass}}</td>
+          <td>{{vehicle.distanceKM}}</td>
+          <td>{{vehicle.kidSeats}}</td>
+
+          <td>
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Open</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem (click)="deleteVehicle(vehicle.id)">Delete vehicle</button>
+              </div>
+            </div>
+          </td>
+
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

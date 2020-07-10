@@ -17,12 +17,21 @@ export class AgentCreateAdService {
 
   id;
   model;
+  ad: any = [];
   evoId(id){
     return this.id = id;
   }
 
   uzmiId(){
     return this.id;
+  }
+
+  sendAdToAnother(ad){
+    this.ad = ad;
+  }
+
+  returnAdToAnother(){
+    return this.ad;
   }
 
   getAds(): Observable<any> {
@@ -72,4 +81,29 @@ export class AgentCreateAdService {
   deleteVote(adId, voteId): Observable<any> {
     return this.http.delete('http://localhost:6969/vote/' + adId + '/' + voteId);
   }
+
+  createReservation(reservation, adId): Observable<any> {
+    return this.http.post<any>('http://localhost:6969/reservation/' + adId, reservation, this.httpOptions);
+  }
+
+  getAgentData(): Observable<any> {
+    return this.http.get<any>('http://localhost:6969/agent/me/user/1');
+  }
+
+  updateAgent(agent, id): Observable<any> {
+    return this.http.put<any>('http://localhost:6969/agent/' + id, agent, this.httpOptions);
+  }
+
+  getAllAds(): Observable<any> {
+    return this.http.get<any>(this.configService.allAds, this.httpOptions);
+  }
+
+  getVehicles(): Observable<any> {
+    return this.http.get<any>(this.configService.allVehicles, this.httpOptions);
+  }
+
+  deleteVehicle(VehicleId): Observable<any> {
+    return this.http.delete('http://localhost:6969/vehicles/' + VehicleId);
+  }
+
 }

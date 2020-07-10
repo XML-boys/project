@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
 import {AgentLayoutComponent} from './agent-layout/agent-layout.component';
 import {LoginAgentComponent} from './login-agent/login-agent.component';
+import {AgentReserveForMyselfComponent} from './agent-reserve-for-myself/agent-reserve-for-myself.component';
 
 const routes: Routes = [
 
@@ -24,6 +25,11 @@ const routes: Routes = [
   {
     path: 'agent-app/login',
     component: LoginAgentComponent,
+    children: [
+    ]},
+  {
+    path: 'agent-app/agent-reserve-for-myself',
+    component: AgentReserveForMyselfComponent,
     children: [
     ]},
 ];
