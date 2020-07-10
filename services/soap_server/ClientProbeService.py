@@ -19,3 +19,7 @@ class ClientProbeService(object):
             @rtype: The address
             """
             return exports['REMOTE_ADDR']
+        
+        @ladonize(int, int, rtype=int)
+        def add(self, x, y):
+                return x+y
