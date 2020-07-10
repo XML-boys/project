@@ -30,24 +30,46 @@ public class CommentController {
         String requestTokenHeader = httpServletRequest.getHeader("Authorization");
         String jwt = requestTokenHeader.substring(7);
         RestService restService = new RestService(new RestTemplateBuilder());
-        ClientDataDTO clientDataDTO = restService.getClient(jwt);
+        UserValidateDTO userValidateDTO = restService.getUserValidate(jwt);
 
 
-        Ad ad = adService.findById(idAd);
-        if(ad!= null){
-            Comment comment = new Comment();
-            comment.setIdKomentatora(clientDataDTO.getUserId());
-            comment.setSadrzaj(commentDTO.getSadrzaj());
-            comment.setApproved(false);
-            comment.setReklamak(ad);
-            ad.getComments().add(commentService.save(comment));
-            Ad adz = adService.save(ad);
-            if(adz != null)
-                return new ResponseEntity<>(HttpStatus.CREATED);
-            else
+        if(userValidateDTO.getRole().equals("Client")){
+            ClientDataDTO clientDataDTO = restService.getClient(jwt);
+            Ad ad = adService.findById(idAd);
+            if(ad!= null){
+                Comment comment = new Comment();
+                comment.setIdKomentatora(clientDataDTO.getUserId());
+                comment.setSadrzaj(commentDTO.getSadrzaj());
+                comment.setApproved(false);
+                comment.setReklamak(ad);
+                ad.getComments().add(commentService.save(comment));
+                Ad adz = adService.save(ad);
+                if(adz != null)
+                    return new ResponseEntity<>(HttpStatus.CREATED);
+                else
+                    return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+            } else
                 return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
-        } else
-            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+        }else if (userValidateDTO.getRole().equals("Agent")){
+            AgentDataDTO agentDataDTO = restService.getAgent(jwt);
+            Ad ad = adService.findById(idAd);
+            if(ad!= null){
+                Comment comment = new Comment();
+                comment.setIdKomentatora(agentDataDTO.getUserId());
+                comment.setSadrzaj(commentDTO.getSadrzaj());
+                comment.setApproved(false);
+                comment.setReklamak(ad);
+                ad.getComments().add(commentService.save(comment));
+                Ad adz = adService.save(ad);
+                if(adz != null)
+                    return new ResponseEntity<>(HttpStatus.CREATED);
+                else
+                    return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+            } else
+                return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+        }
+
+        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
     @GetMapping(produces = "application/json")

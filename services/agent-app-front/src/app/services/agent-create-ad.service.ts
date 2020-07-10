@@ -106,4 +106,12 @@ export class AgentCreateAdService {
     return this.http.delete('http://localhost:6969/vehicles/' + VehicleId);
   }
 
+  createComment(comment, adId): Observable<any> {
+    return this.http.post<any>('http://localhost:6969/comment/' + adId, comment, this.httpOptions);
+  }
+
+  createVote(vote, adId): Observable<any> {
+    return this.http.post<any>('http://localhost:6969/vote/' + adId, vote, this.httpOptions);
+  }
+
 }
