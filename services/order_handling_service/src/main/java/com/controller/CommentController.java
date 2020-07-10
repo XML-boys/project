@@ -66,10 +66,27 @@ public class CommentController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteComment(@PathVariable Long id) {
-        commentService.remove(id);
-        return new ResponseEntity<>((HttpStatus.OK));
+    @DeleteMapping(value = "/{id}/{idComment}")
+    public ResponseEntity<Void> deleteComment(@PathVariable Long id, @PathVariable("idComment") Long idComment) {
+        Ad ad = adService.findById(id);
+        if(ad != null) {
+            for(Comment comment : ad.getComments()){
+                if(comment.getId().equals(idComment)){
+                    ad.getComments().remove(comment);
+                    Ad a = adService.save(ad);
+                    comment.setReklamak(new Ad());
+                    commentService.save(comment);
+
+                    commentService.remove(idComment);
+                    if(a != null) {
+                        return new ResponseEntity<>(HttpStatus.OK);
+                    } else{
+                        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+                    }
+                }
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
     @PutMapping(value = "/{id}", consumes = "application/json")

@@ -51,26 +51,258 @@
         <td>{{ad.vehicleId}}</td>
         <td>{{ad.cena}}</td>
         <td>{{ad.damage}}</td>
-        <td>{{ad.reservations}}</td>
-        <td>{{ad.comments}}</td>
-        <td>{{ad.votes}}</td>
 
         <td>
           <div ngbDropdown class="d-inline-block">
-            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Uprava</button>
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Open reservations</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-             <!-- <button ngbDropdownItem (click)="editM(model,editMo)">Edit model</button>
-              <button ngbDropdownItem (click)="deleteM(model.id)">Delete model</button>-->
+              <button ngbDropdownItem (click)="OpenReservations(openRez,ad.reservations,ad)">Open</button>
             </div>
           </div>
         </td>
+
+        <td>
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>Open comments</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+              <button ngbDropdownItem (click)="OpenComments(openCom,ad.comments,ad)">Open</button>
+            </div>
+          </div>
+        </td>
+
+        <td>
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="dropdownBasic3" ngbDropdownToggle>Open votes</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic3">
+              <button ngbDropdownItem (click)="OpenVote(openVot,ad.votes,ad)">Open</button>
+            </div>
+          </div>
+        </td>
+
+
 
 
       </tr>
     </ng-container>
     </tbody>
   </table>
+</div>
+</div>
 
- <!-- <button class="btn btn-primary" (click)="addM()"> Add model</button>-->
-</div>
-</div>
+
+
+
+<ng-template #openRez let-modal windowClass="modal-dialog">
+  <div class="modal-header">
+    <h4 class="modal-title" class="text-right" id="modal-basic-title4">Reservations</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="card-body">
+
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead class=" text-primary">
+          <th>
+            Id
+          </th>
+          <th>
+            User id
+          </th>
+          <th>
+            Start date
+          </th>
+          <th>
+            End date
+          </th>
+          <th>
+            State
+          </th>
+          <th>
+            Description
+          </th>
+          <th>
+            KM
+          </th>
+          <th>
+            Management
+          </th>
+          </thead>
+          <tbody>
+          <ng-container *ngFor="let reservation of reservations">
+            <tr>
+              <td>{{reservation.id}}</td>
+              <td>{{reservation.userId}}</td>
+              <td>{{reservation.startTime}}</td>
+              <td>{{reservation.endTime}}</td>
+              <td>{{reservation.state}}</td>
+              <td>{{reservation.opis}}</td>
+              <td>{{reservation.predjenaKM}}</td>
+
+              <td>
+                <div ngbDropdown class="d-inline-block">
+                  <button class="btn btn-outline-primary" id="dropdownBasic" ngbDropdownToggle>Show</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic">
+                    <button ngbDropdownItem (click)="OdobriRez(reservation)">Approve</button>
+                    <button ngbDropdownItem (click)="DeleteRez(reservation)">Delete reservation</button>
+                  </div>
+                </div>
+              </td>
+
+
+            </tr>
+          </ng-container>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+  </div>
+</ng-template>
+
+
+
+<ng-template #openCom let-modal windowClass="modal-dialog">
+  <div class="modal-header">
+    <h4 class="modal-title" class="text-right" id="modal-basic-title3">Comments</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+
+    <div class="card-body">
+
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead class=" text-primary">
+          <th>
+            Id
+          </th>
+          <th>
+            Commentator id
+          </th>
+          <th>
+            Content
+          </th>
+          <th>
+            Approved
+          </th>
+          <th>
+            Management
+          </th>
+          </thead>
+          <tbody>
+          <ng-container *ngFor="let comment of comments">
+            <tr>
+              <td>{{comment.id}}</td>
+              <td>{{comment.idKomentatora}}</td>
+              <td>{{comment.sadrzaj}}</td>
+              <td>{{comment.approved}}</td>
+
+
+              <td>
+                <div ngbDropdown class="d-inline-block">
+                  <button class="btn btn-outline-primary" id="dropdownBasic5" ngbDropdownToggle>Show</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic5">
+                    <!--<button ngbDropdownItem (click)="OdobriCom(comment)">Approve</button> proveriti dal treba -->
+                    <button ngbDropdownItem (click)="DeleteCom(comment)">Delete comment</button>
+                  </div>
+                </div>
+              </td>
+
+
+            </tr>
+          </ng-container>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+  </div>
+</ng-template>
+
+
+
+<ng-template #openVot let-modal windowClass="modal-dialog">
+  <div class="modal-header">
+    <h4 class="modal-title" class="text-right" id="modal-basic-title2">Votes</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+
+    <div class="card-body">
+
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead class=" text-primary">
+          <th>
+            Id
+          </th>
+          <th>
+            Vehicle id
+          </th>
+          <th>
+            Ad id
+          </th>
+          <th>
+            Value
+          </th>
+          <th>
+            Approved
+          </th>
+          <th>
+            Management
+          </th>
+          </thead>
+          <tbody>
+          <ng-container *ngFor="let vote of votes">
+            <tr>
+              <td>{{vote.id}}</td>
+              <td>{{vote.idKola}}</td>
+              <td>{{vote.idReklame}}</td>
+              <td>{{vote.vrednost}}</td>
+              <td>{{vote.approved}}</td>
+
+
+              <td>
+                <div ngbDropdown class="d-inline-block">
+                  <button class="btn btn-outline-primary" id="dropdownBasic6" ngbDropdownToggle>Show</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic6">
+                    <!--<button ngbDropdownItem (click)="OdobriCom(comment)">Approve</button> proveriti dal treba -->
+                    <button ngbDropdownItem (click)="DeleteVote(vote)">Delete comment</button>
+                  </div>
+                </div>
+              </td>
+
+
+            </tr>
+          </ng-container>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+  </div>
+</ng-template>

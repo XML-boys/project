@@ -11,6 +11,11 @@ import {FormBuilder} from '@angular/forms';
 })
 export class AgentMyAdsComponent implements OnInit {
   ads: any = [];
+  ad: any = [];
+  closeResult: string;
+  reservations: any = [];
+  comments: any = [];
+  votes: any = [];
   constructor(private agentCreateAdService: AgentCreateAdService , private router: Router, private modalService: NgbModal,
               private formBuilder: FormBuilder) { }
 
@@ -22,4 +27,50 @@ export class AgentMyAdsComponent implements OnInit {
 
   }
 
+  OpenReservations(openRez, reservations, ad){
+    this.reservations = reservations;
+    this.ad = ad;
+    this.modalService.open(openRez, {size: 'xl'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed`;
+    });
+  }
+
+  OpenComments(openCom, comments, ad){
+    this.comments = comments;
+    this.ad = ad;
+    this.modalService.open(openCom, {size: 'xl'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed`;
+    });
+  }
+
+  OpenVote(openVot, votes, ad){
+    this.votes = votes;
+    this.ad = ad;
+    this.modalService.open(openVot, {size: 'xl'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed`;
+    });
+  }
+
+  OdobriRez(reservation) {
+    reservation.state = 'Reserved';
+    this.agentCreateAdService.approveRes(reservation, this.ad.id, reservation.id).subscribe();
+  }
+
+  DeleteRez(reservation) {
+    this.agentCreateAdService.deleteRes(this.ad.id, reservation.id).subscribe();
+  }
+
+  DeleteCom(comment) {
+    this.agentCreateAdService.deleteComment(this.ad.id, comment.id).subscribe();
+  }
+
+  DeleteVote(vote) {
+    this.agentCreateAdService.deleteVote(this.ad.id, vote.id).subscribe();
+  }
 }

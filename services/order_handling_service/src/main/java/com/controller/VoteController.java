@@ -60,10 +60,27 @@ public class VoteController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteVote(@PathVariable Long id) {
-        voteService.remove(id);
-        return new ResponseEntity<>((HttpStatus.OK));
+    @DeleteMapping(value = "/{id}/{idVote}")
+    public ResponseEntity<Void> deleteVote(@PathVariable Long id, @PathVariable("idVote") Long idVote) {
+        Ad ad = adService.findById(id);
+        if(ad != null) {
+            for(Vote vote : ad.getVotes()){
+                if(vote.getId().equals(idVote)){
+                    ad.getVotes().remove(vote);
+                    Ad a = adService.save(ad);
+                    vote.setReklamaz(new Ad());
+                    voteService.save(vote);
+
+                    voteService.remove(idVote);
+                    if(a != null) {
+                        return new ResponseEntity<>(HttpStatus.OK);
+                    } else{
+                        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+                    }
+                }
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
 

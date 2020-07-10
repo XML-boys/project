@@ -56,4 +56,20 @@ export class AgentCreateAdService {
   getAllItems(): Observable<any> {
     return this.http.get<any>(this.configService.allItems, this.httpOptions);
   }
+
+  approveRes(reservation, adId, reservationId): Observable<any> {
+    return this.http.put('http://localhost:6969/reservation/' + adId + '/' + reservationId, reservation, this.httpOptions );
+  }
+
+  deleteRes(adId, reservationId): Observable<any> {
+    return this.http.delete('http://localhost:6969/reservation/' + adId + '/' + reservationId);
+  }
+
+  deleteComment(adId, commentId): Observable<any> {
+    return this.http.delete('http://localhost:6969/comment/' + adId + '/' + commentId);
+  }
+
+  deleteVote(adId, voteId): Observable<any> {
+    return this.http.delete('http://localhost:6969/vote/' + adId + '/' + voteId);
+  }
 }

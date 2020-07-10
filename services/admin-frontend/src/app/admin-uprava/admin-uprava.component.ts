@@ -102,8 +102,8 @@ export class AdminUpravaComponent implements OnInit {
     this.ucitajKomentare();
   }
 
-  open9(id) {
-    this.adminUpravaService.deleteComment(id).subscribe();
+  open9(comment, id) {
+    this.adminUpravaService.deleteComment(comment.reklamak.id, id).subscribe();
     this.ucitajKomentare();
   }
 
@@ -123,8 +123,8 @@ export class AdminUpravaComponent implements OnInit {
     this.ucitajOcene();
   }
 
-  open111(id) {
-    this.adminUpravaService.deleteVote(id).subscribe();
+  open111(idReklame, id) {
+    this.adminUpravaService.deleteVote(idReklame, id).subscribe();
     this.ucitajOcene();
   }
 }

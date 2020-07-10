@@ -71,12 +71,12 @@ export class AdminUpravaService {
     return this.http.delete(this.configService.deleteUser + id);
   }
 
-  deleteComment(id): Observable<any> {
-    return this.http.delete(this.configService.deleteComment + id);
+  deleteComment(adId, id): Observable<any> {
+    return this.http.delete('http://localhost:6969/comment/' + adId + '/' + id);
   }
 
-  deleteVote(id): Observable<any> {
-    return this.http.delete(this.configService.deleteVote + id);
+  deleteVote(idReklame, id): Observable<any> {
+    return this.http.delete('http://localhost:6969/vote/' + idReklame + '/' + id);
   }
 
   putUser(id): Observable<any> {

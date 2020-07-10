@@ -120,8 +120,12 @@ public class ReservationController {
             for(Reservation reservation : ad.getReservations()){
                 if(reservation.getId().equals(idReservation)){
                     ad.getReservations().remove(reservation);
-                    reservationService.remove(idReservation);
                     Ad a = adService.save(ad);
+                    reservation.setReklama(new Ad());
+                    reservationService.save(reservation);
+
+                    reservationService.remove(idReservation);
+
                     if(a != null) {
                         return new ResponseEntity<>(HttpStatus.OK);
                     } else{
@@ -139,11 +143,11 @@ public class ReservationController {
         if(ad != null ){
             for(Reservation rez : ad.getReservations()){
                 if(rez.getId() == idReservation && rez.getState() != "Reserved"){
-                    rez.setUserId(reservationDTO.getUserId());
                     rez.setState(reservationDTO.getState());
                     rez.setEndTime(reservationDTO.getEndTime());
                     rez.setStartTime(reservationDTO.getStartTime());
                     Reservation reservation = reservationService.save(rez);
+                    adService.save(ad);
                     if(reservation != null)
                     {
                         return new ResponseEntity<>(HttpStatus.OK);
