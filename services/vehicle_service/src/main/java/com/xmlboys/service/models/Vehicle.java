@@ -25,7 +25,7 @@ public class Vehicle {
     	
 	private String vendor;
 	
-	
+	private Long agentId;
     	
 	private String model;
 	
@@ -53,9 +53,11 @@ public class Vehicle {
 	public Vehicle() 
 	{
 	}
-	public Vehicle(String _vendor, String _model, String _oilType, String _gearType, String _vehicleClass, Integer _distanceKM, Integer _kidSeats, Long _id) {
+	public Vehicle(Long agentId, String _vendor, String _model, String _oilType, String _gearType, String _vehicleClass, Integer _distanceKM, Integer _kidSeats, Long _id) {
 		super();
 		 
+		this.agentId = agentId;
+
 		this.vendor = _vendor;
 		 
 		this.model = _model;
@@ -131,5 +133,14 @@ public class Vehicle {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getAgentId()
+	{
+		return agentId;
+	}
+
+	public void setAgentId(Long agentId) {
+		this.agentId = agentId;
 	}
 }
