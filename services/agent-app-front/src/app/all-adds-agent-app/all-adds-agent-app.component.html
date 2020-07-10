@@ -1,0 +1,199 @@
+<div class="panel-header panel-header-sm">
+</div>
+
+<h1>All ads</h1>
+<div>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead class=" text-primary">
+      <th>
+        Id
+      </th>
+      <th>
+        Id agenta
+      </th>
+      <th>
+        Start date
+      </th>
+      <th>
+        End date
+      </th>
+      <th>
+        Location
+      </th>
+      <th>
+        Vehicle id
+      </th>
+      <th>
+        Price
+      </th>
+      <th>
+        Damage
+      </th>
+      <th>
+        Reservations
+      </th>
+      <th>
+        Comments
+      </th>
+      <th>
+        Votes
+      </th>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let ad of ads">
+        <tr>
+          <td>{{ad.id}}</td>
+          <td>{{ad.idAgenta}}</td>
+          <td>{{ad.startTime}}</td>
+          <td>{{ad.endDate}}</td>
+          <td>{{ad.location}}</td>
+          <td>{{ad.vehicleId}}</td>
+          <td>{{ad.cena}}</td>
+          <td>{{ad.damage}}</td>
+
+          <td>
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Open reservations</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem (click)="ReserveForMe(ad)">Reserve for myself</button>
+              </div>
+            </div>
+          </td>
+
+          <td>
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>Open comments</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                <button ngbDropdownItem (click)="OpenComments(openCom,ad.comments,ad)">Open</button>
+              </div>
+            </div>
+          </td>
+
+          <td>
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-primary" id="dropdownBasic3" ngbDropdownToggle>Open votes</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic3">
+                <button ngbDropdownItem (click)="OpenVote(openVot,ad.votes,ad)">Open</button>
+              </div>
+            </div>
+          </td>
+
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+<ng-template #openCom let-modal windowClass="modal-dialog">
+  <div class="modal-header">
+    <h4 class="modal-title" class="text-right" id="modal-basic-title3">Comments</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+
+    <div class="card-body">
+
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead class=" text-primary">
+          <th>
+            Id
+          </th>
+          <th>
+            Commentator id
+          </th>
+          <th>
+            Content
+          </th>
+          <th>
+            Approved
+          </th>
+          </thead>
+          <tbody>
+          <ng-container *ngFor="let comment of comments">
+            <tr>
+              <td>{{comment.id}}</td>
+              <td>{{comment.idKomentatora}}</td>
+              <td>{{comment.sadrzaj}}</td>
+              <td>{{comment.approved}}</td>
+
+
+            </tr>
+          </ng-container>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+  </div>
+</ng-template>
+
+
+
+<ng-template #openVot let-modal windowClass="modal-dialog">
+  <div class="modal-header">
+    <h4 class="modal-title" class="text-right" id="modal-basic-title2">Votes</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+
+    <div class="card-body">
+
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead class=" text-primary">
+          <th>
+            Id
+          </th>
+          <th>
+            Vehicle id
+          </th>
+          <th>
+            Ad id
+          </th>
+          <th>
+            Value
+          </th>
+          <th>
+            Approved
+          </th>
+          </thead>
+          <tbody>
+          <ng-container *ngFor="let vote of votes">
+            <tr>
+              <td>{{vote.id}}</td>
+              <td>{{vote.idKola}}</td>
+              <td>{{vote.idReklame}}</td>
+              <td>{{vote.vrednost}}</td>
+              <td>{{vote.approved}}</td>
+
+
+            </tr>
+          </ng-container>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+  </div>
+</ng-template>

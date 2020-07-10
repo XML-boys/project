@@ -12,6 +12,7 @@ import {FormBuilder} from '@angular/forms';
 export class AgentMyAdsComponent implements OnInit {
   ads: any = [];
   ad: any = [];
+  agent: any = {};
   closeResult: string;
   reservations: any = [];
   comments: any = [];
@@ -22,7 +23,10 @@ export class AgentMyAdsComponent implements OnInit {
   ngOnInit(): void {
     this.agentCreateAdService.getAds().subscribe((data: {}) => {
       this.ads = data;
-      console.log(this.ads);
+    });
+    this.agentCreateAdService.getAgentData().subscribe((data: {}) => {
+      this.agent = data;
+      console.log(this.agent);
     });
 
   }
@@ -72,5 +76,11 @@ export class AgentMyAdsComponent implements OnInit {
 
   DeleteVote(vote) {
     this.agentCreateAdService.deleteVote(this.ad.id, vote.id).subscribe();
+  }
+
+  ReserveForMe(ad){
+    this.ad = ad;
+    this.agentCreateAdService.sendAdToAnother(this.ad);
+    this.router.navigate(['/agent-app/agent-reserve-for-myself']);
   }
 }

@@ -1,9 +1,6 @@
 package com.controller;
 
-import com.model.Ad;
-import com.model.AdDTO;
-import com.model.AgentDataDTO;
-import com.model.UserValidateDTO;
+import com.model.*;
 import com.service.AdService;
 import com.service.RestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,18 +52,18 @@ public class AdController {
     }
 
     @GetMapping(produces = "application/json")
-    public ResponseEntity<List<AdDTO>> getAds() {
+    public ResponseEntity<List<AdFullDTO>> getAds() {
         List<Ad> ads = adService.findAllAds();
-        List<AdDTO> adDTOS= new ArrayList<>();
+        List<AdFullDTO> adFullDTOS= new ArrayList<>();
         if(ads != null)
         {
             for(Ad a : ads)
             {
-                adDTOS.add(new AdDTO(a));
-                return new ResponseEntity<>(adDTOS, HttpStatus.OK);
+                adFullDTOS.add(new AdFullDTO(a));
+                return new ResponseEntity<>(adFullDTOS, HttpStatus.OK);
             }
         }
-        return new ResponseEntity<>(adDTOS, HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(adFullDTOS, HttpStatus.NOT_IMPLEMENTED);
     }
 
     @DeleteMapping(value = "/{id}")

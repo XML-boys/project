@@ -26,4 +26,8 @@ export class ConfigService {
   get allItems(): string {
     return this.apiUri + '/codeBook';
   }
+
+  get allVehicles(): string {
+    return this.apiUri + '/vehicles/';
+  }
 }

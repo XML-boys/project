@@ -61,8 +61,8 @@ public class ReservationController {
         }else if(userValidateDTO.getRole().equals("Agent")){
             Ad ad = adService.findById(id);
             if(ad != null) {
-                if(reservation.getUserId() == ad.getIdAgenta()){
-                    AgentDataDTO agentDataDTO = restService.getAgent(jwt);
+                AgentDataDTO agentDataDTO = restService.getAgent(jwt);
+                if(agentDataDTO.getId() == ad.getIdAgenta()){
                     Reservation rez = new Reservation();
                     rez.setUserId(agentDataDTO.getUserId());
                     rez.setState("Reserved");
@@ -78,7 +78,6 @@ public class ReservationController {
                         return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
                     }
                 }else{
-                    AgentDataDTO agentDataDTO = restService.getAgent(jwt);
                     Reservation rez = new Reservation();
                     rez.setUserId(agentDataDTO.getUserId());
                     rez.setState("Pending");

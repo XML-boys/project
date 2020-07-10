@@ -56,7 +56,8 @@
           <div ngbDropdown class="d-inline-block">
             <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Open reservations</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button ngbDropdownItem (click)="OpenReservations(openRez,ad.reservations,ad)">Open</button>
+              <button ngbDropdownItem (click)="OpenReservations(openRez,ad.reservations,ad)">Users reservations</button>
+              <button ngbDropdownItem (click)="ReserveForMe(ad)">Reserve for myself</button>
             </div>
           </div>
         </td>
