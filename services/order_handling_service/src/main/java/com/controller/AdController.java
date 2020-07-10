@@ -174,7 +174,31 @@ public class AdController {
     }
 
 
+    @GetMapping(value = "/vehicle/{vehicleId}", produces = "application/json")
+    public ResponseEntity<List<Ad>> getAdsByVehicle( HttpServletRequest httpServletRequest,@PathVariable Long vehicleId) {
+        String requestTokenHeader = httpServletRequest.getHeader("Authorization");
+        String jwt = requestTokenHeader.substring(7);
+        RestService restService = new RestService(new RestTemplateBuilder());
+        UserValidateDTO userValidateDTO = restService.getUserValidate(jwt);
+        List<Ad> ads = adService.findAdsByVehicle(vehicleId);
+        List<Ad> returnAds = new ArrayList<>();
 
+        if(userValidateDTO.getRole().equals("Agent")){
+            AgentDataDTO agentDataDTO = restService.getAgent(jwt);
+            if(ads != null) {
+                for(Ad ad : ads){
+                    if(ad.getIdAgenta() == agentDataDTO.getId()){
+                        returnAds.add(ad);
+                    }
+                }
+                return new ResponseEntity<>(returnAds,HttpStatus.OK);
+            } else
+            {
+                return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+    }
 
 
 
