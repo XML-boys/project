@@ -4,21 +4,24 @@ from ladon.types.ladontype import LadonType
 
 from typing import * 
 
-class Group(LadonType):
-        cn = str
-        name = str
-        description = str
+class GroupStefan(LadonType):
+        name = int
+        description = int
         numbers = [int]
 
 
 class ClientProbeService(object):
-        @ladonize(rtype=str)
-        def extract_remote_addr(self,**exports):
+        @ladonize(rtype=GroupStefan)
+        def group(self):
             """
             Fetch the client's remote address
             @rtype: The address
             """
-            return exports['REMOTE_ADDR']
+            g = GroupStefan()
+            g.name = 7
+            g.description = 798
+            g.numbers = [1,2,3]
+            return g
         
         @ladonize(int, int, rtype=int)
         def add(self, x, y):

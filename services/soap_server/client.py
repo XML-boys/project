@@ -6,3 +6,5 @@ result = client.service.add(1,2)
 
 print(result)
 assert result == 3
+
+print(client.service.group())
