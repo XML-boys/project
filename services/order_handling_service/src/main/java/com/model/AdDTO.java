@@ -129,4 +129,36 @@ public class AdDTO {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Boolean getDamage() {
+        return damage;
+    }
+
+    public void setDamage(Boolean damage) {
+        this.damage = damage;
+    }
+
+    public Set<Reservation> getAds() {
+        return ads;
+    }
+
+    public void setAds(Set<Reservation> ads) {
+        this.ads = ads;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public Set<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Set<Vote> votes) {
+        this.votes = votes;
+    }
 }

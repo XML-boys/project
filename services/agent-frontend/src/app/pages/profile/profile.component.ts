@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
       email: ['', Validators.required],
       company: ['', Validators.required],
       name: ['', Validators.required],
-      address: ['', Validators.required]
+      adress: ['', Validators.required]
     });
 
     this.loadData();
@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
       this.profileForm.value.email = data.email;
       this.profileForm.value.company = data.companyIdentifier;
       this.profileForm.value.name = data.name;
-      this.profileForm.value.address = data.address;
+      this.profileForm.value.adress = data.adress;
 
       }
     );
@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit {
       email: this.profileForm.value.email,
       companyIdentifier: this.profileForm.value.company,
       name: this.profileForm.value.name,
-      address: this.profileForm.value.address,
+      adress: this.profileForm.value.adress,
     };
     this.service.update(agent, this.loadedData.id).subscribe();
 

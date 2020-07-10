@@ -30,6 +30,7 @@ public class CommentController {
         String requestTokenHeader = httpServletRequest.getHeader("Authorization");
         String jwt = requestTokenHeader.substring(7);
         RestService restService = new RestService(new RestTemplateBuilder());
+        UserValidateDTO userValidateDTO = restService.getUserValidate(jwt);
         ClientDataDTO clientDataDTO = restService.getClient(jwt);
 
 
@@ -39,6 +40,7 @@ public class CommentController {
             comment.setIdKomentatora(clientDataDTO.getUserId());
             comment.setSadrzaj(commentDTO.getSadrzaj());
             comment.setApproved(false);
+            comment.setUsername(userValidateDTO.getUsername());
             comment.setReklamak(ad);
             ad.getComments().add(commentService.save(comment));
             Ad adz = adService.save(ad);
