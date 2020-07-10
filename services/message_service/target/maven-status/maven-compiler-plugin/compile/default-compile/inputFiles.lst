@@ -1,7 +1,11 @@
+/usr/src/mymaven/src/main/java/com/xmlboys/service/dtos/ConversationDTO.java
 /usr/src/mymaven/src/main/java/com/xmlboys/service/BackendApplication.java
 /usr/src/mymaven/src/main/java/com/xmlboys/service/service/MessageService.java
+/usr/src/mymaven/src/main/java/com/xmlboys/service/controller/MessageController.java
 /usr/src/mymaven/src/main/java/com/xmlboys/service/models/Message.java
-/usr/src/mymaven/src/main/java/com/xmlboys/service/repository/ConversationRepository.java
+/usr/src/mymaven/src/main/java/com/xmlboys/service/controller/ConversationController.java
 /usr/src/mymaven/src/main/java/com/xmlboys/service/repository/MessageRepository.java
+/usr/src/mymaven/src/main/java/com/xmlboys/service/repository/ConversationRepository.java
+/usr/src/mymaven/src/main/java/com/xmlboys/service/dtos/MessageDTO.java
 /usr/src/mymaven/src/main/java/com/xmlboys/service/models/Conversation.java
 /usr/src/mymaven/src/main/java/com/xmlboys/service/service/ConversationService.java

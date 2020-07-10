@@ -1,4 +1,4 @@
-package com.xmlboyz.service.models;
+package com.xmlboys.service.models;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import net.bytebuddy.implementation.attribute.AnnotationAppender.Target.OnType;
+
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToMany;
 
@@ -28,6 +31,8 @@ public class Message {
 	
     	
 	private String toUser;
+
+	private String content;
 	
 	@ManyToOne
     	@JoinColumn
@@ -37,7 +42,7 @@ public class Message {
 	public Message() 
 	{
 	}
-	public Message(String _fromUser, String _toUser, Conversation _conversation, Long _id) {
+	public Message(String _fromUser, String _toUser, Conversation _conversation, String content, Long _id) {
 		super();
 		 
 		this.fromUser = _fromUser;
@@ -45,6 +50,7 @@ public class Message {
 		this.toUser = _toUser;
 		 
 		this.conversation = _conversation;
+		this.content = content;
 		 
 		this.id = _id;
 		
@@ -79,5 +85,13 @@ public class Message {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getContent() {
+		return content;
 	}
 }
