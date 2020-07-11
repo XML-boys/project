@@ -1,43 +1,30 @@
 package com.model;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Set;
 
 @Entity
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Ad", namespace = "http://localhost:6969/order-handling-service-schema")
-@XmlRootElement(name = "AdClass")
 public class Ad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @XmlElement
     private Long id;
     @Column
-    @XmlElement
     private Long idAgenta;
     @Column
-    @XmlElement
     private LocalDate startTime;
     @Column
-    @XmlElement
     private LocalDate endDate;
     @Column
-    @XmlElement
     private ArrayList<String> pictures;
     @Column
-    @XmlElement
     private Long vehicleId;
     @Column
-    @XmlElement
     private String location;
     @Column
-    @XmlElement
     private String cena;
     @Column
-    @XmlElement
     private Boolean damage;
 
     @OneToMany(mappedBy = "reklama", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
