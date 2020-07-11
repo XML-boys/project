@@ -74,7 +74,7 @@ services:
                 environment:
                     PGADMIN_DEFAULT_EMAIL: admin@admin.com
                     PGADMIN_DEFAULT_PASSWORD: admin
-        agent-app-service: # borislav
+        agent-app-service: # uros
                 image: maven
                 command: /usr/src/mymaven/run.sh
                 volumes:
