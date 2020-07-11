@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ad="http://localhost:6969/order-handling-service-schema"
+           version="1.0"
+           targetNamespace="http://localhost:6969/order-handling-service-schema">
+
+    <xs:complexType name="Ad">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long" minOccurs="0"/>
+            <xs:element name="idAgenta" type="xs:long" minOccurs="0"/>
+            <xs:element name="startTime" type="xs:string" minOccurs="0"/>
+            <xs:element name="endDate" type="xs:string" minOccurs="0"/>
+            <xs:element name="pictures" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="vehicleId" type="xs:long" minOccurs="0"/>
+            <xs:element name="cena" type="xs:string" minOccurs="0"/>
+            <xs:element name="damage" type="xs:boolean" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="AdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long" minOccurs="0"/>
+                <xs:element name="idAgenta" type="xs:long" minOccurs="0"/>
+                <xs:element name="startTime" type="xs:string" minOccurs="0"/>
+                <xs:element name="endDate" type="xs:string" minOccurs="0"/>
+                <xs:element name="pictures" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="vehicleId" type="xs:long" minOccurs="0"/>
+                <xs:element name="cena" type="xs:string" minOccurs="0"/>
+                <xs:element name="damage" type="xs:boolean" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="AdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:long" name="adId"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
