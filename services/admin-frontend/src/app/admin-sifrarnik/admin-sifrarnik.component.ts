@@ -164,6 +164,7 @@ export class AdminSifrarnikComponent implements OnInit {
       this.adminSifrarnikService.postVendor(JSON.stringify(vendorAdd)).subscribe((data: {}) => {console.log(data); });
       this.codeItems = [];
       this.vendors = [];
+      this.modalService.dismissAll();
       this.getAllVendors();
       this.getAllItems();
       this.router.navigate(['/admin/adminSifrarnik']);
@@ -184,6 +185,7 @@ export class AdminSifrarnikComponent implements OnInit {
         this.adminSifrarnikService.putVendor(codeItem.id , this.EditForm.value.editVendor).subscribe();
         this.codeItems = [];
         this.vendors = [];
+        this.modalService.dismissAll();
         this.getAllVendors();
         this.getAllItems();
       }
@@ -192,7 +194,7 @@ export class AdminSifrarnikComponent implements OnInit {
 
   editM(model , editMo) {
       this.selectedModel = model;
-      console.log(this.selectedModel);
+      this.modalService.dismissAll();
       this.adminSifrarnikService.evoModel(model);
       this.router.navigate(['/admin/editModel']);
   }
@@ -231,6 +233,7 @@ export class AdminSifrarnikComponent implements OnInit {
 
 
   addM() {
+    this.modalService.dismissAll();
     this.router.navigate(['/admin/addModel']);
   }
 

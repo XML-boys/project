@@ -1,10 +1,7 @@
 package com.service;
 
 import ch.qos.logback.core.net.server.Client;
-import com.model.AgentDataDTO;
-import com.model.ClientDataDTO;
-import com.model.UserDTO;
-import com.model.UserValidateDTO;
+import com.model.*;
 import org.assertj.core.util.Lists;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
@@ -56,6 +53,15 @@ public class RestService {
                 ClientDataDTO.class);
 
         return response.getBody();
+    }
+
+    public List<VehicleDataDTO> getVehicles(String jwt) {
+        String url = "http://gateway:80/vehicles/";
+        HttpEntity request = new HttpEntity(setHeader(jwt));
+        ResponseEntity<VehicleDataDTO[]> response = this.restTemplate.exchange(url, HttpMethod.GET, request,
+                VehicleDataDTO[].class);
+
+        return Lists.newArrayList(response.getBody());
     }
 
     public List<UserDTO> getUsers(String jwt) {

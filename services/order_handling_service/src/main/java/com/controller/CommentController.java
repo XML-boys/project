@@ -26,30 +26,69 @@ public class CommentController {
     private AdService adService;
 
     @PostMapping(value = "/{idAd}", consumes = "application/json")
-    public ResponseEntity<Void> saveComment(@RequestBody CommentDTO commentDTO, @PathVariable("idAd") Long idAd, HttpServletRequest httpServletRequest){
+    public ResponseEntity<?> saveComment(@RequestBody CommentDTO commentDTO, @PathVariable("idAd") Long idAd, HttpServletRequest httpServletRequest){
         String requestTokenHeader = httpServletRequest.getHeader("Authorization");
         String jwt = requestTokenHeader.substring(7);
         RestService restService = new RestService(new RestTemplateBuilder());
         UserValidateDTO userValidateDTO = restService.getUserValidate(jwt);
-        ClientDataDTO clientDataDTO = restService.getClient(jwt);
 
-
-        Ad ad = adService.findById(idAd);
-        if(ad!= null){
-            Comment comment = new Comment();
-            comment.setIdKomentatora(clientDataDTO.getUserId());
-            comment.setSadrzaj(commentDTO.getSadrzaj());
-            comment.setApproved(false);
-            comment.setUsername(userValidateDTO.getUsername());
-            comment.setReklamak(ad);
-            ad.getComments().add(commentService.save(comment));
-            Ad adz = adService.save(ad);
-            if(adz != null)
-                return new ResponseEntity<>(HttpStatus.CREATED);
-            else
-                return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
-        } else
+        if(userValidateDTO.getRole().equals("Client")){
+            ClientDataDTO clientDataDTO = restService.getClient(jwt);
+            Ad ad = adService.findById(idAd);
+            if(ad!= null){
+                boolean flag = false;
+                for(Comment c : ad.getComments()){
+                    if(c.getIdKomentatora() == clientDataDTO.getUserId()){
+                        flag = true;
+                    }
+                }
+                if(!flag){
+                    Comment comment = new Comment();
+                    comment.setIdKomentatora(clientDataDTO.getUserId());
+                    comment.setSadrzaj(commentDTO.getSadrzaj());
+                    comment.setApproved(false);
+                    comment.setReklamak(ad);
+                    ad.getComments().add(commentService.save(comment));
+                    Ad adz = adService.save(ad);
+                    if(adz != null)
+                        return new ResponseEntity<>(HttpStatus.CREATED);
+                    else
+                        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+                }else{
+                    return new ResponseEntity<>("vec ste komentarisali ovu reklamu",HttpStatus.NOT_MODIFIED);
+                }
+            } else
             return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+        }else if (userValidateDTO.getRole().equals("Agent")){
+            AgentDataDTO agentDataDTO = restService.getAgent(jwt);
+            Ad ad = adService.findById(idAd);
+            if(ad!= null){
+                boolean flag = false;
+                for(Comment c : ad.getComments()){
+                    if(c.getIdKomentatora() == agentDataDTO.getUserId()){
+                        flag = true;
+                    }
+                }
+                if(!flag){
+                    Comment comment = new Comment();
+                    comment.setIdKomentatora(agentDataDTO.getUserId());
+                    comment.setSadrzaj(commentDTO.getSadrzaj());
+                    comment.setApproved(false);
+                    comment.setReklamak(ad);
+                    ad.getComments().add(commentService.save(comment));
+                    Ad adz = adService.save(ad);
+                    if(adz != null)
+                        return new ResponseEntity<>(HttpStatus.CREATED);
+                    else
+                        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+                } else{
+                    return new ResponseEntity<>("vec ste komentarisali ovu reklamu",HttpStatus.NOT_MODIFIED);
+                }
+            } else
+                return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+        }
+
+        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
     @GetMapping(produces = "application/json")

@@ -65,7 +65,8 @@
             <div ngbDropdown class="d-inline-block">
               <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>Open comments</button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
-                <button ngbDropdownItem (click)="OpenComments(openCom,ad.comments,ad)">Open</button>
+                <button ngbDropdownItem (click)="OpenComments(openCom,ad.comments,ad)">Show</button>
+                <button ngbDropdownItem (click)="MakeComment(addComment, ad.comments,ad)">New comment</button>
               </div>
             </div>
           </td>
@@ -74,7 +75,8 @@
             <div ngbDropdown class="d-inline-block">
               <button class="btn btn-outline-primary" id="dropdownBasic3" ngbDropdownToggle>Open votes</button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic3">
-                <button ngbDropdownItem (click)="OpenVote(openVot,ad.votes,ad)">Open</button>
+                <button ngbDropdownItem (click)="OpenVote(openVot,ad.votes,ad)">Show</button>
+                <button ngbDropdownItem (click)="MakeVote(addVote, ad.votes,ad)">New vote</button>
               </div>
             </div>
           </td>
@@ -188,6 +190,68 @@
           </tbody>
         </table>
       </div>
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+  </div>
+</ng-template>
+
+
+
+<ng-template #addComment let-modal windowClass="modal-dialog">
+  <div class="modal-header">
+    <h4 class="modal-title" class="text-right" id="modal-basic-title">Add new comment</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+
+    <div class="card-body">
+
+      <div class="card-body">
+
+        <form [formGroup]="CommentForm" (ngSubmit)="sendComment()">
+          <label for="commentTextArea">Write your comment here:  </label>
+          <textarea id="commentTextArea" name="commentTextArea" placeholder="Comment here" formControlName="sadrzaj" rows="4" cols="50"> </textarea>
+          <button type="submit" class="btn btn-primary">Comment</button>
+        </form>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+  </div>
+</ng-template>
+
+
+
+<ng-template #addVote let-modal windowClass="modal-dialog">
+  <div class="modal-header">
+    <h4 class="modal-title" class="text-right" id="modal-basic-title4">Add new vote</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+
+    <div class="card-body">
+
+      <form [formGroup]="VoteForm" (ngSubmit)="sendVote()">
+        <input type="number" formControlName="vrednost" id="voteSender" nbInput min="1" max="5"value="1"  placeholder="Vote here">
+        <button type="submit" class="btn btn-primary">Vote</button>
+      </form>
 
     </div>
 

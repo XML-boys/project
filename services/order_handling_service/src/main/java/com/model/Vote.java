@@ -16,6 +16,8 @@ public class Vote {
     @Column
     private Double vrednost;
     @Column
+    private Long idUsera;
+    @Column
     private Boolean approved;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
@@ -85,5 +87,13 @@ public class Vote {
 
     public void setReklamaz(Ad reklamaz) {
         this.reklamaz = reklamaz;
+    }
+
+    public Long getIdUsera() {
+        return idUsera;
+    }
+
+    public void setIdUsera(Long idUsera) {
+        this.idUsera = idUsera;
     }
 }

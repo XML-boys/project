@@ -67,7 +67,8 @@ export class AgentMyAdsComponent implements OnInit {
   }
 
   DeleteRez(reservation) {
-    this.agentCreateAdService.deleteRes(this.ad.id, reservation.id).subscribe();
+    reservation.state = 'Declined';
+    this.agentCreateAdService.approveRes(reservation, this.ad.id, reservation.id).subscribe();
   }
 
   DeleteCom(comment) {

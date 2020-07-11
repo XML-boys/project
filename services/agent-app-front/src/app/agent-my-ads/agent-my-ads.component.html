@@ -147,7 +147,7 @@
                   <button class="btn btn-outline-primary" id="dropdownBasic" ngbDropdownToggle>Show</button>
                   <div ngbDropdownMenu aria-labelledby="dropdownBasic">
                     <button ngbDropdownItem (click)="OdobriRez(reservation)">Approve</button>
-                    <button ngbDropdownItem (click)="DeleteRez(reservation)">Delete reservation</button>
+                    <button ngbDropdownItem (click)="DeleteRez(reservation)">Decline</button>
                   </div>
                 </div>
               </td>
@@ -197,9 +197,6 @@
           <th>
             Approved
           </th>
-          <th>
-            Management
-          </th>
           </thead>
           <tbody>
           <ng-container *ngFor="let comment of comments">
@@ -210,15 +207,7 @@
               <td>{{comment.approved}}</td>
 
 
-              <td>
-                <div ngbDropdown class="d-inline-block">
-                  <button class="btn btn-outline-primary" id="dropdownBasic5" ngbDropdownToggle>Show</button>
-                  <div ngbDropdownMenu aria-labelledby="dropdownBasic5">
-                    <!--<button ngbDropdownItem (click)="OdobriCom(comment)">Approve</button> proveriti dal treba -->
-                    <button ngbDropdownItem (click)="DeleteCom(comment)">Delete comment</button>
-                  </div>
-                </div>
-              </td>
+
 
 
             </tr>
@@ -268,9 +257,6 @@
           <th>
             Approved
           </th>
-          <th>
-            Management
-          </th>
           </thead>
           <tbody>
           <ng-container *ngFor="let vote of votes">
@@ -281,16 +267,6 @@
               <td>{{vote.vrednost}}</td>
               <td>{{vote.approved}}</td>
 
-
-              <td>
-                <div ngbDropdown class="d-inline-block">
-                  <button class="btn btn-outline-primary" id="dropdownBasic6" ngbDropdownToggle>Show</button>
-                  <div ngbDropdownMenu aria-labelledby="dropdownBasic6">
-                    <!--<button ngbDropdownItem (click)="OdobriCom(comment)">Approve</button> proveriti dal treba -->
-                    <button ngbDropdownItem (click)="DeleteVote(vote)">Delete comment</button>
-                  </div>
-                </div>
-              </td>
 
 
             </tr>

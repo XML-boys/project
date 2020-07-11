@@ -1,17 +1,17 @@
 package com.controller;
 
-import com.model.Ad;
-import com.model.Comment;
-import com.model.Vote;
-import com.model.VoteDTO;
+import com.model.*;
 import com.service.AdService;
+import com.service.RestService;
 import com.service.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,23 +26,69 @@ public class VoteController {
     private AdService adService;
 
     @PostMapping(value = "/{idAd}", consumes = "application/json")
-    public ResponseEntity<Void> saveVote(@RequestBody VoteDTO voteDTO,@PathVariable("idAd") Long idAd)  {
+    public ResponseEntity<?> saveVote(@RequestBody VoteDTO voteDTO, @PathVariable("idAd") Long idAd, HttpServletRequest httpServletRequest)  {
+        String requestTokenHeader = httpServletRequest.getHeader("Authorization");
+        String jwt = requestTokenHeader.substring(7);
+        RestService restService = new RestService(new RestTemplateBuilder());
+        UserValidateDTO userValidateDTO = restService.getUserValidate(jwt);
+
         Vote vote = new Vote();
         Ad ad = adService.findById(idAd);
-        if(ad != null){
-            vote.setIdKola(ad.getVehicleId());
-            vote.setIdReklame(idAd);
-            vote.setVrednost(voteDTO.getVrednost());
-            vote.setReklamaz(ad);
-            vote.setApproved(false);
-            ad.getVotes().add(voteService.save(vote));
-            Ad adz = adService.save(ad);
-            if (adz != null)
-                return new ResponseEntity<>(HttpStatus.CREATED);
-            else
-                return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
-        } else
-            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+
+        if(userValidateDTO.getRole().equals("Client")){
+            ClientDataDTO clientDataDTO = restService.getClient(jwt);
+            if(ad != null){
+                boolean flag = false;
+                for(Vote v : ad.getVotes()){
+                    if(v.getIdUsera() == clientDataDTO.getUserId()){
+                        flag = true;
+                    }
+                }
+                if(!flag){
+                    vote.setIdKola(ad.getVehicleId());
+                    vote.setIdReklame(idAd);
+                    vote.setVrednost(voteDTO.getVrednost());
+                    vote.setIdUsera(clientDataDTO.getUserId());
+                    vote.setReklamaz(ad);
+                    vote.setApproved(false);
+                    ad.getVotes().add(voteService.save(vote));
+                    Ad adz = adService.save(ad);
+                    if (adz != null)
+                        return new ResponseEntity<>(HttpStatus.CREATED);
+                    else
+                        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+                } else
+                    return new ResponseEntity<>("Vec ste glasali",HttpStatus.NOT_MODIFIED);
+            }
+        }else if(userValidateDTO.getRole().equals("Agent")){
+            AgentDataDTO agentDataDTO = restService.getAgent(jwt);
+            if(ad != null){
+                boolean flag = false;
+                for(Vote v : ad.getVotes()){
+                    if(v.getIdUsera() == agentDataDTO.getUserId()){
+                        flag = true;
+                    }
+                }
+                if(!flag){
+                    vote.setIdKola(ad.getVehicleId());
+                    vote.setIdReklame(idAd);
+                    vote.setVrednost(voteDTO.getVrednost());
+                    vote.setIdUsera(agentDataDTO.getUserId());
+                    vote.setReklamaz(ad);
+                    vote.setApproved(false);
+                    ad.getVotes().add(voteService.save(vote));
+                    Ad adz = adService.save(ad);
+                    if (adz != null)
+                        return new ResponseEntity<>(HttpStatus.CREATED);
+                    else
+                        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+                } else
+                    return new ResponseEntity<>("Vec ste glasali",HttpStatus.NOT_MODIFIED);
+            }
+        }
+
+
+        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
     @GetMapping(produces = "application/json")

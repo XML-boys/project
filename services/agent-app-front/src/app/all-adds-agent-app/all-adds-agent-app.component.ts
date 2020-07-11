@@ -15,6 +15,13 @@ export class AllAddsAgentAppComponent implements OnInit {
   closeResult: string;
   comments: any = [];
   votes: any = [];
+
+  CommentForm = this.formBuilder.group({
+    sadrzaj: ['']
+  });
+  VoteForm = this.formBuilder.group({
+    vrednost: ['']
+  });
   constructor(private agentCreateAdService: AgentCreateAdService , private router: Router, private modalService: NgbModal,
               private formBuilder: FormBuilder) { }
 
@@ -50,4 +57,33 @@ export class AllAddsAgentAppComponent implements OnInit {
     });
   }
 
+  MakeComment(addComment, comments, ad){
+    this.comments = comments;
+    this.ad = ad;
+    this.modalService.open(addComment, {size: 'xl'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed`;
+    });
+  }
+
+  sendComment(){
+    this.modalService.dismissAll();
+    return this.agentCreateAdService.createComment(this.CommentForm.value, this.ad.id).subscribe();
+  }
+
+  MakeVote(addVote, votes, ad){
+    this.votes = votes;
+    this.ad = ad;
+    this.modalService.open(addVote, {size: 'xl'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed`;
+    });
+  }
+
+  sendVote(){
+    this.modalService.dismissAll();
+    return this.agentCreateAdService.createVote(this.VoteForm.value, this.ad.id).subscribe();
+  }
 }

@@ -6,6 +6,7 @@ public class VoteDTO {
     private Long idReklame;
     private Double vrednost;
     private Boolean approved;
+    private Long idUsera;
 
     public VoteDTO() {
     }
@@ -23,6 +24,7 @@ public class VoteDTO {
         this.idReklame = vote.getIdReklame();
         this.vrednost = vote.getVrednost();
         this.approved = vote.getApproved();
+        this.idUsera = vote.getIdUsera();
     }
 
     public Long getId() {
@@ -63,5 +65,13 @@ public class VoteDTO {
 
     public void setApproved(Boolean approved) {
         this.approved = approved;
+    }
+
+    public Long getIdUsera() {
+        return idUsera;
+    }
+
+    public void setIdUsera(Long idUsera) {
+        this.idUsera = idUsera;
     }
 }

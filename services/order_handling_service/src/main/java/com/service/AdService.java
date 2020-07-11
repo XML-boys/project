@@ -25,4 +25,6 @@ public class AdService {
         return adRepository.findAdById(id);
     }
 
+    public List<Ad> findAdsByVehicle(Long vehicleId) { return adRepository.findAllByVehicleId(vehicleId); }
+
 }
