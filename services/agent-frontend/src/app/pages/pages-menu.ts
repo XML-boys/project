@@ -24,6 +24,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: false,
   },
   {
+    title: 'Other ads',
+    icon: 'file-text',
+    link: '/agent/dashboard/other-ads',
+    home: false,
+  },
+  {
     title: 'Reservation',
     group: true,
   },
@@ -55,4 +61,5 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/agent/dashboard/vehicles',
     home: false,
   },
+
 ];

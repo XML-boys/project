@@ -11,6 +11,8 @@ public class Comment {
     @Column
     private Long idKomentatora;
     @Column
+    private String username;
+    @Column
     private String sadrzaj;
     @Column
     private Boolean approved;
@@ -67,5 +69,13 @@ public class Comment {
 
     public void setApproved(Boolean approved) {
         this.approved = approved;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

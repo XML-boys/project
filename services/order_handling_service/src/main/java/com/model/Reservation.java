@@ -24,6 +24,8 @@ public class Reservation {
     private String opis;
     @Column
     private Integer predjenaKM;
+    @Column
+    private Boolean arhivirano;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
@@ -102,5 +104,13 @@ public class Reservation {
 
     public void setPredjenaKM(Integer predjenaKM) {
         this.predjenaKM = predjenaKM;
+    }
+
+    public Boolean getArhivirano() {
+        return arhivirano;
+    }
+
+    public void setArhivirano(Boolean arhivirano) {
+        this.arhivirano = arhivirano;
     }
 }

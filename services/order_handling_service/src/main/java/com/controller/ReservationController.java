@@ -46,6 +46,7 @@ public class ReservationController {
                 rez.setEndTime(reservation.getEndTime());
                 rez.setStartTime(reservation.getStartTime());
                 rez.setReklama(ad);
+                rez.setArhivirano(false);
                 ad.getReservations().add(reservationService.save(rez));
                 Ad a = adService.save(ad);
                 if(a != null){
@@ -68,6 +69,7 @@ public class ReservationController {
                     rez.setState("Reserved");
                     rez.setEndTime(reservation.getEndTime());
                     rez.setStartTime(reservation.getStartTime());
+                    rez.setArhivirano(false);
                     rez.setReklama(ad);
                     ad.getReservations().add(reservationService.save(rez));
                     Ad a = adService.save(ad);
@@ -83,6 +85,7 @@ public class ReservationController {
                     rez.setState("Pending");
                     rez.setEndTime(reservation.getEndTime());
                     rez.setStartTime(reservation.getStartTime());
+                    rez.setArhivirano(false);
                     rez.setReklama(ad);
                     ad.getReservations().add(reservationService.save(rez));
                     Ad a = adService.save(ad);
@@ -180,7 +183,7 @@ public class ReservationController {
         return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
-    @PutMapping(value = "/{id}/state", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}/state", consumes = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<Void> putVehicleStatus(@RequestBody String state, @PathVariable Long id) {
         List<Reservation> reservations = reservationService.findAll();
         if(reservations != null)
@@ -228,7 +231,6 @@ public class ReservationController {
             return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
         }
     }
-
 
 
 

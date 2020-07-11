@@ -7,31 +7,37 @@ import {LoginService} from '../../@core/services/login.service';
 @Component({
   selector: 'app-reservations',
   templateUrl: './reservations.component.html',
-  styleUrls: ['./reservations.component.css']
+  styleUrls: ['./reservations.component.scss']
 })
 export class ReservationsComponent implements OnInit {
 
   settings = {
+    hideSubHeader: true,
     actions: {
+      custom: [
+        {
+          name: 'reserve',
+          title: '<i class="ion-checkmark-round" title="Accept"></i>'
+        },
+        {
+          name: 'delete',
+          title: '<i class="ion-close-round" title="delete"></i>'
+        }
+      ],
       add: false,
       edit: false,
-      delete: true,
-      custom: [{ name: 'accept', title: '<i class="nb-checkmark" aria-hidden="true"></i>' }]
-    },
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
+      delete: false
     },
     columns: {
       id: {
         title: 'Reservation ID',
         type: 'number',
       },
-      adId: {
+/*      adId: {
         title: 'Ad ID',
         type: 'number',
       },
-      startTime: {
+*/      startTime: {
         title: 'Start date',
         type: 'string',
       },
@@ -50,16 +56,18 @@ export class ReservationsComponent implements OnInit {
   }
 
   loadAds(data){
+    console.log(data);
     for (const item of data) {
-      const tmp = {
-        id: item.id,
-        adId: item.reklama.id,
-        startTime: item.startTime,
-        endDate: item.endDate,
-        location: item.reklama.location,
-      };
-      this.source.add(tmp);
-
+      if (item.state === 'Pending') {
+        const tmp = {
+          id: item.id,
+          // adId: item.reklama.id,
+          startTime: item.startTime,
+          endDate: item.endTime,
+          //  location: item.reklama.location,
+        };
+        this.source.add(tmp);
+      }
     }
     console.log(this.source);
   }
@@ -89,4 +97,15 @@ export class ReservationsComponent implements OnInit {
       }
     );
   }
+
+  onReserve(event) {
+    console.log(event);
+    if (event.action === 'reserve'){
+      this.service.acceptRes(event.data.id, 'Reserved').subscribe();
+    }
+    else if (event.action === 'delete'){
+      this.service.acceptRes(event.data.id, 'Declined').subscribe();
+    }
+  }
+
 }

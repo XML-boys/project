@@ -4,9 +4,9 @@ import { PagesComponent } from './pages.component';
 import {ThemeModule} from '../@theme/theme.module';
 import {
     NbButtonModule,
-    NbCardModule,
+    NbCardModule, NbChatModule,
     NbCheckboxModule,
-    NbDatepickerModule,
+    NbDatepickerModule, NbIconModule,
     NbInputModule,
     NbMenuModule,
     NbSelectModule
@@ -26,11 +26,12 @@ import { StatsComponent } from './stats/stats.component';
 import { ChatComponent } from './chat/chat.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { ReserveFormComponent } from './my-ads/reserve-form/reserve-form.component';
+import { OtherAdsComponent } from './other-ads/other-ads.component';
 
 
 
 @NgModule({
-  declarations: [PagesComponent, MyAdsComponent, NewAdComponent, NewVehicleComponent, ReservationsComponent, NewReservationComponent, ProfileComponent, StatsComponent, ChatComponent, VehiclesComponent, ReserveFormComponent],
+  declarations: [PagesComponent, MyAdsComponent, NewAdComponent, NewVehicleComponent, ReservationsComponent, NewReservationComponent, ProfileComponent, StatsComponent, ChatComponent, VehiclesComponent, ReserveFormComponent, OtherAdsComponent],
     imports: [
         CommonModule,
         ThemeModule,
@@ -45,7 +46,9 @@ import { ReserveFormComponent } from './my-ads/reserve-form/reserve-form.compone
         NbDatepickerModule,
         NbCheckboxModule,
         DropdownListModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NbChatModule,
+        NbIconModule
     ]
 })
 export class PagesModule { }
