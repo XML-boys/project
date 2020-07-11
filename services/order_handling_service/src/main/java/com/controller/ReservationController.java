@@ -183,7 +183,7 @@ public class ReservationController {
         return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
-    @PutMapping(value = "/{id}/state", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}/state", consumes = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<Void> putVehicleStatus(@RequestBody String state, @PathVariable Long id) {
         List<Reservation> reservations = reservationService.findAll();
         if(reservations != null)
