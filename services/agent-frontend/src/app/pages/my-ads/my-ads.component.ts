@@ -17,11 +17,15 @@ import {ReservationsService} from '../../@core/services/reservations.service';
 export class MyAdsComponent implements OnInit {
   @ViewChild('disabledEsc', { read: TemplateRef, static: true }) disabledEscTemplate: TemplateRef<HTMLElement>;
   @ViewChild('commentsWin', { read: TemplateRef, static: true }) commentsTemplate: TemplateRef<HTMLElement>;
+  @ViewChild('reservationsWin', { read: TemplateRef, static: true }) reservationsTemplate: TemplateRef<HTMLElement>;
 
   id;
   min: Date;
   max: Date;
   messages: any = [];
+  ads: any = [];
+  reservations: any = [];
+
   settings = {
       hideSubHeader: true,
       actions: {
@@ -33,6 +37,10 @@ export class MyAdsComponent implements OnInit {
           {
             name: 'comments',
             title: '<i class="ion-clipboard" title="Comments"></i>'
+          },
+          {
+            name: 'reservations',
+            title: '<i class="ion-folder" title="Reservations"></i>'
           },
           {
             name: 'delete',
@@ -73,6 +81,35 @@ export class MyAdsComponent implements OnInit {
   ReerveForm: FormGroup;
   source: LocalDataSource = new LocalDataSource();
 
+  resSettings = {
+    hideSubHeader: true,
+    actions: {
+      add: false,
+      edit: false,
+      delete: false
+    },
+    columns: {
+      id: {
+        title: 'Reservation ID',
+        type: 'number',
+      },
+      /*      adId: {
+              title: 'Ad ID',
+              type: 'number',
+            },
+      */      startTime: {
+        title: 'Start date',
+        type: 'string',
+      },
+      endTime: {
+        title: 'End date',
+        type: 'string',
+      },
+    },
+  };
+
+  resSource: LocalDataSource = new LocalDataSource();
+
   constructor(private service: MyAdsService, private windowService: NbWindowService, protected dateService: NbDateService<Date>,
               private formBuilder: FormBuilder, private reservationService: ReservationsService) {
 
@@ -106,6 +143,8 @@ export class MyAdsComponent implements OnInit {
   ngOnInit(): void {
     this.service.getAll().subscribe((data: {}) => {
         this.loadAds(data);
+        this.ads = data;
+        this.reservations = this.ads.reservations;
         console.log(data);
         this.source.refresh();
       }
@@ -132,6 +171,10 @@ export class MyAdsComponent implements OnInit {
     else if (event.action === 'comments'){
       this.messages = event.data.comments;
       this.commentsWindows();
+    }
+    else if (event.action === 'reservations'){
+      this.openResWindows(event.data.id);
+      this.resSource.refresh();
     }
   }
 
@@ -163,5 +206,33 @@ export class MyAdsComponent implements OnInit {
     );
   }
 
+  openResWindows(id) {
+    this.loading(id);
+    this.windowService.open(
+      this.reservationsTemplate,
+      {
+        title: 'Reservations',
+        hasBackdrop: false,
+        closeOnEsc: true,
+      },
+    );
+  }
 
+  loading( id ) {
+    for (const ad of this.ads) {
+      if (ad.id === id){
+        for (const item of ad.reservations) {
+          const tmp = {
+            id: item.id,
+            // adId: item.reklama.id,
+            startTime: item.startTime,
+            endTime: item.endTime,
+            //  location: item.reklama.location,
+          };
+          this.resSource.add(tmp);
+        }
+      }
+    }
+    console.log(this.source);
+  }
 }

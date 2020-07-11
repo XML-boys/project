@@ -16,4 +16,8 @@ export class MyAdsService {
   createAd(ad): Observable<any> {
     return this.http.post<any>('http://localhost:6969/ad', ad);
   }
+
+  getAllByVehicle(id): Observable<Ad> {
+    return this.http.get<Ad>('http://localhost:6969/ad/vehicle/' + id);
+  }
 }

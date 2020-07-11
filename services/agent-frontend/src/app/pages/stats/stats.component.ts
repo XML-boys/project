@@ -33,12 +33,12 @@ export class StatsComponent implements OnInit {
         title: 'Grade',
         type: 'string',
       },
-      location: {
-        title: 'Location',
-        type: 'string',
-      },
       coments: {
         title: 'Comments',
+        type: 'string',
+      },
+      ads: {
+        title: 'Ads for this vehicle',
         type: 'string',
       },
     },
@@ -79,39 +79,35 @@ export class StatsComponent implements OnInit {
 
   loadAds(data) {
     for (const item of data) {
-      let vehicle = null;
-      this.vehicleService.getVehicle(item.vehicleId).subscribe(data2 => {
-          vehicle = data2;
-          console.log(vehicle);
-          let ukupnaOcena = 0;
-          let i = 0;
-          for (const vote of item.votes) {
-            if (vote.approved === true){
+    // let vehicle = null;
+      this.adService.getAllByVehicle(item.id).subscribe((data2: {}) => {
+        this.ads = data2;
+        let ukupnaOcena = 0;
+        let i = 0;
+        let commentLenght = 0;
+        for (const dat of this.ads) {
+          for (const vote of dat.votes) {
+            if (vote.approved === true) {
               i++;
               ukupnaOcena += vote.vrednost;
             }
           }
-          const ocena = ukupnaOcena / item.votes.length;
-
-          const tmp = {
-            id: item.id,
-            vehicleId: item.vehicleId,
-            vehicle: vehicle.vendor + ' ' + vehicle. model,
-            oil: vehicle.oilType,
-            gear: vehicle.gearType,
-            startTime: item.startTime,
-            endDate: item.endDate,
-            location: item.location,
-            cena: item.cena,
-            comments: item.comments,
-            vote: ocena
-          };
-          this.source.add(tmp);
-          this.source.refresh();
-
-
+          commentLenght += dat.comments.length;
         }
-      );
+        const ocena = ukupnaOcena / i;
+        const tmp = {
+          id: item.id,
+          name: item.vendor + ' ' + item. model + ' ' + item.vehicleClass,
+          distance: item.distanceKM,
+          grade: ocena,
+          coments: commentLenght,
+          ads: this.ads.length
+        };
+        this.source.add(tmp);
+        this.source.refresh();
+
+
+      });
     }
     console.log(this.source);
     console.log('2');
@@ -119,15 +115,8 @@ export class StatsComponent implements OnInit {
   ngOnInit(): void {
     this.vehicleService.getAllVehicle().subscribe( (data: {}) => {
       this.vehicles = data;
-      this.getAllAds();
+      this.loadAds(data);
     });
   }
-
-  getAllAds() {
-    this.adService.getAll().subscribe( (data: {}) => {
-      this.ads = data;
-    });
-  }
-
 
 }

@@ -63,7 +63,7 @@ export class ReservationsComponent implements OnInit {
           id: item.id,
           // adId: item.reklama.id,
           startTime: item.startTime,
-          endDate: item.endTime,
+          endTime: item.endTime,
           //  location: item.reklama.location,
         };
         this.source.add(tmp);

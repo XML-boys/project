@@ -74,6 +74,7 @@ export class OtherAdsComponent implements OnInit {
   ReerveForm: FormGroup;
   source: LocalDataSource = new LocalDataSource();
 
+
   constructor(private service: MyAdsService, private windowService: NbWindowService, protected dateService: NbDateService<Date>,
               private formBuilder: FormBuilder, private reservationService: ReservationsService, private vehicleService: VehicleService) {
 

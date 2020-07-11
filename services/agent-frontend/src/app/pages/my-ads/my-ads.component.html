@@ -40,3 +40,8 @@
                    [sender]="msg.username">
   </nb-chat-message>
 </ng-template>
+
+<ng-template #reservationsWin>
+  <ng2-smart-table [settings]="resSettings" [source]="resSource">
+  </ng2-smart-table>
+</ng-template>
