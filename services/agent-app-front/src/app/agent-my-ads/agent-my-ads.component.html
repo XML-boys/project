@@ -67,6 +67,7 @@
             <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>Open comments</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
               <button ngbDropdownItem (click)="OpenComments(openCom,ad.comments,ad)">Open</button>
+              <button ngbDropdownItem (click)="MakeComment(addComment, ad.comments,ad)">New comment</button>
             </div>
           </div>
         </td>
@@ -274,6 +275,40 @@
           </tbody>
         </table>
       </div>
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+  </div>
+</ng-template>
+
+
+
+<ng-template #addComment let-modal windowClass="modal-dialog">
+  <div class="modal-header">
+    <h4 class="modal-title" class="text-right" id="modal-basic-title">Add new comment</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+
+    <div class="card-body">
+
+      <div class="card-body">
+
+        <form [formGroup]="CommentForm" (ngSubmit)="sendComment()">
+          <label for="commentTextArea">Write your comment here:  </label>
+          <textarea id="commentTextArea" name="commentTextArea" placeholder="Comment here" formControlName="sadrzaj" rows="4" cols="50"> </textarea>
+          <button type="submit" class="btn btn-primary">Comment</button>
+        </form>
+
+      </div>
+
 
     </div>
 

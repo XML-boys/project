@@ -42,7 +42,7 @@ public class ReservationController {
                 ClientDataDTO clientDataDTO = restService.getClient(jwt);
                 Reservation rez = new Reservation();
                 rez.setUserId(clientDataDTO.getUserId());
-                rez.setState(reservation.getState());
+                rez.setState("Pending");
                 rez.setEndTime(reservation.getEndTime());
                 rez.setStartTime(reservation.getStartTime());
                 rez.setReklama(ad);
@@ -63,7 +63,7 @@ public class ReservationController {
             Ad ad = adService.findById(id);
             if(ad != null) {
                 AgentDataDTO agentDataDTO = restService.getAgent(jwt);
-                if(agentDataDTO.getId() == ad.getIdAgenta()){
+                if(agentDataDTO.getUserId() == ad.getIdAgenta()){
                     Reservation rez = new Reservation();
                     rez.setUserId(agentDataDTO.getUserId());
                     rez.setState("Reserved");
@@ -221,6 +221,26 @@ public class ReservationController {
             for(Ad ad : ads){
                 if(ad.getIdAgenta() == idAgenta){
                     for(Reservation reservation : ad.getReservations()){
+                        returnReservation.add(reservation);
+                    }
+                }
+            }
+            return new ResponseEntity<>(returnReservation,HttpStatus.OK);
+        } else
+        {
+            return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        }
+    }
+
+
+    @GetMapping(value = "/{idClienta}/client", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<List<Reservation>> getRezKlijent(@PathVariable("idClienta") Long idClienta) {
+        List<Ad> ads = adService.findAllAds();
+        List<Reservation> returnReservation = new ArrayList<>();
+        if(ads != null) {
+            for(Ad ad : ads){
+                for(Reservation reservation : ad.getReservations()){
+                    if(reservation.getUserId() == idClienta){
                         returnReservation.add(reservation);
                     }
                 }

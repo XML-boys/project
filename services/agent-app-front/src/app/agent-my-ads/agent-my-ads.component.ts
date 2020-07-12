@@ -17,6 +17,10 @@ export class AgentMyAdsComponent implements OnInit {
   reservations: any = [];
   comments: any = [];
   votes: any = [];
+
+  CommentForm = this.formBuilder.group({
+    sadrzaj: ['']
+  });
   constructor(private agentCreateAdService: AgentCreateAdService , private router: Router, private modalService: NgbModal,
               private formBuilder: FormBuilder) { }
 
@@ -83,5 +87,22 @@ export class AgentMyAdsComponent implements OnInit {
     this.ad = ad;
     this.agentCreateAdService.sendAdToAnother(this.ad);
     this.router.navigate(['/agent-app/agent-reserve-for-myself']);
+  }
+
+  // tslint:disable-next-line:typedef
+  sendComment(){
+    this.modalService.dismissAll();
+    return this.agentCreateAdService.createComment(this.CommentForm.value, this.ad.id).subscribe();
+  }
+
+  // tslint:disable-next-line:typedef
+  MakeComment(addComment, comments, ad){
+    this.comments = comments;
+    this.ad = ad;
+    this.modalService.open(addComment, {size: 'xl'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed`;
+    });
   }
 }

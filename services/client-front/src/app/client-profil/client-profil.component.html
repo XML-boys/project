@@ -1,0 +1,36 @@
+<div class="panel-header panel-header-sm">
+</div>
+
+<div class="row">
+  <div class="col-lg-6">
+
+    <h1>My profile</h1>
+    <div class="profile">
+      <form [formGroup]="profileForm" (ngSubmit)="update()">
+        <div>
+          <label for="firstName">First name:       </label>
+          <input type="text" id="firstName" value="{{loadedData.firstName}}" nbInput fullWidth formControlName="firstName" placeholder="First name">
+        </div>
+        <br>
+        <div>
+          <label for="lastName">Last name:             </label>
+          <input type="text" id="lastName" value="{{loadedData.lastName}}" nbInput fullWidth formControlName="lastName" placeholder="Last name">
+        </div>
+        <br>
+        <div>
+          <label for="adress">Adress:           </label>
+          <input type="text" id="adress" value="{{loadedData.adress}}" nbInput fullWidth formControlName="adress" placeholder="Adress">
+        </div>
+        <br>
+        <div>
+          <label for="email">Email:           </label>
+          <input type="text" id="email" value="{{loadedData.email}}" nbInput fullWidth formControlName="email" placeholder="Email">
+        </div>
+        <br>
+        <p>
+          <input type="submit" class="btn btn-primary" value="Update">
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
