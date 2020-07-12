@@ -19,6 +19,10 @@ public class MessageDTO {
 		// implement 
 	}
 	
+	public MessageDTO() {
+	 
+	}
+	
 	
 	public String getFromUser() {
 		return fromUser;

@@ -8,27 +8,27 @@ services:
                         - "./user_frontend/index.html:/usr/share/nginx/html/frontend/index.html"
                 ports:
                         - "6969:80"
-        vehicle-location: # stefan
-                image: python
-                volumes:
-                        - "./vehicle:/code"
-                command: "python /code/main.py"
-        agent-backend: # stefan
-                build: "./agent_backend/"
-                command: python /code/manage.py runserver 0.0.0.0:8000
-                volumes:
-                  - "./agent_backend/:/code/"
-        agent-database: # stefan
-                image: postgres
-        message-queue: # stefan
-                image: rmohr/activemq
-                ports:
-                        - "665:8161"
-        email-service: # stefan
-                image: maven
-                command: cd /usr/src/mymaven && mvn spring-boot:run
-                volumes:
-                        - "./email_service/:/usr/src/mymaven/"
+#        vehicle-location: # stefan
+#                image: python
+#                volumes:
+#                        - "./vehicle:/code"
+#                command: "python /code/main.py"
+#        agent-backend: # stefan
+#                build: "./agent_backend/"
+#                command: python /code/manage.py runserver 0.0.0.0:8000
+#                volumes:
+#                  - "./agent_backend/:/code/"
+#        agent-database: # stefan
+#                image: postgres
+ #       message-queue: # stefan
+ #               image: rmohr/activemq
+ #               ports:
+ #                       - "665:8161"
+ #       email-service: # stefan
+ #               image: maven
+ #               command: cd /usr/src/mymaven && mvn spring-boot:run
+ #               volumes:
+ #                       - "./email_service/:/usr/src/mymaven/"
 
         message-service: # stefan
                 image: maven
@@ -74,8 +74,3 @@ services:
                 environment:
                     PGADMIN_DEFAULT_EMAIL: admin@admin.com
                     PGADMIN_DEFAULT_PASSWORD: admin
-        agent-app-service: # uros
-                image: maven
-                command: /usr/src/mymaven/run.sh
-                volumes:
-                        - "./agent-app-service/:/usr/src/mymaven/"

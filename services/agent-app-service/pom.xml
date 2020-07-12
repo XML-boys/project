@@ -56,63 +56,71 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-websocket</artifactId>
+            <groupId>net.minidev</groupId>
+            <artifactId>json-smart</artifactId>
+            <version>2.3</version>
+            <scope>compile</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.ws</groupId>
             <artifactId>spring-ws-support</artifactId>
             <version>2.1.4.RELEASE</version>
         </dependency>
-
         <dependency>
-            <groupId>wsdl4j</groupId>
-            <artifactId>wsdl4j</artifactId>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.0</version>
         </dependency>
         <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <version>2.3.2</version>
-            <scope>runtime</scope>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.messaging.saaj</groupId>
+            <artifactId>saaj-impl</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.xml.ws</groupId>
+            <artifactId>jaxws-api</artifactId>
+            <version>2.2.6</version>
         </dependency>
 
     </dependencies>
 
     <build>
+
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jaxb2-maven-plugin</artifactId>
-                <version>2.4</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>0.14.0</version>
                 <executions>
                     <execution>
-                        <id>schemagen</id>
-                        <phase>generate-sources</phase>
                         <goals>
-                            <goal>schemagen</goal>
+                            <goal>generate</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <sources>
-                        <source>${basedir}/src/main/java/io/github/t3rmian/jmetersamples/data</source>
-                        <source>${basedir}/src/main/java/io/github/t3rmian/jmetersamples/controller/dto</source>
-                        <source>${basedir}/src/main/java/io/github/t3rmian/jmetersamples/controller/ws/dto</source>
-                    </sources>
-                    <outputDirectory>${project.build.directory}/classes</outputDirectory>
-                    <transformSchemas>
-                        <transformSchema>
-                            <uri>https://github.com/t3rmian/jmeter-samples</uri>
-                            <toPrefix>t3r</toPrefix>
-                            <toFile>users.xsd</toFile>
-                        </transformSchema>
-                    </transformSchemas>
+                    <schemaLanguage>WSDL</schemaLanguage>
+                    <generatePackage>com.xml.RentACar.wsdl</generatePackage>
+                    <schemas>
+                        <schema>
+                            <url>http://localhost:6969/ws/AdServiceSchema.wsdl</url>
+                        </schema>
+                    </schemas>
                 </configuration>
             </plugin>
         </plugins>
