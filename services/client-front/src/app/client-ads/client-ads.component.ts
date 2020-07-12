@@ -21,6 +21,8 @@ export class ClientAdsComponent implements OnInit {
   lokacije: string[] = ['Beograd' , 'Novi Sad', 'Cacak', 'Sabac' , 'Sremska Mitrovica'];
   comments: any = [];
   votes: any = [];
+  newComments: any = [];
+  newVotes: any = [];
   vehicle: any = [];
   CommentForm = this.formBuilder.group({
     sadrzaj: ['']
@@ -63,7 +65,13 @@ export class ClientAdsComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   OpenComments(openCom, comments, ad){
-    this.comments = comments;
+    this.newComments = [];
+    for (const comment of comments){
+      if (comment.approved === true){
+        this.newComments.push(comment);
+      }
+    }
+    this.comments = this.newComments;
     this.ad = ad;
     this.modalService.open(openCom, {size: 'xl'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -74,7 +82,13 @@ export class ClientAdsComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   MakeComment(addComment, comments, ad){
-    this.comments = comments;
+    this.newComments = [];
+    for (const comment of comments){
+      if (comment.approved === true){
+        this.newComments.push(comment);
+      }
+    }
+    this.comments = this.newComments;
     this.ad = ad;
     this.modalService.open(addComment, {size: 'xl'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -85,7 +99,13 @@ export class ClientAdsComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   MakeVote(addVote, votes, ad){
-    this.votes = votes;
+    this.newVotes = [];
+    for (const vote of votes){
+      if (vote.approved === true){
+        this.newVotes.push(vote);
+      }
+    }
+    this.votes = this.newVotes;
     this.ad = ad;
     this.modalService.open(addVote, {size: 'xl'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -96,7 +116,13 @@ export class ClientAdsComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   OpenVote(openVot, votes, ad){
-    this.votes = votes;
+    this.newVotes = [];
+    for (const vote of votes){
+      if (vote.approved === true){
+        this.newVotes.push(vote);
+      }
+    }
+    this.votes = this.newVotes;
     this.ad = ad;
     this.modalService.open(openVot, {size: 'xl'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -142,8 +168,20 @@ export class ClientAdsComponent implements OnInit {
   // tslint:disable-next-line:typedef
   OpenDetails(openDetails, ad){
     this.ad = ad;
-    this.votes = ad.votes;
-    this.comments = ad.comments;
+    this.newVotes = [];
+    for (const vote of ad.votes){
+      if (vote.approved === true){
+        this.newVotes.push(vote);
+      }
+    }
+    this.votes = this.newVotes;
+    this.newComments = [];
+    for (const comment of ad.comments){
+      if (comment.approved === true){
+        this.newComments.push(comment);
+      }
+    }
+    this.comments = this.newComments;
     this.clientService.getVehicleById(this.ad.vehicleId).subscribe((data: {}) => {
       this.vehicle = data;
     });

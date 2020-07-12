@@ -144,7 +144,7 @@ public class ReservationController {
         Ad ad = adService.findById(id);
         if(ad != null ){
             for(Reservation rez : ad.getReservations()){
-                if(rez.getId() == idReservation && rez.getState() != "Reserved"){
+                if(rez.getId() == idReservation && !rez.getState().equals("Reserved")){
                     rez.setState(reservationDTO.getState());
                     rez.setEndTime(reservationDTO.getEndTime());
                     rez.setStartTime(reservationDTO.getStartTime());
