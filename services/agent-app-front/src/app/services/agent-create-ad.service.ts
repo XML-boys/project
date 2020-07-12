@@ -51,7 +51,7 @@ export class AgentCreateAdService {
   }
 
   createAd(ad): Observable<any> {
-    return this.http.post<any>('http://localhost:6969/agent-app/ad', ad);
+    return this.http.post<any>('http://localhost:8080/agent-app/ad', ad);
   }
 
   createVehicle(ad): Observable<any> {

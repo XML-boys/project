@@ -1,0 +1,59 @@
+<div class="panel-header panel-header-sm">
+</div>
+
+<h1>My reservations</h1>
+<div>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead class=" text-primary">
+      <th>
+        Id
+      </th>
+      <th>
+        User id
+      </th>
+      <th>
+        Start date
+      </th>
+      <th>
+        End date
+      </th>
+      <th>
+        State
+      </th>
+      <th>
+        Description
+      </th>
+      <th>
+        KM
+      </th>
+      <th>
+        Management
+      </th>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let reservation of reservations">
+        <tr>
+          <td>{{reservation.id}}</td>
+          <td>{{reservation.userId}}</td>
+          <td>{{reservation.startTime}}</td>
+          <td>{{reservation.endTime}}</td>
+          <td>{{reservation.state}}</td>
+          <td>{{reservation.opis}}</td>
+          <td>{{reservation.predjenaKM}}</td>
+
+          <td>
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-primary" id="dropdownBasic" ngbDropdownToggle>Show</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic">
+                <button ngbDropdownItem (click)="DeleteRez(reservation)">Decline</button>
+              </div>
+            </div>
+          </td>
+
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>

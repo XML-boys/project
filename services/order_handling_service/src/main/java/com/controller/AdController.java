@@ -30,12 +30,15 @@ public class AdController {
         String jwt = requestTokenHeader.substring(7);
         RestService restService = new RestService(new RestTemplateBuilder());
         UserValidateDTO userValidateDTO = restService.getUserValidate(jwt);
-        AgentDataDTO agentDataDTO = restService.getAgent(jwt);
+        List <Ad> ads = adService.findAllAds();
+        int flag = 0;
+
         if(userValidateDTO.getRole().equals("Agent")){
+            AgentDataDTO agentDataDTO = restService.getAgent(jwt);
             Ad ad = new Ad();
             ad.setStartTime(adDTO.getStartTime());
             ad.setEndDate(adDTO.getEndDate());
-            ad.setIdAgenta(agentDataDTO.getId());
+            ad.setIdAgenta(agentDataDTO.getUserId());
             ad.setLocation(adDTO.getLocation());
             ad.setVehicleId(adDTO.getVehicleId());
             //   ad.setPictures(adDTO.getPictures());
@@ -45,25 +48,43 @@ public class AdController {
             adService.save(ad);
 
             return new ResponseEntity<>(HttpStatus.CREATED);
-        }else{
+        }else if (userValidateDTO.getRole().equals("Client")){
+            ClientDataDTO clientDataDTO = restService.getClient(jwt);
+            for (Ad a : ads){
+                if(a.getIdAgenta() == clientDataDTO.getUserId()){
+                    flag++;
+                    return new ResponseEntity<>(HttpStatus.OK);
+                }
+            }
+            if(flag < 4){
+                Ad ad = new Ad();
+                ad.setStartTime(adDTO.getStartTime());
+                ad.setEndDate(adDTO.getEndDate());
+                ad.setIdAgenta(clientDataDTO.getUserId());
+                ad.setLocation(adDTO.getLocation());
+                ad.setVehicleId(adDTO.getVehicleId());
+                //   ad.setPictures(adDTO.getPictures());
+                ad.setCena(adDTO.getCena());
+                ad.setDamage(adDTO.isDamage());
+
+                adService.save(ad);
+                return new ResponseEntity<>(HttpStatus.CREATED);
+            }
+        }
+        else{
             return new ResponseEntity<>(HttpStatus.OK);
         }
-
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping(produces = "application/json")
-    public ResponseEntity<List<AdFullDTO>> getAds() {
+    public ResponseEntity<List<Ad>> getAds() {
         List<Ad> ads = adService.findAllAds();
-        List<AdFullDTO> adFullDTOS= new ArrayList<>();
         if(ads != null)
         {
-            for(Ad a : ads)
-            {
-                adFullDTOS.add(new AdFullDTO(a));
-                return new ResponseEntity<>(adFullDTOS, HttpStatus.OK);
-            }
+            return new ResponseEntity<>(ads, HttpStatus.OK);
         }
-        return new ResponseEntity<>(adFullDTOS, HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(ads, HttpStatus.NOT_IMPLEMENTED);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -160,7 +181,7 @@ public class AdController {
         if(userValidateDTO.getRole().equals("Agent")){
             if(ads != null) {
                 for(Ad ad : ads){
-                    if(ad.getIdAgenta() == agentDataDTO.getId()){
+                    if(ad.getIdAgenta() == agentDataDTO.getUserId()){
                         returnAds.add(ad);
                     }
                 }
@@ -187,7 +208,7 @@ public class AdController {
             AgentDataDTO agentDataDTO = restService.getAgent(jwt);
             if(ads != null) {
                 for(Ad ad : ads){
-                    if(ad.getIdAgenta() == agentDataDTO.getId()){
+                    if(ad.getIdAgenta() == agentDataDTO.getUserId()){
                         returnAds.add(ad);
                     }
                 }

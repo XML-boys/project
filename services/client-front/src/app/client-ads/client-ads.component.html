@@ -1,0 +1,462 @@
+<div class="panel-header panel-header-sm">
+</div>
+
+
+<h1>All ads</h1>
+
+<div class="card-body">
+  <form [formGroup]="ReservationForm" (ngSubmit)="perica(openAd)">
+    <div>
+      <mat-label>Start date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="startTime">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </div>
+    <br>
+    <div>
+      <mat-label>End date  </mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="endTime">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <mat-label>Locations</mat-label>
+        <mat-select formControlName="location">
+          <mat-option id="location"  *ngFor="let location of lokacije" [value]="location">{{location}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+
+</div>
+
+
+
+
+<ng-template #openAd let-modal windowClass="modal-dialog">
+  <div class="modal-header">
+    <h4 class="modal-title" class="text-right" id="modal-basic-title33">Ads</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+
+    <div class="card-body">
+      <input placeholder="Start time" [(ngModel)]="startTime" (input)="Search()">
+      <input placeholder="Cena" [(ngModel)]="cena" (input)="Search1()">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead class=" text-primary">
+          <th>
+            Id
+          </th>
+          <th>
+            Id agenta
+          </th>
+          <th>
+            Start date
+          </th>
+          <th>
+            End date
+          </th>
+          <th>
+            Location
+          </th>
+          <th>
+            Vehicle id
+          </th>
+          <th>
+            Price
+          </th>
+          <th>
+            Damage
+          </th>
+          <th>
+            Reservations
+          </th>
+          <th>
+            Comments
+          </th>
+          <th>
+            Votes
+          </th>
+          <th>
+            Details
+          </th>
+          </thead>
+          <tbody>
+          <ng-container *ngFor="let ad of ads">
+            <tr>
+              <td>{{ad.id}}</td>
+              <td>{{ad.idAgenta}}</td>
+              <td>{{ad.startTime}}</td>
+              <td>{{ad.endDate}}</td>
+              <td>{{ad.location}}</td>
+              <td>{{ad.vehicleId}}</td>
+              <td>{{ad.cena}}</td>
+              <td>{{ad.damage}}</td>
+
+              <td>
+                <div ngbDropdown class="d-inline-block">
+                  <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Open reservations</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem (click)="ReserveForMe(ad)">Reserve for myself</button>
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <div ngbDropdown class="d-inline-block">
+                  <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>Open comments</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                    <button ngbDropdownItem (click)="OpenComments(openCom,ad.comments,ad)">Show</button>
+                    <button ngbDropdownItem (click)="MakeComment(addComment, ad.comments,ad)">New comment</button>
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <div ngbDropdown class="d-inline-block">
+                  <button class="btn btn-outline-primary" id="dropdownBasic3" ngbDropdownToggle>Open votes</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic3">
+                    <button ngbDropdownItem (click)="OpenVote(openVot,ad.votes,ad)">Show</button>
+                    <button ngbDropdownItem (click)="MakeVote(addVote, ad.votes,ad)">New vote</button>
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <div ngbDropdown class="d-inline-block">
+                  <button class="btn btn-outline-primary" id="dropdownBasic4" ngbDropdownToggle>Open details</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic3">
+                    <button ngbDropdownItem (click)="OpenDetails(openDetails,ad)">Show</button>
+                  </div>
+                </div>
+              </td>
+
+            </tr>
+          </ng-container>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+  </div>
+</ng-template>
+
+
+
+<ng-template #openCom let-modal windowClass="modal-dialog">
+  <div class="modal-header">
+    <h4 class="modal-title" class="text-right" id="modal-basic-title3">Comments</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+
+    <div class="card-body">
+
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead class=" text-primary">
+          <th>
+            Id
+          </th>
+          <th>
+            Commentator id
+          </th>
+          <th>
+            Content
+          </th>
+          <th>
+            Approved
+          </th>
+          </thead>
+          <tbody>
+          <ng-container *ngFor="let comment of comments">
+            <tr>
+              <td>{{comment.id}}</td>
+              <td>{{comment.idKomentatora}}</td>
+              <td>{{comment.sadrzaj}}</td>
+              <td>{{comment.approved}}</td>
+
+
+            </tr>
+          </ng-container>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+  </div>
+</ng-template>
+
+
+
+<ng-template #openVot let-modal windowClass="modal-dialog">
+  <div class="modal-header">
+    <h4 class="modal-title" class="text-right" id="modal-basic-title2">Votes</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+
+    <div class="card-body">
+
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead class=" text-primary">
+          <th>
+            Id
+          </th>
+          <th>
+            Vehicle id
+          </th>
+          <th>
+            Ad id
+          </th>
+          <th>
+            Value
+          </th>
+          <th>
+            Approved
+          </th>
+          </thead>
+          <tbody>
+          <ng-container *ngFor="let vote of votes">
+            <tr>
+              <td>{{vote.id}}</td>
+              <td>{{vote.idKola}}</td>
+              <td>{{vote.idReklame}}</td>
+              <td>{{vote.vrednost}}</td>
+              <td>{{vote.approved}}</td>
+
+
+            </tr>
+          </ng-container>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+  </div>
+</ng-template>
+
+
+
+<ng-template #addComment let-modal windowClass="modal-dialog">
+  <div class="modal-header">
+    <h4 class="modal-title" class="text-right" id="modal-basic-title">Add new comment</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+
+    <div class="card-body">
+
+      <div class="card-body">
+
+        <form [formGroup]="CommentForm" (ngSubmit)="sendComment()">
+          <label for="commentTextArea">Write your comment here:  </label>
+          <textarea id="commentTextArea" name="commentTextArea" placeholder="Comment here" formControlName="sadrzaj" rows="4" cols="50"> </textarea>
+          <button type="submit" class="btn btn-primary">Comment</button>
+        </form>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+  </div>
+</ng-template>
+
+
+
+<ng-template #addVote let-modal windowClass="modal-dialog">
+  <div class="modal-header">
+    <h4 class="modal-title" class="text-right" id="modal-basic-title4">Add new vote</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+
+    <div class="card-body">
+
+      <form [formGroup]="VoteForm" (ngSubmit)="sendVote()">
+        <input type="number" formControlName="vrednost" id="voteSender" nbInput min="1" max="5"value="1"  placeholder="Vote here">
+        <button type="submit" class="btn btn-primary">Vote</button>
+      </form>
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+  </div>
+</ng-template>
+
+
+
+<ng-template #openDetails let-modal windowClass="modal-dialog">
+  <div class="modal-header">
+    <h4 class="modal-title" class="text-right" id="modal-basic-title5">Ad details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="card-body">
+      <h1>Votes</h1>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead class=" text-primary">
+          <th>
+            Id
+          </th>
+          <th>
+            Vehicle id
+          </th>
+          <th>
+            Ad id
+          </th>
+          <th>
+            Value
+          </th>
+          <th>
+            Approved
+          </th>
+          </thead>
+          <tbody>
+          <ng-container *ngFor="let vote of votes">
+            <tr>
+              <td>{{vote.id}}</td>
+              <td>{{vote.idKola}}</td>
+              <td>{{vote.idReklame}}</td>
+              <td>{{vote.vrednost}}</td>
+              <td>{{vote.approved}}</td>
+
+
+            </tr>
+          </ng-container>
+          </tbody>
+        </table>
+      </div>
+
+      <h1>Comments</h1>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead class=" text-primary">
+          <th>
+            Id
+          </th>
+          <th>
+            Commentator id
+          </th>
+          <th>
+            Content
+          </th>
+          <th>
+            Approved
+          </th>
+          </thead>
+          <tbody>
+          <ng-container *ngFor="let comment of comments">
+            <tr>
+              <td>{{comment.id}}</td>
+              <td>{{comment.idKomentatora}}</td>
+              <td>{{comment.sadrzaj}}</td>
+              <td>{{comment.approved}}</td>
+
+
+            </tr>
+          </ng-container>
+          </tbody>
+        </table>
+      </div>
+
+      <h1>Vehicle</h1>
+      <div>
+        <label for="vendor">Brand:       </label>
+        <input type="text" id="vendor" value="{{vehicle.vendor}}" nbInput fullWidth disabled placeholder="Vendor">
+      </div>
+      <br>
+      <div>
+        <label for="agentId">Agent id:             </label>
+        <input type="text" id="agentId" value="{{vehicle.agentId}}" nbInput fullWidth disabled placeholder="Id agenta">
+      </div>
+      <br>
+      <div>
+        <label for="modelz">Model:             </label>
+        <input type="text" id="modelz" value="{{vehicle.model}}" nbInput fullWidth disabled placeholder="Model">
+      </div>
+      <br>
+      <div>
+        <label for="oilTypez">Oil type:             </label>
+        <input type="text" id="oilTypez" value="{{vehicle.oilType}}" nbInput fullWidth disabled placeholder="Oil type">
+      </div>
+      <br>
+      <div>
+        <label for="gearTypez">Gear type:             </label>
+        <input type="text" id="gearTypez" value="{{vehicle.gearType}}" nbInput fullWidth disabled placeholder="Gear type">
+      </div>
+      <br>
+      <div>
+        <label for="vehicleClassz">Vehicle class:             </label>
+        <input type="text" id="vehicleClassz" value="{{vehicle.vehicleClass}}" nbInput fullWidth disabled placeholder="Vehicle class">
+      </div>
+      <br>
+      <div>
+        <label for="distanceKM">Distance (KM):             </label>
+        <input type="text" id="distanceKM" value="{{vehicle.distanceKM}}" nbInput fullWidth disabled placeholder="Distance (KM)">
+      </div>
+      <br>
+      <div>
+        <label for="kidSeats">Kids seats:             </label>
+        <input type="text" id="kidSeats" value="{{vehicle.kidSeats}}" nbInput fullWidth disabled placeholder="Kids seats">
+      </div>
+      <br>
+
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+  </div>
+</ng-template>
+
