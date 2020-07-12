@@ -1,6 +1,7 @@
 package com.model;
 
 public class UserDTO {
+    private Long id;
     private String email;
     private Boolean approved;
     private String username;
@@ -45,5 +46,13 @@ public class UserDTO {
 
     public void setApproved(Boolean approved) {
         this.approved = approved;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

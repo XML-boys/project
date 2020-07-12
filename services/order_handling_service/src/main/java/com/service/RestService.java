@@ -2,6 +2,7 @@ package com.service;
 
 import ch.qos.logback.core.net.server.Client;
 import com.model.*;
+import org.apache.catalina.User;
 import org.assertj.core.util.Lists;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
@@ -51,6 +52,24 @@ public class RestService {
         HttpEntity request = new HttpEntity(setHeader(jwt));
         ResponseEntity<ClientDataDTO> response = this.restTemplate.exchange(url, HttpMethod.GET, request,
                 ClientDataDTO.class);
+
+        return response.getBody();
+    }
+
+    public UserDTO getClientByUserId(Long id , String jwt) {
+        String url = "http://gateway:80/mail/" + id;
+        HttpEntity request = new HttpEntity(setHeader(jwt));
+        ResponseEntity<UserDTO> response = this.restTemplate.exchange(url, HttpMethod.GET, request,
+                UserDTO.class);
+
+        return response.getBody();
+    }
+
+    public Long postConversation(String jwt, MessageDataDTO messageDataDTO) {
+        String url = "http://gateway:80/conversation";
+        HttpEntity<MessageDataDTO> request = new HttpEntity<>(messageDataDTO);
+        ResponseEntity<Long> response = this.restTemplate.exchange(url, HttpMethod.POST, request,
+                Long.class);
 
         return response.getBody();
     }

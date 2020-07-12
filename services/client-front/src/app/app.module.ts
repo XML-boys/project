@@ -21,6 +21,7 @@ import { ClientProfilComponent } from './client-profil/client-profil.component';
 import { ClientAdsComponent } from './client-ads/client-ads.component';
 import { ClientReserveForMyselfComponent } from './client-reserve-for-myself/client-reserve-for-myself.component';
 import { ClientMyReservationsComponent } from './client-my-reservations/client-my-reservations.component';
+import { ClientChatComponent } from './client-chat/client-chat.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ClientMyReservationsComponent } from './client-my-reservations/client-m
     ClientProfilComponent,
     ClientAdsComponent,
     ClientReserveForMyselfComponent,
-    ClientMyReservationsComponent
+    ClientMyReservationsComponent,
+    ClientChatComponent
   ],
   imports: [
     BrowserAnimationsModule,

@@ -17,6 +17,9 @@ public class ConversationDTO {
 		// implement 
 	}
 	
+	public ConversationDTO() {
+	}
+	
 	
 	public Long getUserId() {
 		return userId;

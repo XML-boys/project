@@ -7,9 +7,12 @@ import com.service.ReservationService;
 import com.service.RestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +30,12 @@ public class ReservationController {
 
     @Autowired
     private AdService adService;
+
+    @Autowired
+    private JavaMailSender javaMailSender;
+
+    @Autowired
+    private Environment env;
 
     @PostMapping(value = "/{id}")
     public ResponseEntity<Void> saveReservation(@PathVariable("id") Long id, @RequestBody Reservation reservation, HttpServletRequest httpServletRequest)  {
@@ -184,7 +193,11 @@ public class ReservationController {
     }
 
     @PutMapping(value = "/{id}/state", consumes = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<Void> putVehicleStatus(@RequestBody String state, @PathVariable Long id) {
+    public ResponseEntity<Void> putVehicleStatus(HttpServletRequest httpServletRequest,@RequestBody String state, @PathVariable Long id) {
+        String requestTokenHeader = httpServletRequest.getHeader("Authorization");
+        String jwt = requestTokenHeader.substring(7);
+        RestService restService = new RestService(new RestTemplateBuilder());
+
         List<Reservation> reservations = reservationService.findAll();
         if(reservations != null)
         {
@@ -192,7 +205,29 @@ public class ReservationController {
             {
                 if(r.getId() == id){
                     r.setState(state);
+                    UserDTO clientDataDTO = restService.getClientByUserId(r.getUserId(),jwt);
                     reservationService.save(r);
+                    MessageDataDTO messageDataDTO = new MessageDataDTO();
+                    AgentDataDTO agentDataDTO = restService.getAgent(jwt);
+                    messageDataDTO.setOrderId(id);
+                    messageDataDTO.setUserId(agentDataDTO.getUserId());
+                    Long dobar = restService.postConversation(jwt,messageDataDTO);
+                    try{
+                        SimpleMailMessage mail = new SimpleMailMessage();
+                        mail.setTo(clientDataDTO.getEmail());
+                        mail.setFrom(env.getProperty("spring.mail.username"));
+                        mail.setSubject("Obavestenje o statusu rezervacije");
+                        mail.setText("Pozdrav " + clientDataDTO.getUsername() + ",\n\n" +
+                                "Vas zahtev ima status: " + r.getState() +
+                                "\n\n ");
+                        javaMailSender.send(mail);
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                    if(dobar != null){
+                        System.out.println(dobar);
+                    }else
+                        System.out.println("Nije napravio konverzaciju");
                     return new ResponseEntity<>(HttpStatus.OK);
                 }
             }
