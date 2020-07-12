@@ -16,6 +16,8 @@ export class ClientService {
   };
   ad: any = [];
   id;
+  reservations: any = [];
+  ads: any = [];
   // tslint:disable-next-line:typedef
   evoId(id){
     return this.id = id;
@@ -24,6 +26,25 @@ export class ClientService {
   // tslint:disable-next-line:typedef
   uzmiId(){
     return this.id;
+  }
+
+  // tslint:disable-next-line:typedef
+  evoRezervacije(res){
+    this.reservations = res;
+  }
+
+  // tslint:disable-next-line:typedef
+  uzmiRezervacije(){
+    return this.reservations;
+  }
+  // tslint:disable-next-line:typedef
+  evoAds(ads){
+    this.ads = ads;
+  }
+
+  // tslint:disable-next-line:typedef
+  uzmiAds(){
+    return this.ads;
   }
   getClient(): Observable<any> {
     return this.http.get<any>('http://localhost:6969/me');

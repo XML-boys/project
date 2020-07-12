@@ -15,6 +15,7 @@ export class ClientMyReservationsComponent implements OnInit {
   ads: any = [];
   ad: any = [];
   rez: any = [];
+  allRez: any = [];
   constructor(private clientService: ClientService , private router: Router, private modalService: NgbModal,
               private formBuilder: FormBuilder) { }
 
@@ -25,6 +26,14 @@ export class ClientMyReservationsComponent implements OnInit {
     });
     this.clientService.getAllAds().subscribe((data: {}) => {
       this.ads = data;
+      this.clientService.evoAds(this.ads);
+      this.allRez = [];
+      for (const ad of this.ads){
+        for ( const res of ad.reservations){
+          this.allRez.push(res);
+        }
+      }
+      this.clientService.evoRezervacije(this.allRez);
     });
   }
 

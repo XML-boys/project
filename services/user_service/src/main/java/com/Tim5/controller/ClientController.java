@@ -9,6 +9,7 @@ import com.Tim5.service.ClientService;
 import com.Tim5.service.UserService;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +58,7 @@ public class ClientController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody Client client){
+
         if(client != null) {
             Client client1 = clientService.findByID(id);
             client1.setFirstName(client.getFirstName());

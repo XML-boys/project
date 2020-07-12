@@ -17,6 +17,8 @@ export class AgentMyAdsComponent implements OnInit {
   reservations: any = [];
   comments: any = [];
   votes: any = [];
+  newComments: any = [];
+  newVotes: any = [];
 
   CommentForm = this.formBuilder.group({
     sadrzaj: ['']
@@ -46,7 +48,13 @@ export class AgentMyAdsComponent implements OnInit {
   }
 
   OpenComments(openCom, comments, ad){
-    this.comments = comments;
+    this.newComments = [];
+    for (const comment of comments){
+      if (comment.approved === true){
+        this.newComments.push(comment);
+      }
+    }
+    this.comments = this.newComments;
     this.ad = ad;
     this.modalService.open(openCom, {size: 'xl'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -56,7 +64,13 @@ export class AgentMyAdsComponent implements OnInit {
   }
 
   OpenVote(openVot, votes, ad){
-    this.votes = votes;
+    this.newVotes = [];
+    for (const vote of votes){
+      if (vote.approved === true){
+        this.newVotes.push(vote);
+      }
+    }
+    this.votes = this.newVotes;
     this.ad = ad;
     this.modalService.open(openVot, {size: 'xl'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -97,7 +111,13 @@ export class AgentMyAdsComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   MakeComment(addComment, comments, ad){
-    this.comments = comments;
+    this.newComments = [];
+    for (const comment of comments){
+      if (comment.approved === true){
+        this.newComments.push(comment);
+      }
+    }
+    this.comments = this.newComments;
     this.ad = ad;
     this.modalService.open(addComment, {size: 'xl'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;

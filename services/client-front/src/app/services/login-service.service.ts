@@ -28,6 +28,10 @@ export class LoginServiceService {
     return localStorage.getItem('jwt');
   }
 
+  myInfo(): Observable<any> {
+    return this.http.get<any>('http://localhost:6969/me');
+  }
+
   // tslint:disable-next-line:typedef
   logout() {
     localStorage.removeItem('jwt');

@@ -11,6 +11,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/client/clientProfil', title: 'My profil',  icon: '', class: '' },
   { path: '/client/clientAds', title: 'All ads',  icon: '', class: '' },
   { path: '/client/myReservations', title: 'My reservations',  icon: '', class: '' },
+  { path: '/client/chat', title: 'My chat',  icon: '', class: '' },
 ];
 @Component({
   selector: 'app-client-sidebar',
