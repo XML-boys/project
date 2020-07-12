@@ -11,6 +11,7 @@ import {StatsComponent} from './stats/stats.component';
 import {ChatComponent} from './chat/chat.component';
 import {VehiclesComponent} from './vehicles/vehicles.component';
 import {OtherAdsComponent} from './other-ads/other-ads.component';
+import {DiscountsComponent} from './discounts/discounts.component';
 
 const routes: Routes = [{
   path: '',
@@ -55,6 +56,10 @@ const routes: Routes = [{
     {
       path: 'other-ads',
       component: OtherAdsComponent,
+    },
+    {
+      path: 'discounts',
+      component: DiscountsComponent,
     },
   ]
 },

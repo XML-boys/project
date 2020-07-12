@@ -28,4 +28,6 @@ public class ReservationService {
     public void remove(Long id){
         reservationRepository.deleteById(id);
     }
+
+    public Reservation findById(Long id) {return reservationRepository.findById(id).orElseGet(null);}
 }

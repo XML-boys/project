@@ -61,5 +61,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/agent/dashboard/vehicles',
     home: false,
   },
+  {
+    title: 'Discounts',
+    icon: 'thermometer-plus',
+    link: '/agent/dashboard/discounts',
+    home: false,
+  },
 
 ];

@@ -27,7 +27,7 @@ export class ChatComponent implements OnInit {
     this.loginService.myInfo().subscribe(
       myInfo => {
         this.curentuser = myInfo.username;
-        this.reservationsService.getAllReservations(myInfo.id).subscribe(
+        this.reservationsService.getAllReservations(myInfo.userId).subscribe(
           data => {
             this.messageService.getConversations().subscribe(data2 => {
               console.log(data2);

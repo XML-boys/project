@@ -84,7 +84,7 @@ export class ReservationsComponent implements OnInit {
     let myInfo;
     this.auth.myInfo().subscribe((data: {}) => {
       myInfo = data;
-      this.getMyReservations(myInfo.id);
+      this.getMyReservations(myInfo.userId);
     });
 
   }

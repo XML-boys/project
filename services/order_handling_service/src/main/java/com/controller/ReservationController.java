@@ -252,6 +252,16 @@ public class ReservationController {
         }
     }
 
+    @PutMapping(value = "/{id}/opis", consumes = "application/json")
+    public HttpStatus getRezKlijent(@PathVariable("id") Long id, @RequestBody FinishReservationDTO finishReservationDTO) {
+        Reservation res = this.reservationService.findById(id);
+        res.setOpis(finishReservationDTO.getOpis());
+        res.setPredjenaKM(finishReservationDTO.getPredjenaKM());
+        res.setArhivirano(true);
+        this.reservationService.save(res);
+        return HttpStatus.OK;
+    }
+
 
 
 
