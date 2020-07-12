@@ -11,6 +11,8 @@ public class Ad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
+    private Long realId;
+    @Column
     private Long idAgenta;
     @Column
     private LocalDate startTime;
@@ -163,5 +165,13 @@ public class Ad {
 
     public void setVotes(Set<Vote> votes) {
         this.votes = votes;
+    }
+
+    public Long getRealId() {
+        return realId;
+    }
+
+    public void setRealId(Long realId) {
+        this.realId = realId;
     }
 }

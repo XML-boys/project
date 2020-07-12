@@ -13,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToMany;
 
+
 @Entity
 public class Conversation {
 

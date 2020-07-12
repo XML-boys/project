@@ -16,6 +16,9 @@ public interface AdRepository  extends JpaRepository<Ad, Long> {
     void deleteById(Long id);
     Ad findAdById(Long id);
 
+    Ad findByRealId(Long id);
+
     List<Ad> findAllByVehicleId(Long vehicleId);
+    List<Ad> findAllByIdAgenta(Long idAgenta);
 
 }

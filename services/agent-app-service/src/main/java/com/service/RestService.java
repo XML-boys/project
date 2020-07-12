@@ -25,7 +25,7 @@ public class RestService {
     }
 
     public UserValidateDTO getUserValidate(String jwt) {
-        String url = "http://gateway:80/auth";
+        String url = "http://localhost:6969/auth";
         HttpEntity request = new HttpEntity(setHeader(jwt));
         ResponseEntity<UserValidateDTO> response = this.restTemplate.exchange(url, HttpMethod.GET, request,
                 UserValidateDTO.class);
@@ -34,7 +34,7 @@ public class RestService {
     }
 
     public AgentDataDTO getAgent(String jwt) {
-        String url = "http://gateway:80/agent/me/user/1";
+        String url = "http://localhost:6969/agent/me/user/1";
         HttpEntity request = new HttpEntity(setHeader(jwt));
         ResponseEntity<AgentDataDTO> response = this.restTemplate.exchange(url, HttpMethod.GET, request,
                 AgentDataDTO.class);

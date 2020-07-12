@@ -127,6 +127,7 @@ export class MyAdsComponent implements OnInit {
         comments: item.comments
       };
       this.source.add(tmp);
+      this.source.refresh();
 
     }
     console.log(this.source);
@@ -141,7 +142,7 @@ export class MyAdsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.getAll().subscribe((data: {}) => {
+    this.service.getMyAds().subscribe((data: {}) => {
         this.loadAds(data);
         this.ads = data;
         this.reservations = this.ads.reservations;
@@ -224,10 +225,8 @@ export class MyAdsComponent implements OnInit {
         for (const item of ad.reservations) {
           const tmp = {
             id: item.id,
-            // adId: item.reklama.id,
             startTime: item.startTime,
             endTime: item.endTime,
-            //  location: item.reklama.location,
           };
           this.resSource.add(tmp);
         }

@@ -60,8 +60,8 @@ public class AdController {
             for(Ad a : ads)
             {
                 adFullDTOS.add(new AdFullDTO(a));
-                return new ResponseEntity<>(adFullDTOS, HttpStatus.OK);
             }
+            return new ResponseEntity<>(adFullDTOS, HttpStatus.OK);
         }
         return new ResponseEntity<>(adFullDTOS, HttpStatus.NOT_IMPLEMENTED);
     }
