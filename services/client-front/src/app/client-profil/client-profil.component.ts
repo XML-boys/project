@@ -20,7 +20,7 @@ export class ClientProfilComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       adress: ['', Validators.required],
-      email: ['', Validators.required]
+      email: ['']
     });
 
     this.loadData();

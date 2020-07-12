@@ -40,7 +40,7 @@ public class AdController {
             Ad ad = new Ad();
             ad.setStartTime(adDTO.getStartTime());
             ad.setEndDate(adDTO.getEndDate());
-            ad.setIdAgenta(agentDataDTO.getId());
+            ad.setIdAgenta(agentDataDTO.getUserId());
             ad.setLocation(adDTO.getLocation());
             ad.setVehicleId(adDTO.getVehicleId());
             //   ad.setPictures(adDTO.getPictures());

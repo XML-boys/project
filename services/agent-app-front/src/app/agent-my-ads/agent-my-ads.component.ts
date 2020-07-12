@@ -19,6 +19,7 @@ export class AgentMyAdsComponent implements OnInit {
   votes: any = [];
   newComments: any = [];
   newVotes: any = [];
+  id;
 
   CommentForm = this.formBuilder.group({
     sadrzaj: ['']
@@ -27,12 +28,18 @@ export class AgentMyAdsComponent implements OnInit {
               private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.agentCreateAdService.getAds().subscribe((data: {}) => {
-      this.ads = data;
-    });
+
     this.agentCreateAdService.getAgentData().subscribe((data: {}) => {
       this.agent = data;
       console.log(this.agent);
+    });
+
+    this.agentCreateAdService.getAgentData().subscribe(data => {
+      this.id = data.userId;
+
+      this.agentCreateAdService.getAds(data.userId).subscribe((data2: {}) => {
+        this.ads = data2;
+      });
     });
 
   }

@@ -34,8 +34,8 @@ export class AgentCreateAdService {
     return this.ad;
   }
 
-  getAds(): Observable<any> {
-    return this.http.get<any>('http://localhost:8080/agent-app/ad', this.httpOptions);
+  getAds(id): Observable<any> {
+    return this.http.get<any>('http://localhost:8080/agent-app/ad/' + id, this.httpOptions);
   }
 
   getLocations(): Observable<any> {
