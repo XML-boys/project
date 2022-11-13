@@ -26,7 +26,7 @@
     "vue-template-compiler": "^2.6.10",
     "vue.js": "^0.3.2",
     "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.4"
+    "webpack-cli": "^3.3.12"
   },
   "devDependencies": {
     "sass": "^1.23.0-module.beta.1",
